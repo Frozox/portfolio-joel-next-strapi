@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-joel",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm run --parallel build",
+    "start": "pnpm run --parallel start"
+  },
+  "author": "Tom Cuillandre <tom.cuillandre@sfr.fr>",
+  "license": "MIT"
+}

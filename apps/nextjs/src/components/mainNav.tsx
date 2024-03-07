@@ -1,0 +1,76 @@
+"use client"
+
+import { cn } from "@/libs/utils";
+import { AlignJustifyIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdownMenu";
+
+const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
+    const [dropdownOpened, setDropDownOpened] = useState<boolean>(false);
+
+    const toggleDropdown = () => {
+        setDropDownOpened(!dropdownOpened);
+    }
+
+    const dropDownContent: any[] = [
+        {
+            label: "test1",
+            href: "/test-1"
+        },
+        {
+            label: "test2",
+            href: "/test-2"
+        }
+    ]
+
+    return (
+        <nav className={cn("w-full fixed z-50", className)}>
+            <div className="flex flex-wrap items-center justify-between mx-auto px-10 py-8">
+                <Link href={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
+                    <Image src={"/logo.svg"} className="h-8 w-auto dark:invert" alt="Logo" width={0} height={0} />
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Joël Chapeau</span>
+                </Link>
+                <Button onClick={toggleDropdown} type="button" variant="ghost" className="inline-flex items-center p-1 w-10 h-10 justify-center text-sm text-black dark:text-white rounded-lg md:hidden focus:outline-none focus:ring-2 dark:focus:ring-gray-200 dark:hover:bg-gray-700">
+                    <span className="sr-only">Ouvrir le menu</span>
+                    <AlignJustifyIcon className="h-full w-full" />
+                </Button>
+                <div className={cn("w-full md:block md:w-auto", !dropdownOpened && "hidden")}>
+                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-lg">
+                        <li>
+                            <Link href="/" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Accueil</Link>
+                        </li>
+                        <li>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <div className="cursor-pointer block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Travaux
+                                    </div>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="start">
+                                    {dropDownContent.map((item, idx) => {
+                                        return (
+                                            <DropdownMenuItem key={idx} asChild>
+                                                <Link href={item.href} className="w-full h-full text-lg">{item.label}</Link>
+                                            </DropdownMenuItem>
+                                        )
+                                    })}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </li>
+                        <li>
+                            <Link href="/archives" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Archives</Link>
+                        </li>
+                        <li>
+                            <Link href="/contact" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    );
+};
+
+export default MainNav;

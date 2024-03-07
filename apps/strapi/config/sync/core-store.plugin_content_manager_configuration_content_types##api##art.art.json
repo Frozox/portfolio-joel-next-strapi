@@ -1,0 +1,286 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::art.art",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "name",
+      "defaultSortBy": "name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "name": {
+        "edit": {
+          "label": "Nom",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "description": {
+        "edit": {
+          "label": "Description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "description",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "date": {
+        "edit": {
+          "label": "Date",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "date",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "thumbnail": {
+        "edit": {
+          "label": "Vignette",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "thumbnail",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "images": {
+        "edit": {
+          "label": "Images",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "images",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "height": {
+        "edit": {
+          "label": "Hauteur",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "height",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "width": {
+        "edit": {
+          "label": "Largeur",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "width",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "depth": {
+        "edit": {
+          "label": "Profondeur",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "depth",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "art_category": {
+        "edit": {
+          "label": "Catégorie",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "art_category",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "art_tags": {
+        "edit": {
+          "label": "Tags",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "tag"
+        },
+        "list": {
+          "label": "art_tags",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "name",
+            "size": 4
+          },
+          {
+            "name": "date",
+            "size": 4
+          },
+          {
+            "name": "thumbnail",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "description",
+            "size": 6
+          },
+          {
+            "name": "images",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "height",
+            "size": 4
+          },
+          {
+            "name": "width",
+            "size": 4
+          },
+          {
+            "name": "depth",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "art_category",
+            "size": 6
+          },
+          {
+            "name": "art_tags",
+            "size": 6
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "name",
+        "description",
+        "date"
+      ]
+    },
+    "uid": "api::art.art"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

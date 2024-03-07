@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "art_tags",
+  "info": {
+    "singularName": "art-tag",
+    "pluralName": "art-tags",
+    "displayName": "ArtTag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "tag": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "arts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::art.art",
+      "mappedBy": "art_tags"
+    }
+  }
+}

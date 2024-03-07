@@ -1,0 +1,109 @@
+{
+  "kind": "collectionType",
+  "collectionName": "arts",
+  "info": {
+    "singularName": "art",
+    "pluralName": "arts",
+    "displayName": "Art",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "date": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "date"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "height": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "decimal",
+      "required": true
+    },
+    "width": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "decimal",
+      "required": true
+    },
+    "depth": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "decimal"
+    },
+    "art_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::art-category.art-category",
+      "inversedBy": "arts"
+    },
+    "art_tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::art-tag.art-tag",
+      "inversedBy": "arts"
+    }
+  }
+}
