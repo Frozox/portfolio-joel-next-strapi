@@ -1,7 +1,12 @@
+export type TLoadingError = {
+    error: string | null
+}
+
 export type TContentLoader = {
     children: React.ReactNode,
-    loaded: boolean,
-    error: boolean
+    error: string | null
+    isLoading: boolean,
+    isError: boolean
 }
 
 export const Loading = () => {
@@ -16,28 +21,28 @@ export const Loading = () => {
     )
 }
 
-export const LoadingError = () => {
+export const LoadingError = ({ error }: TLoadingError) => {
     return (
         <div className="fixed inset-x-0 inset-y-0 flex justify-center items-center bg-background">
             <div className="relative inline-flex">
-                <div className="text-foreground text-2xl md:text-4xl">Une erreur est survenue :(</div>
+                <div className="text-foreground text-2xl md:text-4xl">{error ?? (<>Une erreur est survenue :(</>)}</div>
             </div>
         </div>
     )
 }
 
-export const ContentLoader = ({ loaded, error, children }: TContentLoader) => {
+export const ContentLoader = ({ error, isLoading, isError, children }: TContentLoader) => {
     return (
-        !error ? (
-            loaded ? (
+        isError ? (
+            <LoadingError error={error} />
+        ) : (
+            isLoading ? (
+                <Loading />
+            ) : (
                 <>
                     {children}
                 </>
-            ) : (
-                <Loading />
             )
-        ) : (
-            <LoadingError />
         )
     )
 }

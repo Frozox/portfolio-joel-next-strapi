@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdownMenu";
 import React from "react";
-import { useArtCategory } from "@/helpers/hook/strapi/strapiSdk";
+import { useArtCategory } from "@/helpers/context/strapi/artCategoryContext";
 
 const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
     const [dropdownOpened, setDropDownOpened] = useState<boolean>(false);
@@ -57,7 +57,7 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
                             <ul>
                                 {artCategories.map((category) => {
                                     return (
-                                        <li>
+                                        <li key={category.id}>
                                             <Link href={category.attributes.slug} className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{category.attributes.name}</Link>
                                         </li>
                                     )

@@ -5,6 +5,7 @@ import { cn } from "@/libs/utils";
 import MainNav from "@/components/mainNav";
 import { ThemeProvider } from "@/helpers/provider/theme/themeProvider"
 import { ArtCategoryProvider } from "@/helpers/provider/strapi/artCategoryProvider";
+import QueryClientProvider from "@/helpers/provider/react-query/queryClientProvider";
 
 export const fontSans = FontSans({ weight: "400", subsets: ["latin"], variable: "--font-sans" });
 
@@ -23,14 +24,16 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
           enableSystem
           disableTransitionOnChange
         >
-          <ArtCategoryProvider>
-            <header className="h-28">
-              <MainNav className="sticky md:fixed md:bg-background" />
-            </header>
-            <main className="h-full w-full">
-              {children}
-            </main>
-          </ArtCategoryProvider>
+          <QueryClientProvider>
+            <ArtCategoryProvider>
+              <header className="h-28">
+                <MainNav className="sticky md:fixed md:bg-background" />
+              </header>
+              <main className="h-full w-full">
+                {children}
+              </main>
+            </ArtCategoryProvider>
+          </QueryClientProvider>
         </ThemeProvider>
       </body>
     </html>

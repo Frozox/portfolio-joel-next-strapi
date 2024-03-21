@@ -24,6 +24,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-query": "^3.39.3",
     "shadcn-ui": "^0.8.0",
     "strapi-sdk-js": "^2.3.3",
     "tailwind-merge": "^2.2.1",

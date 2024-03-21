@@ -4,7 +4,7 @@ import HomeSlider from "@/components/homeSlider";
 import { Button } from "@/components/ui/button";
 import { DirectionAwareHover } from "@/components/ui/directionAwareHover";
 import { TKeenSlideProps } from "@/components/ui/keenSlider";
-import { useArtCategory } from "@/helpers/hook/strapi/strapiSdk";
+import { useArtCategory } from "@/helpers/context/strapi/artCategoryContext";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
@@ -13,7 +13,7 @@ import { env } from "@/env.mjs";
 
 const Home = () => {
   const [slides, setSlides] = React.useState<TKeenSlideProps[]>([]);
-  const { artCategories, failedFetch, endedFetch } = useArtCategory()
+  const { artCategories, isError, isLoading } = useArtCategory()
 
   React.useEffect(() => {
     if (artCategories.length === 0) return;
@@ -38,7 +38,7 @@ const Home = () => {
   }, [artCategories])
 
   return (
-    <ContentLoader loaded={endedFetch} error={failedFetch}>
+    <ContentLoader isLoading={isLoading} isError={isError}>
       <div className="h-full animate-content-load">
         <HomeSlider slides={slides} className="h-4/5 md:h-3/5" />
         <div className="mt-16 md:mt-20 text-center flex flex-col justify-center items-center">

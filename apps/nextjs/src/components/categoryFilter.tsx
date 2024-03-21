@@ -4,8 +4,8 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { cn } from "@/libs/utils";
 import { FilterIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useArtCategory } from "@/helpers/hook/strapi/strapiSdk";
 import React from "react";
+import { useArtCategory } from "@/helpers/context/strapi/artCategoryContext";
 
 type TCheckboxItem = {
     id: string | number,
@@ -83,6 +83,7 @@ export const CategoryFilter = ({ className, activeCategorySlug }: TCategoryFilte
 
     return (
         <div className={cn("fixed w-full", className)}>
+            <hr className="w-full h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
