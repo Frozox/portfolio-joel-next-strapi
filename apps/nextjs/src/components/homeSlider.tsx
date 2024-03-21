@@ -8,30 +8,30 @@ export type THomeSliderProps = React.HTMLAttributes<HTMLElement> & {
     slides: TKeenSlideProps[]
 }
 
-const HomeSlider = ({ className, content, slides, ...props }: THomeSliderProps) => {
-    const sliderOptions: KeenSliderOptions = {
-        mode: "snap",
-        slides: {
-            perView: 2,
-            spacing: 20,
-            origin: "center",
-        },
-        defaultAnimation: {
-            duration: 1800,
-            easing: easeInOutBack
-        },
-        breakpoints: {
-            '(max-width: 1024px)': {
-                slides: {
-                    perView: 1,
-                    spacing: 20,
-                    origin: "center",
-                }
+const sliderOptions: KeenSliderOptions = {
+    mode: "snap",
+    slides: {
+        perView: 2,
+        spacing: 20,
+        origin: "center",
+    },
+    defaultAnimation: {
+        duration: 1800,
+        easing: easeInOutBack
+    },
+    breakpoints: {
+        '(max-width: 1024px)': {
+            slides: {
+                perView: 1,
+                spacing: 20,
+                origin: "center",
             }
-        },
-    };
-    const sliderPlugins: KeenSliderPlugin[] = [autoSlider, moveToSelectedSlide];
+        }
+    },
+};
+const sliderPlugins: KeenSliderPlugin[] = [autoSlider, moveToSelectedSlide];
 
+const HomeSlider = ({ className, content, slides, ...props }: THomeSliderProps) => {
     return (
         <KeenSlider options={sliderOptions} plugins={sliderPlugins} className={className} {...props}>
             {

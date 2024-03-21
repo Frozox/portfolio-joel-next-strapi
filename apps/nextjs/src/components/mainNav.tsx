@@ -29,12 +29,12 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
                     <span className="sr-only">Ouvrir le menu</span>
                     <AlignJustifyIcon className="h-full w-full" />
                 </Button>
-                <div className={cn("w-full md:block md:w-auto", !dropdownOpened && "hidden")}>
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-lg">
+                <div className={cn("w-full md:block md:w-auto bg-background rounded-b-lg border md:border-none border-t-0 mt-4", !dropdownOpened && "hidden")}>
+                    <ul className="flex flex-col font-medium p-4 md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-lg">
                         <li>
                             <Link href="/" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Accueil</Link>
                         </li>
-                        <li>
+                        <li className="hidden md:block">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <div className="cursor-pointer block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -51,6 +51,18 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
                                     })}
                                 </DropdownMenuContent>
                             </DropdownMenu>
+                        </li>
+                        <li className="md:hidden py-2 px-3">
+                            <div className="text-foreground opacity-25">Travaux</div>
+                            <ul>
+                                {artCategories.map((category) => {
+                                    return (
+                                        <li>
+                                            <Link href={category.attributes.slug} className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{category.attributes.name}</Link>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
                         </li>
                         <li>
                             <Link href="/archives" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Archives</Link>

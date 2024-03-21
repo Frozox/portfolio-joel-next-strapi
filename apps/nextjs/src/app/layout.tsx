@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
   return (
     <html lang="fr">
-      <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.className)}>
+      <body className={cn("h-screen bg-background font-sans antialiased", fontSans.className)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="white"
@@ -24,8 +24,10 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
           disableTransitionOnChange
         >
           <ArtCategoryProvider>
-            <MainNav className="sticky md:fixed md:bg-background" />
-            <main className="h-screen w-full md:pt-24">
+            <header className="h-28">
+              <MainNav className="sticky md:fixed md:bg-background" />
+            </header>
+            <main className="h-full w-full">
               {children}
             </main>
           </ArtCategoryProvider>

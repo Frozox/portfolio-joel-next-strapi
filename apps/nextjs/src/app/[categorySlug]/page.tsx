@@ -1,27 +1,15 @@
-import { Card, LayoutGrid } from "@/components/ui/layoutGrid";
-import { faker } from "@faker-js/faker";
+"use client"
 
-type TProps = {
+type TCategoryProps = {
     params: {
         categorySlug: string
     }
 }
 
-const Category = ({ params }: TProps) => {
-    const cardsNb = 10;
-    const cards: Card[] = Array(cardsNb).fill(0).map((k, v) => {
-        return {
-            id: v,
-            content: <div>test</div>,
-            className: '',
-            thumbnail: faker.image.urlPicsumPhotos(),
-        }
-    })
-
+const Category = ({ params }: TCategoryProps) => {
     return (
         <div className="h-screen w-full">
-            <div>{params.categorySlug}</div>
-            <LayoutGrid cards={cards} />
+            {params.categorySlug}
         </div>
     );
 }

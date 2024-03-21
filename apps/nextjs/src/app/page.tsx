@@ -41,11 +41,11 @@ const Home = () => {
     <ContentLoader loaded={endedFetch} error={failedFetch}>
       <div className="h-full animate-content-load">
         <HomeSlider slides={slides} className="h-4/5 md:h-3/5" />
-        <div className="t-20 md:mt-20 text-center flex flex-col justify-center items-center">
+        <div className="mt-16 md:mt-20 text-center flex flex-col justify-center items-center">
           <Image src="/joel.jpg" className="rounded-full" height={200} width={200} alt="joel" />
           <div className="mt-8">nunc vel risus commodo viverra maecenas accumsan lacus vel facilisis</div>
           <hr className="w-64 my-8 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
-          <div>enim praesent elementum</div>
+          <div className="mb-8">enim praesent elementum</div>
         </div>
       </div>
     </ContentLoader>
