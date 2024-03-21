@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "art_tag_categories",
+  "info": {
+    "singularName": "art-tag-category",
+    "pluralName": "art-tag-categories",
+    "displayName": "ArtTagCategory",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "art_tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::art-tag.art-tag",
+      "mappedBy": "art_tag_category"
+    },
+    "display_name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "art_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::art-category.art-category",
+      "inversedBy": "art_tag_categories"
+    }
+  }
+}

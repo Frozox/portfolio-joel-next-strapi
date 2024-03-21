@@ -76,6 +76,21 @@
           "sortable": true
         }
       },
+      "art_tag_categories": {
+        "edit": {
+          "label": "art_tag_categories",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "art_tag_categories",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -137,10 +152,9 @@
     },
     "layouts": {
       "list": [
-        "id",
         "name",
-        "createdAt",
-        "updatedAt"
+        "image",
+        "art_tag_categories"
       ],
       "edit": [
         [
@@ -160,6 +174,12 @@
           },
           {
             "name": "slug",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "art_tag_categories",
             "size": 6
           }
         ]

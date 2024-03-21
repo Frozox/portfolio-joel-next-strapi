@@ -31,6 +31,12 @@
       "relation": "manyToMany",
       "target": "api::art.art",
       "mappedBy": "art_tags"
+    },
+    "art_tag_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::art-tag-category.art-tag-category",
+      "inversedBy": "art_tags"
     }
   }
 }

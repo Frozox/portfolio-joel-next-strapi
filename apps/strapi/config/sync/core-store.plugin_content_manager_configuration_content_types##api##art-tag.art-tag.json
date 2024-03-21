@@ -48,6 +48,21 @@
           "sortable": false
         }
       },
+      "art_tag_category": {
+        "edit": {
+          "label": "art_tag_category",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "art_tag_category",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -109,10 +124,8 @@
     },
     "layouts": {
       "list": [
-        "id",
         "tag",
-        "createdAt",
-        "updatedAt"
+        "art_tag_category"
       ],
       "edit": [
         [
@@ -122,6 +135,12 @@
           },
           {
             "name": "arts",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "art_tag_category",
             "size": 6
           }
         ]

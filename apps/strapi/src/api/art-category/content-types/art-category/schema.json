@@ -54,6 +54,12 @@
       "type": "uid",
       "targetField": "name",
       "required": true
+    },
+    "art_tag_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::art-tag-category.art-tag-category",
+      "mappedBy": "art_categories"
     }
   }
 }

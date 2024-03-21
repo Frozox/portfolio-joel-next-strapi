@@ -923,6 +923,11 @@ export interface ApiArtCategoryArtCategory extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    art_tag_categories: Attribute.Relation<
+      'api::art-category.art-category',
+      'manyToMany',
+      'api::art-tag-category.art-tag-category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -977,6 +982,11 @@ export interface ApiArtTagArtTag extends Schema.CollectionType {
       'manyToMany',
       'api::art.art'
     >;
+    art_tag_category: Attribute.Relation<
+      'api::art-tag.art-tag',
+      'manyToOne',
+      'api::art-tag-category.art-tag-category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -996,6 +1006,71 @@ export interface ApiArtTagArtTag extends Schema.CollectionType {
       'api::art-tag.art-tag',
       'oneToMany',
       'api::art-tag.art-tag'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiArtTagCategoryArtTagCategory extends Schema.CollectionType {
+  collectionName: 'art_tag_categories';
+  info: {
+    singularName: 'art-tag-category';
+    pluralName: 'art-tag-categories';
+    displayName: 'ArtTagCategory';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    art_tags: Attribute.Relation<
+      'api::art-tag-category.art-tag-category',
+      'oneToMany',
+      'api::art-tag.art-tag'
+    >;
+    display_name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    art_categories: Attribute.Relation<
+      'api::art-tag-category.art-tag-category',
+      'manyToMany',
+      'api::art-category.art-category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::art-tag-category.art-tag-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::art-tag-category.art-tag-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::art-tag-category.art-tag-category',
+      'oneToMany',
+      'api::art-tag-category.art-tag-category'
     >;
     locale: Attribute.String;
   };
@@ -1022,6 +1097,7 @@ declare module '@strapi/types' {
       'api::art.art': ApiArtArt;
       'api::art-category.art-category': ApiArtCategoryArtCategory;
       'api::art-tag.art-tag': ApiArtTagArtTag;
+      'api::art-tag-category.art-tag-category': ApiArtTagCategoryArtTagCategory;
     }
   }
 }

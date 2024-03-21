@@ -16,12 +16,12 @@ export const generateMetadata = ({ params }: TLayoutProps): Metadata => {
 
 const CategoryLayout = ({ children, params }: Readonly<TLayoutProps>) => {
     return (
-        <div className="relative animate-content-load">
-            <div className="h-11">
+        <>
+            <div className="h-11 animate-content-load">
                 <CategoryFilter className="sticky md:fixed" activeCategorySlug={params.categorySlug} />
             </div>
             {children}
-        </div>
+        </>
     );
 }
 

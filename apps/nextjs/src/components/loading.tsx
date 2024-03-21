@@ -1,10 +1,10 @@
 export type TLoadingError = {
-    error: string | null
+    error?: string | null
 }
 
 export type TContentLoader = {
     children: React.ReactNode,
-    error: string | null
+    error?: string | null
     isLoading: boolean,
     isError: boolean
 }

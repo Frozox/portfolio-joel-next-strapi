@@ -2,7 +2,9 @@
 
 import { Art } from '../../../art/content-types/art/art';
 import { Media } from '../../../../common/sharedSchemas/Media';
+import { ArtTagCategory } from '../../../art-tag-category/content-types/art-tag-category/art-tag-category';
 import { Art_Plain } from '../../../art/content-types/art/art';
+import { ArtTagCategory_Plain } from '../../../art-tag-category/content-types/art-tag-category/art-tag-category';
 import { AdminPanelRelationPropertyModification } from '../../../../common/sharedSchemas/AdminPanelRelationPropertyModification';
 
 export interface ArtCategory {
@@ -12,6 +14,7 @@ export interface ArtCategory {
     arts: { data: Art[] };
     image: { data: Media };
     slug: string;
+    art_tag_categories?: { data: ArtTagCategory[] };
     locale: string;
     localizations?: { data: ArtCategory[] };
   };
@@ -22,6 +25,7 @@ export interface ArtCategory_Plain {
   arts: Art_Plain[];
   image: Media;
   slug: string;
+  art_tag_categories?: ArtTagCategory_Plain[];
   locale: string;
   localizations?: ArtCategory[];
 }
@@ -32,6 +36,7 @@ export interface ArtCategory_NoRelations {
   arts: number[];
   image: number;
   slug: string;
+  art_tag_categories?: number[];
   locale: string;
   localizations?: ArtCategory[];
 }
@@ -42,6 +47,7 @@ export interface ArtCategory_AdminPanelLifeCycle {
   arts: AdminPanelRelationPropertyModification<Art_Plain>;
   image: AdminPanelRelationPropertyModification<Media>;
   slug: string;
+  art_tag_categories?: AdminPanelRelationPropertyModification<ArtTagCategory_Plain>;
   locale: string;
   localizations?: ArtCategory[];
 }

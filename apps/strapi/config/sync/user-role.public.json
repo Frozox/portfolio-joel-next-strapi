@@ -10,6 +10,12 @@
       "action": "api::art-category.art-category.findOne"
     },
     {
+      "action": "api::art-tag-category.art-tag-category.find"
+    },
+    {
+      "action": "api::art-tag-category.art-tag-category.findOne"
+    },
+    {
       "action": "api::art-tag.art-tag.find"
     },
     {
