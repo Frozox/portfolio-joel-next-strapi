@@ -423,6 +423,7 @@ export interface PluginUploadFile extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    placeholder: Attribute.Text;
   };
 }
 
@@ -884,6 +885,7 @@ export interface ApiArtCategoryArtCategory extends Schema.CollectionType {
     singularName: 'art-category';
     pluralName: 'art-categories';
     displayName: 'ArtCategory';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -907,6 +909,20 @@ export interface ApiArtCategoryArtCategory extends Schema.CollectionType {
       'oneToMany',
       'api::art.art'
     >;
+    image: Attribute.Media &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    slug: Attribute.UID<'api::art-category.art-category', 'name'> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

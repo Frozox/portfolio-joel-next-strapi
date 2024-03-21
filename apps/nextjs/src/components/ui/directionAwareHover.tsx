@@ -7,12 +7,14 @@ import { cn } from "@/libs/utils";
 
 export const DirectionAwareHover = ({
     imageUrl,
+    blurData,
     children,
     childrenClassName,
     imageClassName,
     className,
 }: {
     imageUrl: string;
+    blurData?: string;
     children: React.ReactNode | string;
     childrenClassName?: string;
     imageClassName?: string;
@@ -94,6 +96,9 @@ export const DirectionAwareHover = ({
                             width="1000"
                             height="1000"
                             src={imageUrl}
+                            blurDataURL={blurData}
+                            placeholder={blurData ? "blur" : "empty"}
+                            unoptimized
                         />
                     </motion.div>
                     <motion.div

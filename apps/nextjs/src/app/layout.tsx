@@ -3,7 +3,8 @@ import { Lato as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/libs/utils";
 import MainNav from "@/components/mainNav";
-import { ThemeProvider } from "@/components/themeProvider";
+import { ThemeProvider } from "@/helpers/provider/theme/themeProvider"
+import { ArtCategoryProvider } from "@/helpers/provider/strapi/artCategoryProvider";
 
 export const fontSans = FontSans({ weight: "400", subsets: ["latin"], variable: "--font-sans" });
 
@@ -18,14 +19,16 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
       <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.className)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="white"
           enableSystem
           disableTransitionOnChange
         >
-          <MainNav className="sticky md:fixed md:bg-background" />
-          <main className="h-screen w-full">
-            {children}
-          </main>
+          <ArtCategoryProvider>
+            <MainNav className="sticky md:fixed md:bg-background" />
+            <main className="h-screen w-full md:pt-24">
+              {children}
+            </main>
+          </ArtCategoryProvider>
         </ThemeProvider>
       </body>
     </html>

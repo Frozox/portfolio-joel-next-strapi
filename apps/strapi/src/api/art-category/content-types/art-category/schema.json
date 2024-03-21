@@ -4,7 +4,8 @@
   "info": {
     "singularName": "art-category",
     "pluralName": "art-categories",
-    "displayName": "ArtCategory"
+    "displayName": "ArtCategory",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -30,6 +31,29 @@
       "relation": "oneToMany",
       "target": "api::art.art",
       "mappedBy": "art_category"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "uid",
+      "targetField": "name",
+      "required": true
     }
   }
 }

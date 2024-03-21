@@ -6,3 +6,4 @@ results
 node_modules
 .node_history
 .yarn/**
+.DS_Store

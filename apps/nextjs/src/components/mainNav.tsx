@@ -7,24 +7,16 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdownMenu";
+import React from "react";
+import { useArtCategory } from "@/helpers/hook/strapi/strapiSdk";
 
 const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
     const [dropdownOpened, setDropDownOpened] = useState<boolean>(false);
+    const { artCategories } = useArtCategory();
 
     const toggleDropdown = () => {
         setDropDownOpened(!dropdownOpened);
     }
-
-    const dropDownContent: any[] = [
-        {
-            label: "test1",
-            href: "/test-1"
-        },
-        {
-            label: "test2",
-            href: "/test-2"
-        }
-    ]
 
     return (
         <nav className={cn("w-full fixed z-50", className)}>
@@ -50,10 +42,10 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
                                     </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="start">
-                                    {dropDownContent.map((item, idx) => {
+                                    {artCategories.map((category) => {
                                         return (
-                                            <DropdownMenuItem key={idx} asChild>
-                                                <Link href={item.href} className="w-full h-full text-lg">{item.label}</Link>
+                                            <DropdownMenuItem key={category.id} asChild>
+                                                <Link href={category.attributes.slug} className="w-full h-full text-lg">{category.attributes.name}</Link>
                                             </DropdownMenuItem>
                                         )
                                     })}

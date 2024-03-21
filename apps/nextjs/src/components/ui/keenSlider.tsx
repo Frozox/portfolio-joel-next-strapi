@@ -1,5 +1,3 @@
-"use client"
-
 import { cn } from "@/libs/utils"
 import "keen-slider/keen-slider.min.css"
 import { KeenSliderOptions, KeenSliderPlugin, useKeenSlider } from "keen-slider/react"
@@ -19,7 +17,14 @@ export interface TKeenSlideProps {
 }
 
 export const KeenSlider = ({ options, plugins, className, children }: TKeenSliderProps) => {
-    const [sliderRef, instanceRef] = useKeenSlider(options, plugins);
+    const [sliderRef, sliderInstance] = useKeenSlider(options, plugins);
+
+    React.useEffect(() => {
+        sliderInstance.current?.update({
+            ...options,
+            ...plugins
+        })
+    }, [sliderInstance, options, plugins, children])
 
     return (
         <div ref={sliderRef} className={cn("keen-slider", className)}>

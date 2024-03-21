@@ -30,10 +30,17 @@ export const autoSlider = (slider: KeenSliderInstance) => {
 };
 
 export const moveToSelectedSlide = (slider: KeenSliderInstance) => {
-  slider.slides.forEach((slide, idx) => {
-    slide.addEventListener("click", (e) => {
-      if (slider.track.details.rel === idx) return;
-      slider.moveToIdx(idx);
-    });
+  const events: number[] = [];
+  slider.on("optionsChanged", () => {
+    if (slider.slides.length === 0) return;
+    slider.slides
+      .filter((_, id) => !events.includes(id))
+      .forEach((slide, idx) => {
+        events.push(idx);
+        slide.addEventListener("click", () => {
+          if (slider.track.details.rel === idx) return;
+          slider.moveToIdx(idx);
+        });
+      });
   });
 };

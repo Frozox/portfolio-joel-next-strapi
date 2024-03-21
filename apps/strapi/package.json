@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@strapi/database": "^4.20.4",
     "@strapi/plugin-cloud": "4.20.3",
     "@strapi/plugin-i18n": "4.20.3",
     "@strapi/plugin-users-permissions": "4.20.3",
@@ -22,6 +23,8 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
     "strapi-plugin-config-sync": "^1.2.3",
+    "strapi-plugin-placeholder": "^4.4.0",
+    "strapi-plugin-schemas-to-ts": "^1.1.21",
     "styled-components": "5.3.3"
   },
   "author": {
