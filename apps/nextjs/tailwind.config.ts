@@ -68,10 +68,21 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "content-load": {
+          from: {
+            opacity: "0",
+            transform: "translate3d(0, 20px, 0)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translate3d(0, 0px, 0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "content-load": "content-load 1s cubic-bezier(0.23, 1, 0.32, 1)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],

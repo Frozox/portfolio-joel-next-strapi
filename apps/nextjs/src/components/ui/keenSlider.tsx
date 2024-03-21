@@ -12,7 +12,7 @@ export type TKeenSliderProps = {
 }
 
 export interface TKeenSlideProps {
-    content: JSX.Element | React.ReactNode | string
+    children: React.ReactNode
     className?: string
 }
 
@@ -33,10 +33,10 @@ export const KeenSlider = ({ options, plugins, className, children }: TKeenSlide
     );
 }
 
-export const KeenSlide = ({ content, className }: TKeenSlideProps) => {
+export const KeenSlide = ({ className, children }: TKeenSlideProps) => {
     return (
         <div className={cn("keen-slider__slide", className)}>
-            {content}
+            {children}
         </div>
     )
 }
