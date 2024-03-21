@@ -1,16 +1,16 @@
 "use client";
 
+import { env } from "@/env.mjs";
 import { ArtCategoryContext } from "@/helpers/context/strapi/artCategoryContext";
-import { env } from "process";
-import React, { useEffect } from "react";
+import React from "react";
 import Strapi, { type StrapiOptions } from "strapi-sdk-js";
 
 export const useStrapiSdk = () => {
   const [strapiSdk, setStrapiSdk] = React.useState<Strapi>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const strapiOptions: StrapiOptions = {
-      url: "http://localhost:8000/",
+      url: env.NEXT_PUBLIC_BACKEND_HOST,
     };
 
     setStrapiSdk(new Strapi(strapiOptions));

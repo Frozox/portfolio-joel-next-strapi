@@ -8,11 +8,12 @@ import { useArtCategory } from "@/helpers/hook/strapi/strapiSdk";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import Loading from "@/components/loading";
+import { ContentLoader } from "@/components/loading";
+import { env } from "@/env.mjs";
 
 const Home = () => {
   const [slides, setSlides] = React.useState<TKeenSlideProps[]>([]);
-  const { artCategories } = useArtCategory()
+  const { artCategories, failedFetch, endedFetch } = useArtCategory()
 
   React.useEffect(() => {
     if (artCategories.length === 0) return;
@@ -21,7 +22,7 @@ const Home = () => {
 
       return {
         children: (
-          <DirectionAwareHover imageUrl={`http://localhost:8000${image.attributes.url}`} blurData={image.attributes.placeholder}>
+          <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`} blurData={image.attributes.placeholder}>
             <div className="m-4">
               <div className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</div>
               <Link href={`/${item.attributes.slug}`}>
@@ -37,7 +38,7 @@ const Home = () => {
   }, [artCategories])
 
   return (
-    slides.length > 0 ? (
+    <ContentLoader loaded={endedFetch} error={failedFetch}>
       <div className="h-full animate-content-load">
         <HomeSlider slides={slides} className="h-4/5 md:h-3/5" />
         <div className="t-20 md:mt-20 text-center flex flex-col justify-center items-center">
@@ -47,9 +48,7 @@ const Home = () => {
           <div>enim praesent elementum</div>
         </div>
       </div>
-    ) : (
-      <Loading />
-    )
+    </ContentLoader>
   );
 }
 

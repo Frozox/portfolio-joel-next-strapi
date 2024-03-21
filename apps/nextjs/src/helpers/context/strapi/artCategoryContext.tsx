@@ -4,7 +4,9 @@ import { type ArtCategory } from "@portfolio/strapi/src/api/art-category/content
 import React from "react";
 
 export const initialArtCategoryContext = {
-  artCategories: [] as ArtCategory[]
+  artCategories: [] as ArtCategory[],
+  failedFetch: false,
+  endedFetch: false,
 };
 
 export const ArtCategoryContext = React.createContext(
