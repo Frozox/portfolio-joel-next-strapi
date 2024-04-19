@@ -113,7 +113,7 @@ export const ArtFilterPagination = () => {
 
   return (
     <div className="select-none">
-      <hr className="h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
+      <hr className="mb-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -185,13 +185,29 @@ export const ArtFilterPagination = () => {
                   </>
                 )) || (
                 <>
-                  {Array.from({ length: extraPagesToDisplay }).map((_, j) => (
-                    <React.Fragment key={j}>
-                      <PaginationItem>
-                        <PaginationLink>x</PaginationLink>
-                      </PaginationItem>
-                    </React.Fragment>
-                  ))}
+                  {Array.from({ length: extraPagesToDisplay }).map((_, j) => {
+                    const page = metaPagination.page <= 2 ? j + 2 :
+                      (metaPagination.page >= metaPagination.pageCount ? j + metaPagination.page - 2 :
+                        j + metaPagination.page - 1);
+
+                    return (
+                      <React.Fragment key={j}>
+                        <PaginationItem>
+                          <PaginationLink isActive={metaPagination.page === page}>
+                            <button
+                              onClick={() =>
+                                setPagination({ ...pagination, page })
+                              }
+                              disabled={metaPagination.page === page}
+                              className="size-full"
+                            >
+                              {page}
+                            </button>
+                          </PaginationLink>
+                        </PaginationItem>
+                      </React.Fragment>
+                    );
+                  })}
                 </>
               )}
             </React.Fragment>
@@ -211,7 +227,7 @@ export const ArtFilterPagination = () => {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-      <hr className="h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
+      <hr className="mt-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
     </div>
   );
 };
