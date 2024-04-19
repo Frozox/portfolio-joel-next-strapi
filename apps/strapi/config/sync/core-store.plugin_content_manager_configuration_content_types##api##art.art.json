@@ -274,6 +274,7 @@
       "list": [
         "name",
         "date",
+        "art_category",
         "thumbnail"
       ]
     },

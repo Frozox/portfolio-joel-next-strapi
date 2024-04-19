@@ -1,15 +1,15 @@
-"use client"
+'use client';
 
-import React from "react";
-import ArtCategoryContext from "@/helpers/context/strapi/artCategoryContext";
-import { useGetArtCategories } from "@/helpers/hook/strapi/request";
+import ArtCategoryContext from '@/helpers/context/strapi/artCategoryContext';
+import { useGetArtCategories } from '@/helpers/hook/strapi/request';
+import React from 'react';
 
 export const ArtCategoryProvider = ({ children }: { children: React.ReactNode }) => {
-    const { response, error, isError, isLoading } = useGetArtCategories({ populate: "image" })
+  const { response, error, isError, isLoading } = useGetArtCategories({ populate: 'image' });
 
-    return (
-        <ArtCategoryContext.Provider value={{ artCategories: response?.data ?? [], error, isError, isLoading }}>
-            {children}
-        </ArtCategoryContext.Provider>
-    )
-}
+  return (
+    <ArtCategoryContext.Provider value={{ artCategories: response?.data ?? [], error, isError, isLoading }}>
+      {children}
+    </ArtCategoryContext.Provider>
+  );
+};

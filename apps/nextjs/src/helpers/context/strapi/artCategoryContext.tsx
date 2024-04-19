@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { type ArtCategory } from "@portfolio/strapi/src/api/art-category/content-types/art-category/art-category";
-import React from "react";
-import { StrapiError } from "strapi-sdk-js";
+import { type ArtCategory } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
+import React from 'react';
+import { StrapiError } from 'strapi-sdk-js';
 
 type TArtCategoryContext = {
   artCategories: ArtCategory[],

@@ -1,9 +1,9 @@
 const Archives = () => {
-    return (
-        <div className="h-screen w-full">
-            <span>Archives</span>
-        </div>
-    );
-}
+  return (
+    <div className="size-full">
+      <span>Archives</span>
+    </div>
+  );
+};
 
 export default Archives;

@@ -1,9 +1,9 @@
 const Contact = () => {
-    return (
-        <div className="h-screen w-full">
-            <span>Contact</span>
-        </div>
-    );
-}
+  return (
+    <div className="size-full">
+      <span>Contact</span>
+    </div>
+  );
+};
 
 export default Contact;

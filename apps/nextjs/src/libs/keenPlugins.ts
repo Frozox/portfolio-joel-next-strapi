@@ -1,4 +1,4 @@
-import { KeenSliderInstance } from "keen-slider/react";
+import { KeenSliderInstance } from 'keen-slider/react';
 
 export const autoSlider = (slider: KeenSliderInstance) => {
   let timeout: ReturnType<typeof setTimeout>;
@@ -13,31 +13,31 @@ export const autoSlider = (slider: KeenSliderInstance) => {
       slider.next();
     }, 6000);
   }
-  slider.on("created", () => {
-    slider.container.addEventListener("mouseover", () => {
+  slider.on('created', () => {
+    slider.container.addEventListener('mouseover', () => {
       mouseOver = true;
       clearNextTimeout();
     });
-    slider.container.addEventListener("mouseout", () => {
+    slider.container.addEventListener('mouseout', () => {
       mouseOver = false;
       nextTimeout();
     });
     nextTimeout();
   });
-  slider.on("dragStarted", clearNextTimeout);
-  slider.on("animationEnded", nextTimeout);
-  slider.on("updated", nextTimeout);
+  slider.on('dragStarted', clearNextTimeout);
+  slider.on('animationEnded', nextTimeout);
+  slider.on('updated', nextTimeout);
 };
 
 export const moveToSelectedSlide = (slider: KeenSliderInstance) => {
   const events: number[] = [];
-  slider.on("optionsChanged", () => {
+  slider.on('optionsChanged', () => {
     if (slider.slides.length === 0) return;
     slider.slides
       .filter((_, id) => !events.includes(id))
       .forEach((slide, idx) => {
         events.push(idx);
-        slide.addEventListener("click", () => {
+        slide.addEventListener('click', () => {
           if (slider.track.details.rel === idx) return;
           slider.moveToIdx(idx);
         });

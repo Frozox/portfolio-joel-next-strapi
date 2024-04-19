@@ -1,80 +1,79 @@
-"use client"
+'use client';
 
-import { cn } from "@/libs/utils";
-import { AlignJustifyIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdownMenu";
-import React from "react";
-import { useArtCategory } from "@/helpers/context/strapi/artCategoryContext";
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdownMenu';
+import { useArtCategory } from '@/helpers/context/strapi/artCategoryContext';
+import { cn } from '@/libs/utils';
+import { AlignJustifyIcon } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
 
 const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
-    const [dropdownOpened, setDropDownOpened] = useState<boolean>(false);
-    const { artCategories, isError, isLoading } = useArtCategory();
+  const [dropdownOpened, setDropDownOpened] = useState<boolean>(false);
+  const { artCategories, isError, isLoading } = useArtCategory();
 
-    const toggleDropdown = () => {
-        setDropDownOpened(!dropdownOpened);
-    }
+  const toggleDropdown = () => {
+    setDropDownOpened(!dropdownOpened);
+  };
 
-    return (
-        <nav className={cn("w-full fixed z-50", className)}>
-            <div className="flex flex-wrap items-center justify-between mx-auto px-10 py-8">
-                <Link href={"/"} className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <Image src={"/logo.svg"} className="h-8 w-auto dark:invert" alt="Logo" width={0} height={0} />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Joël Chapeau</span>
-                </Link>
-                <Button onClick={toggleDropdown} type="button" variant="ghost" className="inline-flex items-center p-1 w-10 h-10 justify-center text-sm text-black dark:text-white rounded-lg md:hidden focus:outline-none focus:ring-2 dark:focus:ring-gray-200 dark:hover:bg-gray-700">
-                    <span className="sr-only">Ouvrir le menu</span>
-                    <AlignJustifyIcon className="h-full w-full" />
-                </Button>
-                <div className={cn("w-full md:block md:w-auto bg-background rounded-b-lg border md:border-none border-t-0 mt-4", !dropdownOpened && "hidden")}>
-                    <ul className="flex flex-col font-medium p-4 md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-lg">
-                        <li>
-                            <Link href="/" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Accueil</Link>
-                        </li>
-                        <li className="hidden md:block">
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <button disabled={isLoading || isError} className="cursor-pointer block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 disabled:pointer-events-none disabled:opacity-50">
-                                        Travaux
-                                    </button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="start">
-                                    {artCategories.map((category) => {
-                                        return (
-                                            <DropdownMenuItem key={category.id} asChild>
-                                                <Link href={category.attributes.slug} className="w-full h-full text-lg">{category.attributes.name}</Link>
-                                            </DropdownMenuItem>
-                                        )
-                                    })}
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </li>
-                        <li className="md:hidden py-2 px-3">
-                            <div className="text-foreground opacity-50">Travaux</div>
-                            <ul>
-                                {artCategories.map((category) => {
-                                    return (
-                                        <li key={category.id}>
-                                            <Link href={category.attributes.slug} className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{category.attributes.name}</Link>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </li>
-                        <li>
-                            <Link href="/archives" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Archives</Link>
-                        </li>
-                        <li>
-                            <Link href="/contact" className="block py-2 px-3 rounded md:hover:bg-transparent md:border-0 md:p-0 md:dark:hover:bg-transparent text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Contact</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    );
+  return (
+    <nav className={cn('w-full fixed z-50', className)}>
+      <div className="mx-auto flex flex-wrap items-center justify-between px-10 py-8">
+        <Link href={'/'} className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Image src={'/logo.svg'} className="h-8 w-auto dark:invert" alt="Logo" width={0} height={0} />
+          <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Joël Chapeau</span>
+        </Link>
+        <Button onClick={toggleDropdown} type="button" variant="ghost" className="inline-flex size-10 items-center justify-center rounded-lg p-1 text-sm text-black focus:outline-none focus:ring-2 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-200 md:hidden">
+          <span className="sr-only">Ouvrir le menu</span>
+          <AlignJustifyIcon className="size-full" />
+        </Button>
+        <div className={cn('w-full md:block md:w-auto bg-background rounded-b-lg border md:border-none border-t-0 mt-4', !dropdownOpened && 'hidden')}>
+          <ul className="flex flex-col p-4 text-lg font-medium md:mt-0 md:flex-row md:space-x-8 md:p-0 rtl:space-x-reverse">
+            <li>
+              <Link href="/" className="block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">Accueil</Link>
+            </li>
+            <li className="hidden md:block">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button disabled={isLoading || isError} className="block cursor-pointer rounded px-3 py-2 text-black hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">
+                    Travaux
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {artCategories.map((category) => {
+                    return (
+                      <DropdownMenuItem key={category.id} asChild>
+                        <Link href={category.attributes.slug} className="size-full text-lg">{category.attributes.name}</Link>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </li>
+            <li className="px-3 py-2 md:hidden">
+              <div className="text-foreground opacity-50">Travaux</div>
+              <ul>
+                {artCategories.map((category) => {
+                  return (
+                    <li key={category.id}>
+                      <Link href={category.attributes.slug} className="block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">{category.attributes.name}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+            <li>
+              <Link href="/archives" className="block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">Archives</Link>
+            </li>
+            <li>
+              <Link href="/contact" className="block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">Contact</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default MainNav;
