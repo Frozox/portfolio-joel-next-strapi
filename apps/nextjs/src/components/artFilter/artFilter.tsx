@@ -19,6 +19,8 @@ import {
 } from '@/components/ui/pagination';
 import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
 import { cn } from '@/libs/utils';
+import useEventListener from '@use-it/event-listener';
+import * as KeyCode from 'keycode-js';
 import { ArrowDownAZIcon, FilterIcon, Trash2Icon } from 'lucide-react';
 import React from 'react';
 
@@ -81,7 +83,7 @@ export const ArtFilterCheckboxItem = ({
   );
 };
 
-export const ArtFilterPagination = () => {
+export const ArtFilterPagination = ({className}:{className:string}) => {
   const {
     artsQuery: { response, isError, isLoading },
     pagination,
@@ -96,6 +98,14 @@ export const ArtFilterPagination = () => {
   });
   const [extraPagesToDisplay, setExtraPagesToDisplay] = React.useState(0);
 
+  // Switch pages with arrows
+  useEventListener('keydown', (e: KeyboardEvent) => {
+    if (KeyCode.CODE_LEFT === e.code && metaPagination.page > 1)
+      setPagination({ ...pagination, page: metaPagination.page - 1 });
+    else if (KeyCode.CODE_RIGHT === e.code && metaPagination.page < metaPagination.pageCount)
+      setPagination({ ...pagination, page: metaPagination.page + 1 });
+  });
+  
   React.useEffect(() => {
     if (!response?.meta) return;
     setMetaPagination(response.meta.pagination as TMetaPagination);
@@ -112,7 +122,7 @@ export const ArtFilterPagination = () => {
   }, [metaPagination]);
 
   return (
-    <div className="select-none">
+    <div className={cn('select-none', className)}>
       <hr className="mb-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
       <Pagination>
         <PaginationContent>

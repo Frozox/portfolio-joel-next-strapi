@@ -1,10 +1,10 @@
 'use client';
 
-import HomeSlider from '@/components/homeSlider';
-import { ContentLoader } from '@/components/loading';
+import HomeSlider from '@/components/slider/homeSlider';
 import { Button } from '@/components/ui/button';
 import { DirectionAwareHover } from '@/components/ui/directionAwareHover';
 import { TKeenSlideProps } from '@/components/ui/keenSlider';
+import { ContentLoader } from '@/components/ui/loading';
 import { env } from '@/env.mjs';
 import { useArtCategory } from '@/helpers/context/strapi/artCategoryContext';
 import Image from 'next/image';
@@ -12,19 +12,14 @@ import Link from 'next/link';
 import React from 'react';
 
 const Home = () => {
-  const [slides, setSlides] = React.useState<TKeenSlideProps[]>([]);
   const { artCategories, isError, isLoading } = useArtCategory();
-
-  React.useEffect(() => {
-    if (artCategories.length === 0) return;
+  const slides = React.useMemo<TKeenSlideProps[]>(() => {
+    if (artCategories.length === 0) return [];
     const formatedSlides: TKeenSlideProps[] = artCategories.map((item) => {
       const image = item.attributes.image.data;
-
       return {
         children: (
           <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`} blurData={
-            // TODO add missing placeholder value
-            // @ts-expect-error
             image.attributes.placeholder
           }>
             <div className="m-4">
@@ -37,8 +32,7 @@ const Home = () => {
         )
       };
     });
-
-    setSlides(formatedSlides);
+    return formatedSlides;
   }, [artCategories]);
 
   return (

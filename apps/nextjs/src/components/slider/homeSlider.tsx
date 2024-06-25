@@ -1,4 +1,5 @@
-import { KeenSlide, KeenSlider, TKeenSlideProps } from '@/components/ui/keenSlider';
+import Slider from '@/components/slider/slider';
+import { TKeenSlideProps } from '@/components/ui/keenSlider';
 import { easeInOutBack } from '@/libs/easing';
 import { autoSlider, moveToSelectedSlide } from '@/libs/keenPlugins';
 import { KeenSliderOptions, KeenSliderPlugin } from 'keen-slider/react';
@@ -31,19 +32,11 @@ const sliderOptions: KeenSliderOptions = {
 };
 const sliderPlugins: KeenSliderPlugin[] = [autoSlider, moveToSelectedSlide];
 
-const HomeSlider = ({ className, content, slides, ...props }: THomeSliderProps) => {
+const HomeSlider = ({ children, slides, ...props }: THomeSliderProps) => {
   return (
-    <KeenSlider options={sliderOptions} plugins={sliderPlugins} className={className} {...props}>
-      {
-        slides.map(({ children, ...slideProps }, idx) => {
-          return (
-            <KeenSlide key={idx} {...slideProps}>
-              {children}
-            </KeenSlide>
-          );
-        })
-      }
-    </KeenSlider>
+    <Slider sliderOptions={sliderOptions} sliderPlugins={sliderPlugins} slides={slides} {...props}>
+      {children}
+    </Slider>
   );
 };
 

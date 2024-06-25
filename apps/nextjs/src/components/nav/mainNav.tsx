@@ -18,7 +18,7 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
   };
 
   return (
-    <nav className={cn('w-full fixed z-50', className)}>
+    <nav className={cn('fixed z-50', className)}>
       <div className="mx-auto flex flex-wrap items-center justify-between px-10 py-8">
         <Link href={'/'} className="flex items-center space-x-3 rtl:space-x-reverse">
           <Image src={'/logo.svg'} className="h-8 w-auto dark:invert" alt="Logo" width={0} height={0} />

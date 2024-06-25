@@ -1,4 +1,4 @@
-import { ArtFilter } from '@/components/artFilter';
+import { ArtFilter } from '@/components/artFilter/artFilter';
 import { ArtFilterProvider } from '@/helpers/provider/strapi/artFilterProvider';
 import { Metadata } from 'next';
 
@@ -18,8 +18,8 @@ export const generateMetadata = ({ params }: TLayoutProps): Metadata => {
 const CategoryLayout = ({ children, params }: Readonly<TLayoutProps>) => {
   return (
     <ArtFilterProvider activeCategorySlug={params.categorySlug}>
-      <div className="h-11 animate-content-load">
-        <ArtFilter className="sticky h-11 bg-background md:fixed" />
+      <div className="h-11">
+        <ArtFilter className="sticky h-11 bg-background md:fixed max-w-[2500px] mx-auto" />
       </div>
       <div className="h-[calc(100%-2.75rem)] w-full">
         {children}
