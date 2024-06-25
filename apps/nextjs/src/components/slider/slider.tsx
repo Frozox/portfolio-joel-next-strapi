@@ -1,16 +1,14 @@
-import { KeenSlide, KeenSlider, TKeenSlideProps } from '@/components/ui/keenSlider';
-import { KeenSliderOptions, KeenSliderPlugin } from 'keen-slider/react';
+import { KeenSlide, KeenSlider } from '@/components/ui/keenSlider';
+import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
 import React from 'react';
 
-export type TSliderProps = React.HTMLAttributes<HTMLElement> & {
-    slides: TKeenSlideProps[]
-    sliderOptions?: KeenSliderOptions,
-    sliderPlugins?: KeenSliderPlugin[]
-}
+export type TSliderProps = React.HTMLAttributes<HTMLElement> & {}
 
-const Slider = ({ className, slides, sliderOptions, sliderPlugins, ...props }: TSliderProps) => {
+const Slider = ({ className, ...props }: TSliderProps) => {
+  const { slides } = useKeenSlider();
+
   return (
-    <KeenSlider options={sliderOptions} plugins={sliderPlugins} className={className} {...props}>
+    <KeenSlider className={className} {...props}>
       {
         slides.map(({ children, ...slideProps }, idx) => {
           return (

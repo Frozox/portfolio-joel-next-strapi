@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { env } from "@/env.mjs";
-import { useArtFilter } from "@/helpers/context/strapi/artFilterContext";
-import { easeInOutBack } from "@/libs/easing";
-import { motion } from "framer-motion";
-import { KeenSliderOptions } from "keen-slider/react";
-import Image from "next/image";
-import React from "react";
-import FadeSlider from "../slider/fadeSlider";
-import { TKeenSlideProps } from "../ui/keenSlider";
+import Slider from '@/components/slider/slider';
+import { TKeenSlideProps } from '@/components/ui/keenSlider';
+import { env } from '@/env.mjs';
+import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
+import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import React from 'react';
 
 type TArtCaroussel = React.HTMLAttributes<HTMLElement> & {};
 
@@ -37,6 +36,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
   const {
     artsQuery: { response },
   } = useArtFilter();
+  const { sliderInstance, setSlides } = useKeenSlider();
 
   const selectedArtItemRef = React.useRef<HTMLDivElement>(null);
   const artItems = React.useMemo<TArtItem[]>(
@@ -66,7 +66,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
     [response?.data],
   );
 
-  const fadeSlides = React.useMemo<TKeenSlideProps[]>(() => {
+  const slides = React.useMemo<TKeenSlideProps[]>(() => {
     return artItems.map(
       (item): TKeenSlideProps => ({
         children: (
@@ -111,33 +111,16 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
     );
   }, [artItems]);
 
-  const [selectedArtItem, setSelectedArtItem] = React.useState<TArtItem>(
-    artItems[0],
-  );
-
   React.useEffect(() => {
-    console.log(selectedArtItem);
-  }, [selectedArtItem]);
-
-  const sliderOptions: KeenSliderOptions = {
-    mode: "snap",
-    slides: {
-      perView: 1,
-      spacing: 20,
-      origin: "center",
-    },
-    defaultAnimation: {
-      duration: 1800,
-      easing: easeInOutBack,
-    },
-  };
+    setSlides(slides);
+  }, [slides, setSlides]);
 
   const selectArtItem = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
     artItem: TArtItem,
   ) => {
     if (window.scrollY === 0) {
-      setSelectedArtItem(artItem);
+      sliderInstance.current?.moveToIdx(artItems.indexOf(artItem));
       return;
     }
 
@@ -148,10 +131,10 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
     }, 200);
 
     window.addEventListener(
-      "scroll",
+      'scroll',
       () => {
         if (window.scrollY > 0) return;
-        setSelectedArtItem(artItem);
+        sliderInstance.current?.moveToIdx(artItems.indexOf(artItem));
         scrollController.abort();
       },
       { signal: scrollController.signal },
@@ -164,10 +147,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
         className="flex py-2 md:h-[calc(100vh-15rem)]"
         ref={selectedArtItemRef}
       >
-        <FadeSlider
-          slides={fadeSlides}
-          sliderOptions={sliderOptions}
-          sliderPlugins={[]}
+        <Slider
           className="relative"
         />
       </motion.div>
@@ -183,7 +163,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
               <Image
                 src={artItem.thumbnail.url}
                 blurDataURL={artItem.thumbnail.placeholder}
-                placeholder={artItem.thumbnail.placeholder ? "blur" : "empty"}
+                placeholder={artItem.thumbnail.placeholder ? 'blur' : 'empty'}
                 alt={artItem.name}
                 width={artItem.thumbnail.width}
                 height={artItem.thumbnail.height}

@@ -1,21 +1,21 @@
-import MainNav from "@/components/nav/mainNav";
-import QueryClientProvider from "@/helpers/provider/react-query/queryClientProvider";
-import { ArtCategoryProvider } from "@/helpers/provider/strapi/artCategoryProvider";
-import { ThemeProvider } from "@/helpers/provider/theme/themeProvider";
-import { cn } from "@/libs/utils";
-import type { Metadata } from "next";
-import { Lato as FontSans } from "next/font/google";
-import "./globals.css";
+import MainNav from '@/components/nav/mainNav';
+import QueryClientProvider from '@/helpers/provider/react-query/queryClientProvider';
+import { ArtCategoryProvider } from '@/helpers/provider/strapi/artCategoryProvider';
+import { ThemeProvider } from '@/helpers/provider/theme/themeProvider';
+import { cn } from '@/libs/utils';
+import type { Metadata } from 'next';
+import { Lato as FontSans } from 'next/font/google';
+import './globals.css';
 
 export const fontSans = FontSans({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-sans",
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
-  title: "Joel Chapeau",
-  description: "Portfolio de Joel",
+  title: 'Joel Chapeau',
+  description: 'Portfolio de Joel',
 };
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
@@ -28,7 +28,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       <body
         className={cn(
           fontSans.className,
-          "mx-auto h-screen max-w-[2500px] self-center bg-background align-middle font-sans antialiased",
+          'mx-auto h-screen max-w-[2500px] self-center bg-background align-middle font-sans antialiased',
         )}
       >
         <ThemeProvider

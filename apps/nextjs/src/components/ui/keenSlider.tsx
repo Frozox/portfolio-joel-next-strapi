@@ -1,13 +1,10 @@
+import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
 import { cn } from '@/libs/utils';
 import 'keen-slider/keen-slider.min.css';
-import { KeenSliderOptions, KeenSliderPlugin, useKeenSlider } from 'keen-slider/react';
-import React, { LegacyRef } from 'react';
+import React from 'react';
 
 export type TKeenSliderProps = {
-  sliderRef?: LegacyRef<any>,
   className?: string,
-  options?: KeenSliderOptions
-  plugins?: KeenSliderPlugin[]
   children: React.ReactNode,
 }
 
@@ -16,8 +13,8 @@ export interface TKeenSlideProps {
   className?: string
 }
 
-export const KeenSlider = ({ options, plugins, className, children }: TKeenSliderProps) => {
-  const [sliderRef, sliderInstance] = useKeenSlider(options, plugins);
+export const KeenSlider = ({ className, children }: TKeenSliderProps) => {
+  const {sliderRef, sliderInstance, options, plugins} = useKeenSlider();
 
   React.useEffect(() => {
     sliderInstance.current?.update({

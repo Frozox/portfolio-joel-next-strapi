@@ -1,45 +1,45 @@
 'use client';
 
 import HomeSlider from '@/components/slider/homeSlider';
-import { Button } from '@/components/ui/button';
-import { DirectionAwareHover } from '@/components/ui/directionAwareHover';
-import { TKeenSlideProps } from '@/components/ui/keenSlider';
 import { ContentLoader } from '@/components/ui/loading';
-import { env } from '@/env.mjs';
 import { useArtCategory } from '@/helpers/context/strapi/artCategoryContext';
+import { KeenSliderProvider } from '@/helpers/provider/keen/keenSliderProvider';
+import { easeInOutBack } from '@/libs/easing';
+import { autoSlider, moveToSelectedSlide } from '@/libs/keenPlugins';
 import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
 
 const Home = () => {
-  const { artCategories, isError, isLoading } = useArtCategory();
-  const slides = React.useMemo<TKeenSlideProps[]>(() => {
-    if (artCategories.length === 0) return [];
-    const formatedSlides: TKeenSlideProps[] = artCategories.map((item) => {
-      const image = item.attributes.image.data;
-      return {
-        children: (
-          <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`} blurData={
-            image.attributes.placeholder
-          }>
-            <div className="m-4">
-              <div className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</div>
-              <Link href={`/${item.attributes.slug}`}>
-                <Button type="button" variant="outline" className="w-fit border-white bg-transparent p-6 text-xl hover:bg-background md:min-w-60 md:text-2xl">Voir les travaux</Button>
-              </Link>
-            </div>
-          </DirectionAwareHover>
-        )
-      };
-    });
-    return formatedSlides;
-  }, [artCategories]);
+  const { isError, isLoading } = useArtCategory();
 
   return (
     <div className="size-full">
       <ContentLoader isLoading={isLoading} isError={isError}>
         <div className="h-full animate-content-load">
-          <HomeSlider slides={slides} className="h-4/5 md:h-3/5" />
+          <KeenSliderProvider options={{
+            mode: 'snap',
+            slides: {
+              perView: 2,
+              spacing: 20,
+              origin: 'center',
+            },
+            defaultAnimation: {
+              duration: 1800,
+              easing: easeInOutBack
+            },
+            breakpoints: {
+              '(max-width: 1024px)': {
+                slides: {
+                  perView: 1,
+                  spacing: 20,
+                  origin: 'center',
+                }
+              }
+            },
+          }}
+          plugins={[autoSlider, moveToSelectedSlide]}
+          >
+            <HomeSlider />
+          </KeenSliderProvider>
           <div className="mt-16 flex flex-col items-center justify-center text-center md:mt-20">
             <Image src="/joel.jpg" className="rounded-full" height={200} width={200} alt="joel" />
             <div className="mt-8">nunc vel risus commodo viverra maecenas accumsan lacus vel facilisis</div>

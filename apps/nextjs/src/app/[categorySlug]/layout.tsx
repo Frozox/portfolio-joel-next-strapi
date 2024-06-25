@@ -19,7 +19,7 @@ const CategoryLayout = ({ children, params }: Readonly<TLayoutProps>) => {
   return (
     <ArtFilterProvider activeCategorySlug={params.categorySlug}>
       <div className="h-11">
-        <ArtFilter className="sticky h-11 bg-background md:fixed max-w-[2500px] mx-auto" />
+        <ArtFilter className="sticky mx-auto h-11 max-w-[2500px] bg-background md:fixed" />
       </div>
       <div className="h-[calc(100%-2.75rem)] w-full">
         {children}
