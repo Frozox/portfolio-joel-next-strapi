@@ -20,6 +20,7 @@ export interface Art {
     depth?: number;
     art_category?: { data: ArtCategory };
     art_tags?: { data: ArtTag[] };
+    sold_out: boolean;
     locale: string;
     localizations?: { data: Art[] };
   };
@@ -36,6 +37,7 @@ export interface Art_Plain {
   depth?: number;
   art_category?: ArtCategory_Plain;
   art_tags?: ArtTag_Plain[];
+  sold_out: boolean;
   locale: string;
   localizations?: Art[];
 }
@@ -52,6 +54,7 @@ export interface Art_NoRelations {
   depth?: number;
   art_category?: number;
   art_tags?: number[];
+  sold_out: boolean;
   locale: string;
   localizations?: Art[];
 }
@@ -68,6 +71,7 @@ export interface Art_AdminPanelLifeCycle {
   depth?: number;
   art_category?: AdminPanelRelationPropertyModification<ArtCategory_Plain>;
   art_tags?: AdminPanelRelationPropertyModification<ArtTag_Plain>;
+  sold_out: boolean;
   locale: string;
   localizations?: Art[];
 }

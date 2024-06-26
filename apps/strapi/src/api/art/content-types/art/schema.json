@@ -104,6 +104,16 @@
       "relation": "manyToMany",
       "target": "api::art-tag.art-tag",
       "inversedBy": "arts"
+    },
+    "sold_out": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

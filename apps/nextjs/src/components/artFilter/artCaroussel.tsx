@@ -1,33 +1,37 @@
 'use client';
 
 import Slider from '@/components/slider/slider';
+import { Button } from '@/components/ui/button';
 import { TKeenSlideProps } from '@/components/ui/keenSlider';
 import { env } from '@/env.mjs';
+import { useContact } from '@/helpers/context/contact/contactContext';
 import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
 import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
+import { cn } from '@/libs/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 
 type TArtCaroussel = React.HTMLAttributes<HTMLElement> & {};
 
-type TArtItem = {
+type TArtCarousselItem = {
   id: number;
   name: string;
   height: number;
   width: number;
   depth?: number;
   description?: string;
+  sold_out?: boolean;
   thumbnail: {
     url: string;
     placeholder: string;
     width: number;
     height: number;
   };
-  art_tags?: TArtItemTag[];
+  art_tags?: TArtCarousselItemTag[];
 };
 
-type TArtItemTag = {
+type TArtCarousselItemTag = {
   id: number;
   tag: string;
 };
@@ -37,12 +41,13 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
     artsQuery: { response },
   } = useArtFilter();
   const { sliderInstance, setSlides } = useKeenSlider();
+  const { savedArts, toggleSavedArt } = useContact();
 
   const selectedArtItemRef = React.useRef<HTMLDivElement>(null);
-  const artItems = React.useMemo<TArtItem[]>(
+  const artItems = React.useMemo<TArtCarousselItem[]>(
     () =>
       response?.data.map(
-        (art): TArtItem => ({
+        (art): TArtCarousselItem => ({
           id: art.id,
           name: art.attributes.name,
           thumbnail: {
@@ -52,7 +57,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
             height: art.attributes.thumbnail.data.attributes.height,
           },
           art_tags: art.attributes?.art_tags?.data.map(
-            (tag): TArtItemTag => ({
+            (tag): TArtCarousselItemTag => ({
               id: tag.id,
               tag: tag.attributes.tag,
             }),
@@ -61,6 +66,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
           width: art.attributes.width,
           depth: art.attributes.depth,
           description: art.attributes.description,
+          sold_out: art.attributes.sold_out,
         }),
       ) ?? [],
     [response?.data],
@@ -90,7 +96,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
             </div>
             <div className="mt-6 flex justify-center lg:relative lg:ml-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end">
               <div>
-                <h2 className="mb-4 text-xl">{item.name}</h2>
+                <h2 className="mb-4 text-xl font-medium md:text-2xl">{item.name}</h2>
                 <div>
                   {item.art_tags?.map((tag) => (
                     <p className="text-foreground" key={tag.id}>
@@ -102,6 +108,24 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                       ? `${item.height} x ${item.width} x ${item.depth} cm`
                       : `${item.height} x ${item.width} cm`}
                   </p>
+                  <div className={cn(item?.sold_out ? 'cursor-not-allowed' : 'cursor-pointer')}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => toggleSavedArt({
+                        id: item.id,
+                        name: item.name,
+                        thumbnail: item.thumbnail,
+                      })}
+                      disabled={item?.sold_out ?? false}
+                      className="mt-4 w-fit border-foreground bg-transparent p-6 text-xl text-foreground hover:bg-foreground hover:text-background md:min-w-60 md:text-2xl"
+                    >
+                      {item?.sold_out ? 'Indisponible' : (
+                        savedArts.find((savedArt) => savedArt.id === item.id) ? 'Enregistré' :  'Enregistrer'
+                      )}
+                    </Button>
+                  </div>
+                  <p className='mt-4 text-sm text-foreground'>les œuvres enregistrés se retrouvent dans la page de contact</p>
                 </div>
               </div>
             </div>
@@ -109,7 +133,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
         ),
       }),
     );
-  }, [artItems]);
+  }, [artItems, savedArts, toggleSavedArt]);
 
   React.useEffect(() => {
     setSlides(slides);
@@ -117,7 +141,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
 
   const selectArtItem = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
-    artItem: TArtItem,
+    artItem: TArtCarousselItem,
   ) => {
     if (window.scrollY === 0) {
       sliderInstance.current?.moveToIdx(artItems.indexOf(artItem));
@@ -144,7 +168,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
   return (
     <div>
       <motion.div
-        className="flex py-2 md:h-[calc(100vh-15rem)]"
+        className="flex py-2 lg:h-[calc(100vh-15rem)]"
         ref={selectedArtItemRef}
       >
         <Slider
@@ -152,7 +176,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
         />
       </motion.div>
       <div className="md:container">
-        <div className="columns-2 justify-center gap-4 space-y-4 p-8 lg:columns-3">
+        <div className="columns-2 justify-center gap-4 space-y-4 p-2 lg:columns-3 lg:p-8">
           {artItems.map((artItem) => (
             <motion.div
               key={artItem.id}

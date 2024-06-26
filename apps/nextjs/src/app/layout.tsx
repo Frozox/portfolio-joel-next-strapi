@@ -1,4 +1,5 @@
 import MainNav from '@/components/nav/mainNav';
+import { ContactProvider } from '@/helpers/provider/contact/contactProvider';
 import QueryClientProvider from '@/helpers/provider/react-query/queryClientProvider';
 import { ArtCategoryProvider } from '@/helpers/provider/strapi/artCategoryProvider';
 import { ThemeProvider } from '@/helpers/provider/theme/themeProvider';
@@ -39,10 +40,12 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         >
           <QueryClientProvider>
             <ArtCategoryProvider>
-              <header className="h-28">
-                <MainNav className="sticky mx-auto h-28 w-full max-w-[2500px] md:fixed md:bg-background" />
-              </header>
-              <main className="h-[calc(100vh-7rem)] w-full">{children}</main>
+              <ContactProvider>
+                <header className="h-28">
+                  <MainNav className="sticky mx-auto h-28 w-full max-w-[2500px] md:fixed md:bg-background" />
+                </header>
+                <main className="h-[calc(100vh-7rem)] w-full">{children}</main>
+              </ContactProvider>
             </ArtCategoryProvider>
           </QueryClientProvider>
         </ThemeProvider>

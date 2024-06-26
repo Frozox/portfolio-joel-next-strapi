@@ -161,6 +161,20 @@
           "sortable": false
         }
       },
+      "sold_out": {
+        "edit": {
+          "label": "Vendu",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "sold_out",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -263,11 +277,15 @@
         [
           {
             "name": "art_category",
-            "size": 6
+            "size": 4
           },
           {
             "name": "art_tags",
-            "size": 6
+            "size": 4
+          },
+          {
+            "name": "sold_out",
+            "size": 4
           }
         ]
       ],

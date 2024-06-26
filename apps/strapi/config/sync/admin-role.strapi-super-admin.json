@@ -252,7 +252,8 @@
           "width",
           "depth",
           "art_category",
-          "art_tags"
+          "art_tags",
+          "sold_out"
         ],
         "locales": [
           "en",
@@ -300,7 +301,8 @@
           "width",
           "depth",
           "art_category",
-          "art_tags"
+          "art_tags",
+          "sold_out"
         ],
         "locales": [
           "en",
@@ -324,7 +326,8 @@
           "width",
           "depth",
           "art_category",
-          "art_tags"
+          "art_tags",
+          "sold_out"
         ],
         "locales": [
           "en",
