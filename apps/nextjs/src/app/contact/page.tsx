@@ -37,6 +37,7 @@ const Contact = () => {
       >
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
+            <label className='hidden'>.</label>
             <Label htmlFor="fullname">Nom/Prénom</Label>
             <Input
               {...register('fullname')}
@@ -58,6 +59,7 @@ const Contact = () => {
             <Label htmlFor="message">Message</Label>
             <Textarea
               {...register('message')}
+              className='max-h-80'
               placeholder="Votre message"
               required={true}
             ></Textarea>
@@ -71,7 +73,12 @@ const Contact = () => {
           sitekey={env.NEXT_PUBLIC_HCAPTCHA_SITEKEY}
           size="invisible"
         />
-        <Toaster />
+        <Toaster toastOptions={{
+          style: {
+            backgroundColor: 'hsl(var(--foreground))',
+            color: 'hsl(var(--background))',
+          }
+        }}/>
       </form>
     </div>
   );
