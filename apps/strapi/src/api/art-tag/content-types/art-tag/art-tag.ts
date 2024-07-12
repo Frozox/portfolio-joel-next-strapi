@@ -22,7 +22,7 @@ export interface ArtTag_Plain {
   arts?: Art_Plain[];
   art_tag_category?: ArtTagCategory_Plain;
   locale: string;
-  localizations?: ArtTag[];
+  localizations?: ArtTag_Plain[];
 }
 
 export interface ArtTag_NoRelations {

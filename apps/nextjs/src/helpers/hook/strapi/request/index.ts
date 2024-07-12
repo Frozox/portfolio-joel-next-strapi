@@ -3,6 +3,7 @@ import { ArtCategory } from '@portfolio/strapi/src/api/art-category/content-type
 import { ArtTagCategory } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
 import { ArtTag } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
 import { Art } from '@portfolio/strapi/src/api/art/content-types/art/art';
+import { GenericEmail } from '@portfolio/strapi/types/email/email';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import {
@@ -38,6 +39,14 @@ const useGenericRequestFindMany = <T>(
   );
 };
 
+const genericRequestPost = async <T>(
+  contentType: string,
+  body: any,
+  params?: StrapiRequestParams
+): Promise<StrapiResponse<T>> => {
+  return await strapiInstance.create<T>(contentType, body, params);
+};
+
 export const useGetArtCategories = (params?: StrapiRequestParams) =>
   useGenericRequestFindMany<ArtCategory>('art-categories', params);
 
@@ -49,3 +58,6 @@ export const useGetArtTagCategories = (params?: StrapiRequestParams) =>
 
 export const useGetArtTags = (params?: StrapiRequestParams) =>
   useGenericRequestFindMany<ArtTag>('art-tags', params);
+
+export const sendContactForm = (body: any, params?: StrapiRequestParams) =>
+  genericRequestPost<GenericEmail>('email/contact-form', body, params);

@@ -3,6 +3,7 @@
 import { Media } from '../../../../common/sharedSchemas/Media';
 import { ArtCategory } from '../../../art-category/content-types/art-category/art-category';
 import { ArtTag } from '../../../art-tag/content-types/art-tag/art-tag';
+import { Media_Plain } from '../../../../common/sharedSchemas/Media';
 import { ArtCategory_Plain } from '../../../art-category/content-types/art-category/art-category';
 import { ArtTag_Plain } from '../../../art-tag/content-types/art-tag/art-tag';
 import { AdminPanelRelationPropertyModification } from '../../../../common/sharedSchemas/AdminPanelRelationPropertyModification';
@@ -30,8 +31,8 @@ export interface Art_Plain {
   createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  name: string;
   description?: string;
   date?: Date;
-  thumbnail: Media;
-  images?: Media[];
+  thumbnail: Media_Plain;
+  images?: Media_Plain[];
   height: number;
   width: number;
   depth?: number;
@@ -39,7 +40,7 @@ export interface Art_Plain {
   art_tags?: ArtTag_Plain[];
   sold_out: boolean;
   locale: string;
-  localizations?: Art[];
+  localizations?: Art_Plain[];
 }
 
 export interface Art_NoRelations {
@@ -64,8 +65,8 @@ export interface Art_AdminPanelLifeCycle {
   createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  name: string;
   description?: string;
   date?: Date;
-  thumbnail: AdminPanelRelationPropertyModification<Media>;
-  images?: AdminPanelRelationPropertyModification<Media>[];
+  thumbnail: AdminPanelRelationPropertyModification<Media_Plain>;
+  images?: AdminPanelRelationPropertyModification<Media_Plain>[];
   height: number;
   width: number;
   depth?: number;

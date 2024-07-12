@@ -10,6 +10,7 @@ export const autoSlider = (slider: KeenSliderInstance) => {
     clearTimeout(timeout);
     if (mouseOver) return;
     timeout = setTimeout(() => {
+      if (!slider.slides.length) return;
       slider.next();
     }, 6000);
   }

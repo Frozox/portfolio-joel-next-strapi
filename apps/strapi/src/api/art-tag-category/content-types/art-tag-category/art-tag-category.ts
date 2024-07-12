@@ -24,7 +24,7 @@ export interface ArtTagCategory_Plain {
   display_name: string;
   art_categories?: ArtCategory_Plain[];
   locale: string;
-  localizations?: ArtTagCategory[];
+  localizations?: ArtTagCategory_Plain[];
 }
 
 export interface ArtTagCategory_NoRelations {

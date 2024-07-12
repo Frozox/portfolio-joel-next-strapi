@@ -75,6 +75,20 @@
           "sortable": true
         }
       },
+      "status": {
+        "edit": {
+          "label": "status",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "status",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "actions": {
         "edit": {
           "label": "actions",
@@ -180,6 +194,10 @@
         [
           {
             "name": "timezone",
+            "size": 6
+          },
+          {
+            "name": "status",
             "size": 6
           }
         ]
