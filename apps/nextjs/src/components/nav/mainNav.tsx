@@ -42,7 +42,7 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
             <li className="hidden md:block">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button disabled={isLoading || isError} className="block cursor-pointer rounded px-3 py-2 text-black hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">
+                  <button disabled={isLoading || isError || artCategories.length === 0} className="block cursor-pointer rounded px-3 py-2 text-black hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">
                     Travaux
                   </button>
                 </DropdownMenuTrigger>
