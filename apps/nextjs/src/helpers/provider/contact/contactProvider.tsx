@@ -39,7 +39,8 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
         width: art.attributes.thumbnail.data.attributes.width,
         height: art.attributes.thumbnail.data.attributes.height,
       },
-    })) || [];
+    }));
+    if (defaultSavedArts.length === 0) return;
     setSavedArts(defaultSavedArts);
   }, [artsQuery.response?.data]);
 

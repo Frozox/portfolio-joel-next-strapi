@@ -24,7 +24,7 @@ const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <DefaultProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} buttonPosition='bottom-left' />
       {showDevtools && (
         <React.Suspense>
           <ReactQueryDevtoolsProduction />

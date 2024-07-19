@@ -77,7 +77,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
       (item): TKeenSlideProps => ({
         children: (
           <div
-            className="flex size-full flex-col justify-center px-2 lg:flex-row lg:px-0"
+            className="flex size-full flex-col justify-center px-2 lg:flex-row lg:px-4"
             key={item.id}
           >
             <div className="relative self-center lg:self-auto">
@@ -94,7 +94,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                 className="absolute bottom-0"
               />
             </div>
-            <div className="mt-6 flex justify-center lg:relative lg:ml-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end">
+            <div className="mt-6 flex justify-center lg:relative lg:mx-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end">
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">{item.name}</h2>
                 <div>
@@ -121,7 +121,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                       className="mt-4 w-fit border-foreground bg-transparent p-6 text-xl text-foreground hover:bg-foreground hover:text-background md:min-w-60 md:text-2xl"
                     >
                       {item?.sold_out ? 'Indisponible' : (
-                        savedArts.find((savedArt) => savedArt.id === item.id) ? 'Enregistré' :  'Enregistrer'
+                        savedArts.find((savedArt) => savedArt.id === item.id) ? 'Enregistré 💾' :  'Enregistrer'
                       )}
                     </Button>
                   </div>

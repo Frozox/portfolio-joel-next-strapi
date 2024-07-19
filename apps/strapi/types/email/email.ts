@@ -6,4 +6,17 @@ export interface GenericEmail {
 }
 
 export interface ContactEmail extends GenericEmail {
+    arts: number[];
+}
+
+export interface ContactEmailPopulated extends GenericEmail {
+    arts: {
+        id: number;
+        name: string;
+        thumbnail: {
+            url: string;
+            width: number;
+            height: number;
+        };
+    }[];
 }

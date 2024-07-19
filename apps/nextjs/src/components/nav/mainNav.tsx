@@ -31,7 +31,7 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
           <AlignJustifyIcon className="size-full" />
           {
             savedArts.length > 0 && !dropdownOpened &&
-                <span className="absolute -right-3 -top-3 flex size-5 items-center justify-center rounded-full bg-red-600 p-2 text-sm text-background">{savedArts.length}</span>
+                <span className="absolute -right-3 -top-3 flex size-5 items-center justify-center rounded-full bg-red-600 p-2 text-sm text-white">{savedArts.length}</span>
           }
         </Button>
         <div className={cn('w-full md:block md:w-auto bg-background rounded-b-lg border md:border-none border-t-0 mt-4', !dropdownOpened && 'hidden')}>
@@ -76,7 +76,7 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
               <Link href="/contact" className="block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent">Contact</Link>
               {
                 savedArts.length > 0 &&
-                <span className="absolute -top-1 left-20 flex size-5 items-center justify-center rounded-full bg-red-600 p-2 text-sm text-background md:-right-5 md:-top-2 md:left-auto">{savedArts.length}</span>
+                <span className="absolute -top-1 left-20 flex size-5 items-center justify-center rounded-full bg-red-600 p-2 text-sm text-white md:-right-5 md:-top-2 md:left-auto">{savedArts.length}</span>
               }
             </li>
           </ul>

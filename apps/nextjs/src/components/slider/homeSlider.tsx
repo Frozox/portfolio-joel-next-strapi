@@ -39,7 +39,7 @@ const HomeSlider = () => {
   }, [slides, setSlides]);
 
   return (
-    <Slider/>
+    <Slider className='lg:h-[50vh] xl:h-[70vh] 2xl:h-[80vh]'/>
   );
 };
 

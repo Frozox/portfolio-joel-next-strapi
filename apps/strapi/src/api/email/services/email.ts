@@ -2,10 +2,10 @@
  * email service
  */
 
-import { ContactEmail } from "../../../../types/email/email";
+import { ContactEmailPopulated } from "../../../../types/email/email";
 
 export default () => ({
-  async sendContactEmail(body: ContactEmail) {
+  async sendContactEmail(body: ContactEmailPopulated) {
     return await strapi.plugin("email-designer").services.email.sendTemplatedEmail(
       {
         to: process.env.EMAIL_ADDRESS_FROM,
@@ -13,15 +13,11 @@ export default () => ({
       {
         templateReferenceId: 1,
       },
-      {
-        fullname: body.fullname,
-        email: body.email,
-        message: body.message,
-      },
+      body,
     );
   },
 
-  async sendContactEmailConfirmation(body: ContactEmail) {
+  async sendContactEmailConfirmation(body: ContactEmailPopulated) {
     return await strapi.plugin("email-designer").services.email.sendTemplatedEmail(
       {
         to: body.email,
@@ -29,11 +25,7 @@ export default () => ({
       {
         templateReferenceId: 2,
       },
-      {
-        fullname: body.fullname,
-        email: body.email,
-        message: body.message,
-      },
+      body,
     );
   },
 });
