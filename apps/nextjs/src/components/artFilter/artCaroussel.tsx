@@ -14,6 +14,18 @@ import React from 'react';
 
 type TArtCaroussel = React.HTMLAttributes<HTMLElement> & {};
 
+type TArtCarousselSlider = React.HTMLAttributes<HTMLElement> & {
+  name: string;
+  slides: TArtCarousselImage[];
+};
+
+type TArtCarousselImage = {
+  url: string;
+  placeholder: string;
+  width: number;
+  height: number;
+};
+
 type TArtCarousselItem = {
   id: number;
   name: string;
@@ -22,18 +34,48 @@ type TArtCarousselItem = {
   depth?: number;
   description?: string;
   sold_out?: boolean;
-  thumbnail: {
-    url: string;
-    placeholder: string;
-    width: number;
-    height: number;
-  };
+  thumbnail: TArtCarousselImage;
+  images: TArtCarousselImage[];
   art_tags?: TArtCarousselItemTag[];
 };
 
 type TArtCarousselItemTag = {
   id: number;
   tag: string;
+};
+
+export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
+  const [activeSlide, setActiveSlide] = React.useState(0);
+
+  return (
+    <div className='relative size-full'>
+      {props.slides.map((image, index) => {
+        return (
+          <div key={index} className={cn('size-full transition-opacity duration-300 ease-in-out', index !== activeSlide && 'opacity-0 size-0')}>
+            <canvas
+              height={image.height}
+              width={image.width}
+              className="max-h-full max-w-full"
+            />
+            <Image
+              src={image.url}
+              alt={props.name}
+              width={image.width}
+              height={image.height}
+              placeholder='blur'
+              blurDataURL={image.placeholder}
+              className="absolute bottom-0"
+            />
+          </div>
+        );
+      })}
+      <div className='absolute inset-x-0 bottom-2 flex justify-center gap-3'>
+        {props.slides.length > 1 && props.slides.map((image, index) => (
+          <div key={index} className={cn('size-4 rounded-full border border-black bg-white transition-all duration-300 ease-in-out', index === activeSlide && 'w-8')} onClick={() => setActiveSlide(index)} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
@@ -56,6 +98,14 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
             width: art.attributes.thumbnail.data.attributes.width,
             height: art.attributes.thumbnail.data.attributes.height,
           },
+          images: art.attributes?.images?.data?.map(
+            (image): TArtCarousselImage => ({
+              url: `${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`,
+              placeholder: image.attributes.placeholder,
+              width: image.attributes.width,
+              height: image.attributes.height,
+            }),
+          ) ?? [],
           art_tags: art.attributes?.art_tags?.data.map(
             (tag): TArtCarousselItemTag => ({
               id: tag.id,
@@ -80,19 +130,8 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
             className="flex size-full flex-col justify-center px-2 lg:flex-row lg:px-4"
             key={item.id}
           >
-            <div className="relative self-center lg:self-auto">
-              <canvas
-                height={item.thumbnail.height}
-                width={item.thumbnail.width}
-                className="max-h-full max-w-full"
-              />
-              <Image
-                src={item.thumbnail.url}
-                alt={item.name}
-                width={item.thumbnail.width}
-                height={item.thumbnail.height}
-                className="absolute bottom-0"
-              />
+            <div className="self-center lg:self-auto">
+              <ArtCarousselSlider name={item.name} slides={[item.thumbnail, ...item.images]}/>
             </div>
             <div className="mt-6 flex justify-center lg:relative lg:mx-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end">
               <div>
