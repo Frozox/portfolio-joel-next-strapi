@@ -1,10 +1,4 @@
 export default ({ env }) => ({
-  placeholder: {
-    enabled: true,
-    config: {
-      size: 10,
-    },
-  },
   "schemas-to-ts": {
     enabled: true,
     config: {
