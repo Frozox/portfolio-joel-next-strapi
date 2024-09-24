@@ -71,7 +71,7 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
       })}
       <div className='absolute inset-x-0 bottom-2 flex justify-center gap-3'>
         {props.slides.length > 1 && props.slides.map((image, index) => (
-          <div key={index} className={cn('size-4 rounded-full border border-black bg-white transition-all duration-300 ease-in-out', index === activeSlide && 'w-8')} onClick={() => setActiveSlide(index)} />
+          <div key={index} className={cn('size-4 rounded-full border border-black bg-white cursor-pointer transition-all duration-300 ease-in-out', index === activeSlide && 'w-8')} onClick={() => setActiveSlide(index)} />
         ))}
       </div>
     </div>

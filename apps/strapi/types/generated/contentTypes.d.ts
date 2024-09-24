@@ -1138,6 +1138,51 @@ export interface ApiArtTagCategoryArtTagCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiNewNew extends Schema.SingleType {
+  collectionName: 'news';
+  info: {
+    singularName: 'new';
+    pluralName: 'news';
+    displayName: 'News';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    content: Attribute.DynamicZone<
+      [
+        'visual-components.text-media-component',
+        'visual-components.text-component',
+        'visual-components.media-component'
+      ]
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::new.new', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::new.new', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::new.new',
+      'oneToMany',
+      'api::new.new'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1161,6 +1206,7 @@ declare module '@strapi/types' {
       'api::art-category.art-category': ApiArtCategoryArtCategory;
       'api::art-tag.art-tag': ApiArtTagArtTag;
       'api::art-tag-category.art-tag-category': ApiArtTagCategoryArtTagCategory;
+      'api::new.new': ApiNewNew;
     }
   }
 }

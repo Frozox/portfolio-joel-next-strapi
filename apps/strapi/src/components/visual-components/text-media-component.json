@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_visual_components_text_medias",
+  "info": {
+    "displayName": "Text + Media",
+    "icon": "dashboard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "media": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "media_position": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right"
+      ],
+      "required": true,
+      "default": "left"
+    },
+    "media_mobile_position": {
+      "type": "enumeration",
+      "enum": [
+        "top",
+        "bottom"
+      ],
+      "default": "top",
+      "required": true
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { ArtCategory } from '@portfolio/strapi/src/api/art-category/content-type
 import { ArtTagCategory } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
 import { ArtTag } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
 import { Art } from '@portfolio/strapi/src/api/art/content-types/art/art';
+import { New } from '@portfolio/strapi/src/api/new/content-types/new/new';
 import { GenericEmail } from '@portfolio/strapi/types/email/email';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
@@ -39,6 +40,27 @@ const useGenericRequestFindMany = <T>(
   );
 };
 
+const useGenericRequestFindSingle = <T>(
+  contentType: string,
+  params?: StrapiRequestParams
+) => {
+  const { data, error, isError, isLoading } = useQuery<
+    StrapiResponse<T>,
+    StrapiError
+  >({
+    queryKey: [contentType, params],
+    queryFn: async () => {
+      return await strapiInstance.find<T>(contentType, params);
+    },
+  });
+
+  return React.useMemo(
+    () => ({ response: data, error, isError, isLoading }),
+    [data, error, isError, isLoading]
+  );
+};
+
+
 const genericRequestPost = async <T>(
   contentType: string,
   body: any,
@@ -58,6 +80,9 @@ export const useGetArtTagCategories = (params?: StrapiRequestParams) =>
 
 export const useGetArtTags = (params?: StrapiRequestParams) =>
   useGenericRequestFindMany<ArtTag>('art-tags', params);
+
+export const useGetNews = (params?: StrapiRequestParams) =>
+  useGenericRequestFindSingle<New>('new', params);
 
 export const sendContactForm = (body: any, params?: StrapiRequestParams) =>
   genericRequestPost<GenericEmail>('email/contact-form', body, params);

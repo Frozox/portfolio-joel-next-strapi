@@ -31,6 +31,9 @@
       "action": "api::email.email.sendContactForm"
     },
     {
+      "action": "api::new.new.find"
+    },
+    {
       "action": "plugin::users-permissions.auth.callback"
     },
     {

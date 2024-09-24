@@ -19,6 +19,7 @@ export default [
             "blob:",
             "cdn.jsdelivr.net",
             "strapi.io",
+            "market-assets.strapi.io",
             "s3.amazonaws.com",
           ],
           "media-src": ["'self'", "data:", "blob:", "market-assets.strapi.io"],
