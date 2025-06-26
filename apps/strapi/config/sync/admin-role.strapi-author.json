@@ -4,6 +4,258 @@
   "description": "Authors can manage the content they have created.",
   "permissions": [
     {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::art-category.art-category",
+      "properties": {
+        "fields": [
+          "name",
+          "arts",
+          "image",
+          "slug",
+          "art_tag_categories"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::art-category.art-category",
+      "properties": {
+        "fields": [
+          "name",
+          "arts",
+          "image",
+          "slug",
+          "art_tag_categories"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::art-category.art-category",
+      "properties": {
+        "fields": [
+          "name",
+          "arts",
+          "image",
+          "slug",
+          "art_tag_categories"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::art-tag-category.art-tag-category",
+      "properties": {
+        "fields": [
+          "name",
+          "art_tags",
+          "display_name",
+          "art_categories"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::art-tag-category.art-tag-category",
+      "properties": {
+        "fields": [
+          "name",
+          "art_tags",
+          "display_name",
+          "art_categories"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::art-tag-category.art-tag-category",
+      "properties": {
+        "fields": [
+          "name",
+          "art_tags",
+          "display_name",
+          "art_categories"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::art-tag.art-tag",
+      "properties": {
+        "fields": [
+          "tag",
+          "arts",
+          "art_tag_category"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::art-tag.art-tag",
+      "properties": {
+        "fields": [
+          "tag",
+          "arts",
+          "art_tag_category"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::art-tag.art-tag",
+      "properties": {
+        "fields": [
+          "tag",
+          "arts",
+          "art_tag_category"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::art.art",
+      "properties": {
+        "fields": [
+          "name",
+          "description",
+          "date",
+          "thumbnail",
+          "images",
+          "height",
+          "width",
+          "depth",
+          "art_category",
+          "art_tags",
+          "sold_out"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::art.art",
+      "properties": {
+        "fields": [
+          "name",
+          "description",
+          "date",
+          "thumbnail",
+          "images",
+          "height",
+          "width",
+          "depth",
+          "art_category",
+          "art_tags",
+          "sold_out"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::art.art",
+      "properties": {
+        "fields": [
+          "name",
+          "description",
+          "date",
+          "thumbnail",
+          "images",
+          "height",
+          "width",
+          "depth",
+          "art_category",
+          "art_tags",
+          "sold_out"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
+      "subject": "api::new.new",
+      "properties": {
+        "fields": [
+          "content"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::new.new",
+      "properties": {
+        "fields": [
+          "content"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::new.new",
+      "properties": {
+        "fields": [
+          "content"
+        ]
+      },
+      "conditions": [
+        "admin::is-creator"
+      ]
+    },
+    {
       "action": "plugin::upload.assets.copy-link",
       "actionParameters": {},
       "subject": null,

@@ -124,7 +124,9 @@
     },
     "layouts": {
       "list": [
+        "id",
         "tag",
+        "arts",
         "art_tag_category"
       ],
       "edit": [

@@ -96,7 +96,8 @@
       "list": [
         "id",
         "createdAt",
-        "updatedAt"
+        "updatedAt",
+        "createdBy"
       ],
       "edit": [
         [

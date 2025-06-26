@@ -11,22 +11,25 @@ export enum MediaMobilePosition {
   Bottom = 'bottom',}
 
 export interface TextMediaComponent {
-  content: string;
   media: { data: Media };
   media_position: MediaPosition;
   media_mobile_position: MediaMobilePosition;
+  content?: any;
+  title?: string;
 }
 export interface TextMediaComponent_Plain {
-  content: string;
   media: Media_Plain;
   media_position: MediaPosition;
   media_mobile_position: MediaMobilePosition;
+  content?: any;
+  title?: string;
 }
 
 export interface TextMediaComponent_NoRelations {
-  content: string;
   media: number;
   media_position: MediaPosition;
   media_mobile_position: MediaMobilePosition;
+  content?: any;
+  title?: string;
 }
 

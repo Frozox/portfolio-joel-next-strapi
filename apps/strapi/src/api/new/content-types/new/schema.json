@@ -26,7 +26,8 @@
       "components": [
         "visual-components.text-media-component",
         "visual-components.text-component",
-        "visual-components.media-component"
+        "visual-components.media-component",
+        "visual-components.spacer-component"
       ]
     }
   }

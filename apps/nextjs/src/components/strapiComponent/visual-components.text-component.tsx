@@ -4,9 +4,11 @@ import { TextComponent } from '../../../../strapi/src/components/visual-componen
 export type TStrapiTextComponent = TStrapiComponent<TextComponent>
 
 const StrapiTextComponent = (component: TStrapiTextComponent) => {
-  console.log(component.content);
   return (
-    <div dangerouslySetInnerHTML={{ __html: component.content }}/>
+    <div>
+      {component.title && <h3 className='mb-4 text-center text-2xl font-bold lg:text-left'>{component.title}</h3>}
+      <span className='text-justify'  dangerouslySetInnerHTML={{ __html: component.content }}/>
+    </div>
   );
 };
 

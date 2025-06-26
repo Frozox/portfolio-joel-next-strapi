@@ -152,9 +152,10 @@
     },
     "layouts": {
       "list": [
+        "id",
         "name",
-        "image",
-        "art_tag_categories"
+        "arts",
+        "image"
       ],
       "edit": [
         [

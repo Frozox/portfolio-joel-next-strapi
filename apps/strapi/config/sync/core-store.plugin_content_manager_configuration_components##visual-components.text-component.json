@@ -6,7 +6,7 @@
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "id",
+      "mainField": "title",
       "defaultSortBy": "id",
       "defaultSortOrder": "ASC"
     },
@@ -29,6 +29,20 @@
         },
         "list": {
           "label": "content",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "title",
           "searchable": true,
           "sortable": true
         }
@@ -37,12 +51,18 @@
     "layouts": {
       "list": [
         "id",
-        "content"
+        "title"
       ],
       "edit": [
         [
           {
             "name": "content",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "title",
             "size": 6
           }
         ]

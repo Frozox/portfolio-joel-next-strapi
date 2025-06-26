@@ -34,10 +34,10 @@
       "action": "api::new.new.find"
     },
     {
-      "action": "plugin::users-permissions.auth.callback"
+      "action": "plugin::i18n.locales.listLocales"
     },
     {
-      "action": "plugin::users-permissions.auth.changePassword"
+      "action": "plugin::users-permissions.auth.callback"
     },
     {
       "action": "plugin::users-permissions.auth.connect"
@@ -47,6 +47,9 @@
     },
     {
       "action": "plugin::users-permissions.auth.forgotPassword"
+    },
+    {
+      "action": "plugin::users-permissions.auth.register"
     },
     {
       "action": "plugin::users-permissions.auth.resetPassword"

@@ -41,6 +41,7 @@ const Contact = () => {
   }, [savedArts, form]);
 
   const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
+    console.log(hcaptchaRef);
     if (!hcaptchaRef.current) return;
     
     await hcaptchaRef.current.execute({ async: true });

@@ -2,12 +2,15 @@
 
 export interface TextComponent {
   content: any;
+  title?: string;
 }
 export interface TextComponent_Plain {
   content: any;
+  title?: string;
 }
 
 export interface TextComponent_NoRelations {
   content: any;
+  title?: string;
 }
 

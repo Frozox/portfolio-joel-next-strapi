@@ -7,10 +7,6 @@
   },
   "options": {},
   "attributes": {
-    "content": {
-      "type": "text",
-      "required": true
-    },
     "media": {
       "type": "media",
       "multiple": false,
@@ -39,6 +35,17 @@
       ],
       "default": "top",
       "required": true
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

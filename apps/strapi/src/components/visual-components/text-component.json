@@ -15,6 +15,9 @@
       },
       "required": true,
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }
