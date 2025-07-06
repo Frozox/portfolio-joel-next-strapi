@@ -1,11 +1,11 @@
-import { strapiInstance } from '@/helpers/hook/strapi';
+import { StrapiContentTypes, strapiInstance } from '@/helpers/hook/strapi';
 import { ArtCategory } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
 import { ArtTagCategory } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
 import { ArtTag } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
 import { Art } from '@portfolio/strapi/src/api/art/content-types/art/art';
 import { New } from '@portfolio/strapi/src/api/new/content-types/new/new';
 import { GenericEmail } from '@portfolio/strapi/types/email/email';
-import { useQuery } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import {
   StrapiError,
@@ -21,7 +21,7 @@ export type TGenericFindQuery<T> = {
 };
 
 const useGenericRequestFindMany = <T>(
-  contentType: string,
+  contentType: StrapiContentTypes,
   params?: StrapiRequestParams
 ) => {
   const { data, error, isError, isLoading } = useQuery<
@@ -41,7 +41,7 @@ const useGenericRequestFindMany = <T>(
 };
 
 const useGenericRequestFindSingle = <T>(
-  contentType: string,
+  contentType: StrapiContentTypes,
   params?: StrapiRequestParams
 ) => {
   const { data, error, isError, isLoading } = useQuery<
@@ -60,29 +60,55 @@ const useGenericRequestFindSingle = <T>(
   );
 };
 
-
 const genericRequestPost = async <T>(
-  contentType: string,
+  contentType: StrapiContentTypes,
   body: any,
   params?: StrapiRequestParams
 ): Promise<StrapiResponse<T>> => {
   return await strapiInstance.create<T>(contentType, body, params);
 };
 
+const prefetchQuery = (
+  queryClient: QueryClient,
+  contentType: StrapiContentTypes,
+  params?: StrapiRequestParams
+) => queryClient.prefetchQuery({
+  queryKey: [contentType, params],
+  queryFn: async () => {
+    return await strapiInstance.find(contentType, params);
+  },
+});
+
+
 export const useGetArtCategories = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<ArtCategory>('art-categories', params);
+  useGenericRequestFindMany<ArtCategory>(StrapiContentTypes.ArtCategories, params);
+
+export const prefetchArtCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
+  prefetchQuery(queryClient, StrapiContentTypes.ArtCategories , params);
 
 export const useGetArts = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<Art>('arts', params);
+  useGenericRequestFindMany<Art>(StrapiContentTypes.Arts, params);
+
+export const prefetchArts = (queryClient: QueryClient, params?: StrapiRequestParams) =>
+  prefetchQuery(queryClient, StrapiContentTypes.Arts, params);
 
 export const useGetArtTagCategories = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<ArtTagCategory>('art-tag-categories', params);
+  useGenericRequestFindMany<ArtTagCategory>(StrapiContentTypes.ArtTagCategories, params);
+
+export const prefetchArtTagCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
+  prefetchQuery(queryClient, StrapiContentTypes.ArtTagCategories, params);
 
 export const useGetArtTags = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<ArtTag>('art-tags', params);
+  useGenericRequestFindMany<ArtTag>(StrapiContentTypes.ArtTags, params);
+
+export const prefetchArtTags = (queryClient: QueryClient, params?: StrapiRequestParams) =>
+  prefetchQuery(queryClient, StrapiContentTypes.ArtTags, params);
 
 export const useGetNews = (params?: StrapiRequestParams) =>
-  useGenericRequestFindSingle<New>('new', params);
+  useGenericRequestFindSingle<New>(StrapiContentTypes.News, params);
+
+export const prefetchNews = (queryClient: QueryClient, params?: StrapiRequestParams) =>
+  prefetchQuery(queryClient, StrapiContentTypes.News, params);
 
 export const sendContactForm = (body: any, params?: StrapiRequestParams) =>
-  genericRequestPost<GenericEmail>('email/contact-form', body, params);
+  genericRequestPost<GenericEmail>(StrapiContentTypes.ContactForm, body, params);

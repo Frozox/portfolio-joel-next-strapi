@@ -18,12 +18,12 @@ const HomeSlider = () => {
       const image = item.attributes.image.data;
       return {
         children: (
-          <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`} blurData={
+          <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.formats.large.url}`} blurData={
             // @ts-expect-error,
             image.attributes.placeholder
           }>
             <div className="m-4">
-              <div className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</div>
+              <h2 className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</h2>
               <Link href={`/${item.attributes.slug}`}>
                 <Button type="button" variant="outline" className="w-fit border-white bg-transparent p-6 text-xl hover:bg-background md:min-w-60 md:text-2xl">Voir les travaux</Button>
               </Link>

@@ -10,7 +10,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
+interface MainNavProps extends React.HTMLAttributes<HTMLElement> {
+  className: string
+}
+
+const MainNav = ({ className }: MainNavProps) => {
   const [dropdownOpened, setDropDownOpened] = useState<boolean>(false);
   const { artCategories, isError, isLoading } = useArtCategory();
   const { savedArts } = useContact();
@@ -18,13 +22,13 @@ const MainNav = ({ className }: React.HTMLAttributes<HTMLElement>) => {
   const toggleDropdown = () => {
     setDropDownOpened(!dropdownOpened);
   };
-
+  
   return (
     <nav className={cn('fixed z-50', className)}>
       <div className="mx-auto flex flex-wrap items-center justify-between px-10 py-8">
         <Link href={'/'} className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image src={'/logo.svg'} className="h-8 w-auto dark:invert" alt="Logo" width={0} height={0} />
-          <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Joël Chapeau</span>
+          <Image src={'/logo.svg'} className="h-8 w-auto dark:invert" alt="" width={0} height={0} />
+          <span className="self-center whitespace-nowrap text-2xl font-semibold">Joël Chapeau</span>
         </Link>
         <Button onClick={toggleDropdown} type="button" variant="ghost" className="relative inline-flex size-10 items-center justify-center rounded-lg p-1 text-sm text-black focus:outline-none focus:ring-2 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-200 md:hidden">
           <span className="sr-only">Ouvrir le menu</span>

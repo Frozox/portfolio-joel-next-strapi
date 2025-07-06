@@ -1,19 +1,22 @@
 'use client';
 
-import { StrapiComponentLoader, TStrapiComponent } from '@/components/strapiComponent';
+import { StrapiComponentLoader, TStrapiComponent } from '@/components/strapiComponent/StrapiComponentLoader';
+import { ContentLoader } from '@/components/ui/loading';
 import { useGetNews } from '@/helpers/hook/strapi/request';
 
 const News = () => {
-  const news = useGetNews({ populate: 'content.media' });
+  const { response, isLoading, isError } = useGetNews({ populate: 'content.media' });
 
   return (
-    <div className="size-full">
-      <div className='container'>
-        {news.response?.data.attributes.content.map((component: TStrapiComponent) => (
-          <StrapiComponentLoader key={component.id} component={component} />
-        ))}
+    <ContentLoader isLoading={isLoading} isError={isError}>
+      <div className="size-full">
+        <div className='container'>
+          {response?.data.attributes.content.map((component: TStrapiComponent, idx: number) => (
+            <StrapiComponentLoader key={idx} component={component} />
+          ))}
+        </div>
       </div>
-    </div>
+    </ContentLoader>
   );
 };
 

@@ -93,19 +93,19 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
           id: art.id,
           name: art.attributes.name,
           thumbnail: {
-            url: `${env.NEXT_PUBLIC_BACKEND_HOST}${art.attributes.thumbnail.data.attributes.url}`,
+            url: `${env.NEXT_PUBLIC_BACKEND_HOST}${art.attributes.thumbnail.data.attributes.formats.large.url}`,
             // @ts-expect-error,
             placeholder: art.attributes.thumbnail.data.attributes.placeholder,
-            width: art.attributes.thumbnail.data.attributes.width,
-            height: art.attributes.thumbnail.data.attributes.height,
+            width: art.attributes.thumbnail.data.attributes.formats.large.width,
+            height: art.attributes.thumbnail.data.attributes.formats.large.height,
           },
           images: art.attributes?.images?.data?.map(
             (image): TArtCarousselImage => ({
-              url: `${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`,
+              url: `${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.formats.large.url}`,
               // @ts-expect-error,
               placeholder: image.attributes.placeholder,
-              width: image.attributes.width,
-              height: image.attributes.height,
+              width: image.attributes.formats.large.width,
+              height: image.attributes.formats.large.height,
             }),
           ) ?? [],
           art_tags: art.attributes?.art_tags?.data.map(

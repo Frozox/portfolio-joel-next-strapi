@@ -1,7 +1,8 @@
 'use client';
 
-import { QueryClientProvider as DefaultProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import getQueryClient from '@/helpers/hook/react-query';
+import { QueryClientProvider as DefaultProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools/production';
 import React from 'react';
 
 const ReactQueryDevtoolsProduction = React.lazy(() =>
@@ -13,7 +14,7 @@ const ReactQueryDevtoolsProduction = React.lazy(() =>
 );
 
 const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
-  const queryClient = new QueryClient();
+  const queryClient = getQueryClient();
   const [showDevtools, setShowDevtools] = React.useState(false);
 
   React.useEffect(() => {

@@ -32,17 +32,36 @@
           "searchable": false,
           "sortable": false
         }
+      },
+      "media_position": {
+        "edit": {
+          "label": "media_position",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "media_position",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
       "list": [
         "id",
-        "media"
+        "media",
+        "media_position"
       ],
       "edit": [
         [
           {
             "name": "media",
+            "size": 6
+          },
+          {
+            "name": "media_position",
             "size": 6
           }
         ]

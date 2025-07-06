@@ -3,14 +3,22 @@
 import { Media } from '../../../common/sharedSchemas/Media';
 import { Media_Plain } from '../../../common/sharedSchemas/Media';
 
+export enum MediaPosition {
+  Left = 'left',
+  Right = 'right',
+  Center = 'center',}
+
 export interface MediaComponent {
   media: { data: Media };
+  media_position: MediaPosition;
 }
 export interface MediaComponent_Plain {
   media: Media_Plain;
+  media_position: MediaPosition;
 }
 
 export interface MediaComponent_NoRelations {
   media: number;
+  media_position: MediaPosition;
 }
 

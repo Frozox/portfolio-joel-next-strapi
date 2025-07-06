@@ -34,11 +34,11 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
       id: art.id,
       name: art.attributes.name,
       thumbnail: {
-        url: `${env.NEXT_PUBLIC_BACKEND_HOST}${art.attributes.thumbnail.data.attributes.url}`,
+        url: `${env.NEXT_PUBLIC_BACKEND_HOST}${art.attributes.thumbnail.data.attributes.formats.small.url}`,
         // @ts-expect-error,
         placeholder: art.attributes.thumbnail.data.attributes.placeholder,
-        width: art.attributes.thumbnail.data.attributes.width,
-        height: art.attributes.thumbnail.data.attributes.height,
+        width: art.attributes.thumbnail.data.attributes.formats.small.width,
+        height: art.attributes.thumbnail.data.attributes.formats.small.height,
       },
     }));
     if (defaultSavedArts.length === 0) return;

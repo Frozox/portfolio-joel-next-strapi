@@ -17,6 +17,16 @@
         "videos",
         "audios"
       ]
+    },
+    "media_position": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right",
+        "center"
+      ],
+      "default": "left",
+      "required": true
     }
   }
 }

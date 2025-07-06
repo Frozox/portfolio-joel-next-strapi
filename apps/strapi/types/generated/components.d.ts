@@ -10,6 +10,9 @@ export interface VisualComponentsMediaComponent extends Schema.Component {
   attributes: {
     media: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Attribute.Required;
+    media_position: Attribute.Enumeration<['left', 'right', 'center']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'left'>;
   };
 }
 

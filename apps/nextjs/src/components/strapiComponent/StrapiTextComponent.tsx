@@ -1,11 +1,14 @@
 import { TextComponent } from '@portfolio/strapi/src/components/visual-components/interfaces/TextComponent';
-import { TStrapiComponent } from '.';
+import { TStrapiComponent } from './StrapiComponentLoader';
 
 export type TStrapiTextComponent = TStrapiComponent<TextComponent>
 
 const StrapiTextComponent = (component: TStrapiTextComponent) => {
   return (
-    <hr className="my-8 h-[2px] w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
+    <div>
+      {component.title && <h2 className='mb-4 text-center text-2xl font-bold lg:text-left'>{component.title}</h2>}
+      <span className='text-justify'  dangerouslySetInnerHTML={{ __html: component.content }}/>
+    </div>
   );
 };
 
