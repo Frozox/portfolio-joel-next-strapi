@@ -30,7 +30,7 @@ export default {
           id: art.id,
           name: art.name,
           thumbnail: {
-            url: `${strapi.config.get('server.base_url')}${art.thumbnail.url}`,
+            url: `${strapi.config.get('server.url')}${art.thumbnail.url}`,
             width: art.thumbnail.width,
             height: art.thumbnail.height,
           },
@@ -39,10 +39,11 @@ export default {
 
       await strapi.service("api::email.email").sendContactEmail(populatedBody);
       await strapi.service("api::email.email").sendContactEmailConfirmation(populatedBody);
+      
+      ctx.status = 200;
     } catch (e) {
-      return ctx.badRequest('Une erreur est survenue', e);
+      console.error(e)
+      ctx.internalServerError('L\'email n\'a pas pu être envoyé');
     }
-
-    ctx.status = 200;
   },
 };

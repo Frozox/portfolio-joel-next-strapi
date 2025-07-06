@@ -16,7 +16,7 @@ export default ({ env }) => ({
   },
   email: {
     config: {
-      provider: env('EMAIL_PROVIDER'),
+      provider: env('EMAIL_PROVIDER', 'nodemailer'),
       providerOptions: {
         host: env('EMAIL_SMTP_HOST'),
         port: env('EMAIL_SMTP_PORT'),
@@ -30,4 +30,31 @@ export default ({ env }) => ({
       },
     }
   },
+  'email-designer': {
+    enabled: true,
+    config: {
+      editor: {
+        options: {
+          mergeTags: [
+            {
+              name: 'Email',
+              value: '{{ email }}',
+            },
+            {
+              name: 'Fullname',
+              value: '{{ fullname }}',
+            },
+            {
+              name: 'Message',
+              value: '{{ message }}',
+            },
+            {
+              name: 'Arts',
+              value: '{{ arts }}',
+            }
+          ],
+        },
+      },
+    },
+  }
 });

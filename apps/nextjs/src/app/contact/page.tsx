@@ -41,10 +41,14 @@ const Contact = () => {
   }, [savedArts, form]);
 
   const onSubmit = async (data: z.infer<typeof ContactFormSchema>) => {
-    console.log(hcaptchaRef);
     if (!hcaptchaRef.current) return;
     
-    await hcaptchaRef.current.execute({ async: true });
+    try {
+      await hcaptchaRef.current.execute({ async: true });
+    } catch {
+      console.error('failed to execute captcha');
+    }
+    
     data.h_captcha_response = hcaptchaRef.current.getResponse();
     setFormSending(true);
 
@@ -53,7 +57,7 @@ const Contact = () => {
       clearSavedArts();
       toast.success('Message envoyé !');
     }).catch((res: any) => {
-      toast.error(res?.error?.status === 500 ? 'Une erreur s\'est produite.' : res.error.message);
+      toast.error(res.error.message);
     }).finally(() => {
       setFormSending(false);
     });

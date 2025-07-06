@@ -19,6 +19,7 @@ const HomeSlider = () => {
       return {
         children: (
           <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.url}`} blurData={
+            // @ts-expect-error,
             image.attributes.placeholder
           }>
             <div className="m-4">

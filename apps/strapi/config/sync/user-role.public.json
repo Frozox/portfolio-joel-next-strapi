@@ -49,9 +49,6 @@
       "action": "plugin::users-permissions.auth.forgotPassword"
     },
     {
-      "action": "plugin::users-permissions.auth.register"
-    },
-    {
       "action": "plugin::users-permissions.auth.resetPassword"
     },
     {
