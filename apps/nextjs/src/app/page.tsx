@@ -47,9 +47,9 @@ const Home = () => {
               <QuoteIcon size={40} className='absolute'/>
               <p className='pb-6 text-2xl'>Bienvenue</p>
               <p>Je m&apos;appelle Joël Chapeau, artiste peintre installé à Grenade, en région Occitanie.</p>
-              <p>Depuis plus de dix ans, la peinture est pour moi une passion, un terrain d&apos;exploration et un espace de liberté.</p>
-              <p>Autodidacte, je me suis formé au sein de l&apos;atelier du LAC, où j&apos;ai appris à expérimenter différents médiums; aquarelle, acrylique, techniques mixtes.</p>
-              <p>Je travaille aussi bien l&apos;abstrait que le figuratif, inspiré par la nature, le corps et mes racines provençales.</p>
+              <p>Depuis plus de 25 ans, la peinture est pour moi une passion, un terrain d&apos;exploration et un espace de liberté.</p>
+              <p>Autodidacte, je me suis formé au sein de l&apos;atelier de peinture du CE de Airbus, où j&apos;ai appris à expérimenter différents médiums; aquarelle, acrylique, techniques mixtes.</p>
+              <p>Je travaille aussi bien l&apos;abstrait que le figuratif, inspiré par la nature, le corps, ma famille et mes racines provençales.</p>
               <p>Sur ce site, je vous invite à découvrir mon travail, mes recherches et mes expositions.</p>
               <p>Bonne visite !</p>
             </div>

@@ -3,6 +3,7 @@ import { ContentLoader } from '@/components/ui/loading';
 import { env } from '@/env.mjs';
 import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
 import { useArtCategory } from '@/helpers/context/strapi/artCategoryContext';
+import { getMediaFromFormat } from '@/libs/mediaFormat';
 import Link from 'next/link';
 import React from 'react';
 import { Button } from '../ui/button';
@@ -16,12 +17,13 @@ const HomeSlider = () => {
   const slides = React.useMemo<TKeenSlideProps[]>(() => {
     if (artCategories.length === 0) return [];
     const formatedSlides: TKeenSlideProps[] = artCategories.map((item) => {
-      const image = item.attributes.image.data;
+      const formatedImage = getMediaFromFormat(item.attributes.image.data, 'large');
+      
       return {
         children: (
-          <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.formats.large.url}`} blurData={
+          <DirectionAwareHover imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`} blurData={
             // @ts-expect-error,
-            image.attributes.placeholder
+            item.attributes.image.data.attributes.placeholder
           }>
             <div className="m-4">
               <p className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</p>

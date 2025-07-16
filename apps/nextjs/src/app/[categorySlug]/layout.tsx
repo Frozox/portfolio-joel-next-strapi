@@ -4,6 +4,7 @@ import { Title } from '@/components/ui/title';
 import getQueryClient from '@/helpers/hook/react-query';
 import { fetchArtCategories, prefetchArts, prefetchArtTagCategories } from '@/helpers/hook/strapi/request';
 import { ArtFilterProvider } from '@/helpers/provider/strapi/artFilterProvider';
+import { getMediaFromFormat } from '@/libs/mediaFormat';
 import { defaultPaginationFilter } from '@/libs/pagination';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Metadata } from 'next';
@@ -40,14 +41,17 @@ export const generateMetadata = async ({ params }: TLayoutProps): Promise<Metada
 const CategoryLayout = async ({ children, params }: Readonly<TLayoutProps>) => {
   const queryClient = getQueryClient();
   await prefetchArtTagCategories(queryClient, { populate: '*', sort: 'display_name', filters: { art_categories: { slug: params.categorySlug } } });
-  await prefetchArts(queryClient, { populate: '*', filters: { art_category: { slug: params.categorySlug } }, pagination: defaultPaginationFilter });
+  await prefetchArts(queryClient, { filters: { art_category: { slug: params.categorySlug } }, pagination: defaultPaginationFilter, populate: '*' });
+  await prefetchArts(queryClient, { filters: { $and:[{ art_tags:{ $or:[] }}], art_category: { slug: params.categorySlug } }, pagination: defaultPaginationFilter, populate: '*' });
   const currentArtCategory = await getCurrentArtCategory(params.categorySlug);
   
+  const formatedThumbnail = getMediaFromFormat(currentArtCategory.attributes.image.data, 'thumbnail');
+
   const artCategoryStructuredJsonLd: WithContext<Product> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: currentArtCategory.attributes.name,
-    image: currentArtCategory.attributes.image.data.attributes.formats.thumbnail.url,
+    image: formatedThumbnail.url,
     description: currentArtCategory.attributes.metaDescription,
   };
 

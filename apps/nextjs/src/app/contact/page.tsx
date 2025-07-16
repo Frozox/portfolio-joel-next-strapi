@@ -117,13 +117,13 @@ const Contact = () => {
           render={({ field }) => (
             <FormItem className='col-span-2'>
               <FormLabel className='relative'>
-                <span>Oeuvres enregistrées</span>
+                <span>œuvres enregistrées</span>
                 <TooltipProvider>
                   <Tooltip delayDuration={0}>
                     <TooltipTrigger asChild className='absolute -right-5 -top-1'><button type='button'><Info className='size-4'/></button></TooltipTrigger>
                     <TooltipPortal>
                       <TooltipContent className="max-w-72" side='top' align='start'>
-                        <p>Vous pouvez ajouter une ou plusieurs oeuvres depuis l&apos;onglet travaux</p>
+                        <p>Vous pouvez ajouter une ou plusieurs œuvres depuis l&apos;onglet travaux</p>
                         <TooltipArrow width={10} height={5} className='rounded fill-foreground'/>
                       </TooltipContent>
                     </TooltipPortal>
@@ -139,7 +139,7 @@ const Contact = () => {
                       return (
                         <div key={id} className='relative'>
                           <div className='overflow-hidden' onLoad={(e) => e.currentTarget.style.maxWidth = `${e.currentTarget.querySelector('img')?.width}px` }>
-                            <Image src={currentArt.thumbnail.url} width={200} height={200} alt={currentArt.name} className='size-auto max-h-28' />
+                            <Image src={currentArt.thumbnail.url} width={200} height={200} alt={currentArt.name} title={currentArt.name} className='size-auto max-h-28' />
                             <p className='truncate'>{currentArt.name}</p>
                           </div>
                           <CircleX className='absolute -right-2 -top-2 cursor-pointer rounded-full border-2 border-transparent bg-background text-red-600 hover:scale-125' onClick={() => toggleSavedArt(currentArt)}/>
@@ -147,7 +147,7 @@ const Contact = () => {
                       );
                     })
                     || (
-                      <p className='mx-2 text-sm text-muted-foreground'>Aucune oeuvre enregistree</p>
+                      <p className='mx-2 text-sm text-muted-foreground'>Aucune œuvre enregistree</p>
                     ) 
                   }
                 </div>

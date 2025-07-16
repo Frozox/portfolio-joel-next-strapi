@@ -16,7 +16,8 @@
           "art_tag_categories",
           "metaDescription",
           "metaKeywords",
-          "title"
+          "title",
+          "order"
         ],
         "locales": [
           "en",
@@ -62,7 +63,8 @@
           "art_tag_categories",
           "metaDescription",
           "metaKeywords",
-          "title"
+          "title",
+          "order"
         ],
         "locales": [
           "en",
@@ -84,7 +86,8 @@
           "art_tag_categories",
           "metaDescription",
           "metaKeywords",
-          "title"
+          "title",
+          "order"
         ],
         "locales": [
           "en",

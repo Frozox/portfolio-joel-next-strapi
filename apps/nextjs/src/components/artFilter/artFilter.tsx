@@ -21,7 +21,7 @@ import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
 import { cn } from '@/libs/utils';
 import useEventListener from '@use-it/event-listener';
 import * as KeyCode from 'keycode-js';
-import { ArrowDownAZIcon, FilterIcon, Trash2Icon } from 'lucide-react';
+import { FilterIcon, Trash2Icon } from 'lucide-react';
 import React from 'react';
 
 type TMetaPagination = {
@@ -246,6 +246,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
   const {
     artTagCategoriesQuery: { response, isError, isLoading },
     setFilters,
+    filters: currentFilters
   } = useArtFilter();
   const [filterCategories, setFilterCategories] = React.useState<
     TFilterCategory[]
@@ -310,6 +311,17 @@ export const ArtFilter = ({ className }: { className?: string }) => {
     setFilters(filters);
   }, [filterCategories, filterItems, setFilters]);
 
+  React.useEffect(() => {
+    if (!currentFilters || !currentFilters.art_tags || !currentFilters.art_tags) return;
+
+    setFilterItems((prev) =>
+      prev.map((t) => {
+        if (t.tagId !== (currentFilters.art_tags as { id: number }).id) return t;
+        return { ...t, checked: !t.checked };
+      }),
+    );
+  }, [currentFilters]);
+
   return (
     <div className={cn('fixed z-40 w-full sm:px-5', className)}>
       <hr className="h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
@@ -351,7 +363,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
-        <NavigationMenuList>
+        {/* <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger disabled={isLoading || isError}>
               <ArrowDownAZIcon />
@@ -367,7 +379,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-        </NavigationMenuList>
+        </NavigationMenuList> */}
         <NavigationMenuList>
           <NavigationMenuItem>
             <button

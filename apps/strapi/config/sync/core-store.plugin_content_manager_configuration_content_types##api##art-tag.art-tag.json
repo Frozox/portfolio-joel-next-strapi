@@ -21,7 +21,7 @@
       },
       "tag": {
         "edit": {
-          "label": "tag",
+          "label": "Nom",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -43,14 +43,14 @@
           "mainField": "name"
         },
         "list": {
-          "label": "arts",
+          "label": "oeuvres",
           "searchable": false,
           "sortable": false
         }
       },
       "art_tag_category": {
         "edit": {
-          "label": "art_tag_category",
+          "label": "Catégorie",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -123,12 +123,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "tag",
-        "arts",
-        "art_tag_category"
-      ],
       "edit": [
         [
           {
@@ -136,16 +130,15 @@
             "size": 6
           },
           {
-            "name": "arts",
-            "size": 6
-          }
-        ],
-        [
-          {
             "name": "art_tag_category",
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "tag",
+        "art_tag_category",
+        "arts"
       ]
     },
     "uid": "api::art-tag.art-tag"

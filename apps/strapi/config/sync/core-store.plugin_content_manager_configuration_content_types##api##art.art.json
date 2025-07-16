@@ -21,21 +21,21 @@
       },
       "name": {
         "edit": {
-          "label": "name",
+          "label": "Nom",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "name",
+          "label": "Nom",
           "searchable": true,
           "sortable": true
         }
       },
       "description": {
         "edit": {
-          "label": "description",
+          "label": "Description",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -49,35 +49,35 @@
       },
       "date": {
         "edit": {
-          "label": "date",
+          "label": "Date",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "date",
+          "label": "Date",
           "searchable": true,
           "sortable": true
         }
       },
       "thumbnail": {
         "edit": {
-          "label": "thumbnail",
+          "label": "Vignette",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "thumbnail",
+          "label": "Vignette",
           "searchable": false,
           "sortable": false
         }
       },
       "images": {
         "edit": {
-          "label": "images",
+          "label": "Images",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -91,7 +91,7 @@
       },
       "height": {
         "edit": {
-          "label": "height",
+          "label": "Hauteur (cm)",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -105,7 +105,7 @@
       },
       "width": {
         "edit": {
-          "label": "width",
+          "label": "Largeur (cm)",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -119,7 +119,7 @@
       },
       "depth": {
         "edit": {
-          "label": "depth",
+          "label": "Profondeur (cm)",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -133,7 +133,7 @@
       },
       "art_category": {
         "edit": {
-          "label": "art_category",
+          "label": "Catégorie",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -141,14 +141,14 @@
           "mainField": "name"
         },
         "list": {
-          "label": "art_category",
+          "label": "Catégorie",
           "searchable": true,
           "sortable": true
         }
       },
       "art_tags": {
         "edit": {
-          "label": "art_tags",
+          "label": "Tags",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -163,7 +163,7 @@
       },
       "sold_out": {
         "edit": {
-          "label": "sold_out",
+          "label": "Vendu ?",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -235,12 +235,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "description",
-        "date"
-      ],
       "edit": [
         [
           {
@@ -248,7 +242,17 @@
             "size": 6
           },
           {
+            "name": "art_category",
+            "size": 6
+          }
+        ],
+        [
+          {
             "name": "description",
+            "size": 6
+          },
+          {
+            "name": "art_tags",
             "size": 6
           }
         ],
@@ -259,20 +263,18 @@
           },
           {
             "name": "thumbnail",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "images",
-            "size": 6
+            "size": 4
           },
           {
-            "name": "height",
+            "name": "images",
             "size": 4
           }
         ],
         [
+          {
+            "name": "height",
+            "size": 4
+          },
           {
             "name": "width",
             "size": 4
@@ -284,20 +286,16 @@
         ],
         [
           {
-            "name": "art_category",
-            "size": 6
-          },
-          {
-            "name": "art_tags",
-            "size": 6
-          }
-        ],
-        [
-          {
             "name": "sold_out",
             "size": 4
           }
         ]
+      ],
+      "list": [
+        "name",
+        "thumbnail",
+        "art_category",
+        "date"
       ]
     },
     "uid": "api::art.art"

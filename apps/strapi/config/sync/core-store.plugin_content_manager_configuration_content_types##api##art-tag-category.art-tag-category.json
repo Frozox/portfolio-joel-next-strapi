@@ -7,7 +7,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "name",
-      "defaultSortBy": "name",
+      "defaultSortBy": "display_name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -21,21 +21,21 @@
       },
       "name": {
         "edit": {
-          "label": "name",
+          "label": "Nom",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "name",
+          "label": "Nom",
           "searchable": true,
           "sortable": true
         }
       },
       "art_tags": {
         "edit": {
-          "label": "art_tags",
+          "label": "Tags",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -43,28 +43,28 @@
           "mainField": "tag"
         },
         "list": {
-          "label": "art_tags",
+          "label": "Tags",
           "searchable": false,
           "sortable": false
         }
       },
       "display_name": {
         "edit": {
-          "label": "display_name",
+          "label": "Nom d'affichage",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "display_name",
+          "label": "Nom d'affichage",
           "searchable": true,
           "sortable": true
         }
       },
       "art_categories": {
         "edit": {
-          "label": "art_categories",
+          "label": "Catégories",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -72,7 +72,7 @@
           "mainField": "name"
         },
         "list": {
-          "label": "art_categories",
+          "label": "Catégories",
           "searchable": false,
           "sortable": false
         }
@@ -137,12 +137,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "art_tags",
-        "display_name"
-      ],
       "edit": [
         [
           {
@@ -150,13 +144,13 @@
             "size": 6
           },
           {
-            "name": "art_tags",
+            "name": "display_name",
             "size": 6
           }
         ],
         [
           {
-            "name": "display_name",
+            "name": "art_tags",
             "size": 6
           },
           {
@@ -164,6 +158,12 @@
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "name",
+        "display_name",
+        "art_categories",
+        "art_tags"
       ]
     },
     "uid": "api::art-tag-category.art-tag-category"

@@ -3,6 +3,7 @@
 import { env } from '@/env.mjs';
 import ContactContext, { TSavedArt } from '@/helpers/context/contact/contactContext';
 import { useGetArts } from '@/helpers/hook/strapi/request';
+import { getMediaFromFormat } from '@/libs/mediaFormat';
 import React from 'react';
 
 type TContactProviderProps = {
@@ -30,17 +31,21 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
 
   React.useEffect(() => {
     if (!artsQuery.response?.data) return;
-    const defaultSavedArts: TSavedArt[] = artsQuery.response.data.map((art) => ({
-      id: art.id,
-      name: art.attributes.name,
-      thumbnail: {
-        url: `${env.NEXT_PUBLIC_BACKEND_HOST}${art.attributes.thumbnail.data.attributes.formats.small.url}`,
-        // @ts-expect-error,
-        placeholder: art.attributes.thumbnail.data.attributes.placeholder,
-        width: art.attributes.thumbnail.data.attributes.formats.small.width,
-        height: art.attributes.thumbnail.data.attributes.formats.small.height,
-      },
-    }));
+    const defaultSavedArts: TSavedArt[] = artsQuery.response.data.map((art) => {
+      const formatedThumbnail = getMediaFromFormat(art.attributes.thumbnail.data, 'thumbnail');
+
+      return {
+        id: art.id,
+        name: art.attributes.name,
+        thumbnail: {
+          url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
+          // @ts-expect-error,
+          placeholder: art.attributes.thumbnail.data.attributes.placeholder,
+          width: formatedThumbnail.width,
+          height: formatedThumbnail.height,
+        },
+      };
+    });
     if (defaultSavedArts.length === 0) return;
     setSavedArts(defaultSavedArts);
   }, [artsQuery.response?.data]);

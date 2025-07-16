@@ -19,7 +19,7 @@ export const generateMetadata = (): Metadata => {
 const ContactLayout = ({children} : Readonly<TLayoutProps>) => {
   return (
     <>
-      <Title h1='contact' h2='Contacter Joel Chapeau' className='mb-10 mt-8'/>
+      <Title h1='contact' h2='Contacter Joel Chapeau' h3='Vous êtes intéressé par mon travail ? Parlons-en !' className='mb-10 mt-8'/>
       {children}
     </>
   );

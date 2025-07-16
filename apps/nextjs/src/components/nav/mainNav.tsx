@@ -9,7 +9,7 @@ import { cn } from '@/libs/utils';
 import { AlignJustifyIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 interface MainNavProps extends React.HTMLAttributes<HTMLElement> {
   className: string
@@ -20,10 +20,27 @@ const MainNav = ({ className }: MainNavProps) => {
   const { artCategories, isError, isLoading } = useArtCategory();
   const { savedArts } = useContact();
   const currentPath = usePathname();
+  
+  const mobileDropDownRef = useRef<HTMLDivElement>(null);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = useCallback(() => {
     setDropDownOpened(!dropdownOpened);
-  };
+  }, [dropdownOpened]);
+
+  useEffect(() => {
+    const handleOutSideClick = (e: MouseEvent) => {
+      if(!dropdownOpened) return;
+      if (!mobileDropDownRef.current?.contains(e.target as Node)) {
+        toggleDropdown();
+      }
+    };
+
+    window.addEventListener('mousedown', handleOutSideClick);
+
+    return () => {
+      window.removeEventListener('mousedown', handleOutSideClick);
+    };
+  }, [mobileDropDownRef, dropdownOpened, toggleDropdown]);
   
   const currentPageStyle = 'underline underline-offset-4 decoration-2';
 
@@ -42,7 +59,7 @@ const MainNav = ({ className }: MainNavProps) => {
                 <span className="absolute -right-3 -top-3 flex size-5 items-center justify-center rounded-full bg-red-600 p-2 text-sm text-white">{savedArts.length}</span>
           }
         </Button>
-        <div className={cn('w-full md:block md:w-auto bg-background rounded-b-lg border md:border-none border-t-0 mt-4', !dropdownOpened && 'hidden')}>
+        <div ref={mobileDropDownRef} onClick={(e) => e.target instanceof HTMLAnchorElement && toggleDropdown()} className={cn('w-full md:block md:w-auto bg-background rounded-b-lg border md:border-none border-t-0 mt-4', !dropdownOpened && 'hidden')}>
           <ul className="flex flex-col p-4 text-lg font-medium md:mt-0 md:flex-row md:space-x-8 md:p-0 rtl:space-x-reverse">
             <li>
               <Link href="/" className={cn('block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent', currentPath === '/' && currentPageStyle)}>Accueil</Link>

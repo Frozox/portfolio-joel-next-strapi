@@ -8,6 +8,7 @@ import { env } from '@/env.mjs';
 import { useContact } from '@/helpers/context/contact/contactContext';
 import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
 import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
+import { getMediaFromFormat } from '@/libs/mediaFormat';
 import { cn } from '@/libs/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -34,6 +35,7 @@ type TArtCarousselItem = {
   width: number;
   depth?: number;
   description?: string;
+  date?: string;
   sold_out?: boolean;
   thumbnail: TArtCarousselImage;
   images: TArtCarousselImage[];
@@ -61,6 +63,7 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
             <Image
               src={image.url}
               alt={props.name}
+              title={props.name}
               width={image.width}
               height={image.height}
               placeholder='blur'
@@ -82,50 +85,69 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
 export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
   const {
     artsQuery: { response },
+    setFilters
   } = useArtFilter();
   const { sliderInstance, setSlides, slides: keenSlides } = useKeenSlider();
   const { savedArts, toggleSavedArt } = useContact();
 
+
   const selectedArtItemRef = React.useRef<HTMLDivElement>(null);
   const artItems = React.useMemo<TArtCarousselItem[]>(
-    () =>
+    () => 
       response?.data.map(
-        (art): TArtCarousselItem => ({
-          id: art.id,
-          name: art.attributes.name,
-          thumbnail: {
-            url: `${env.NEXT_PUBLIC_BACKEND_HOST}${art.attributes.thumbnail.data.attributes.formats.large.url}`,
-            // @ts-expect-error,
-            placeholder: art.attributes.thumbnail.data.attributes.placeholder,
-            width: art.attributes.thumbnail.data.attributes.formats.large.width,
-            height: art.attributes.thumbnail.data.attributes.formats.large.height,
-          },
-          images: art.attributes?.images?.data?.map(
-            (image): TArtCarousselImage => ({
-              url: `${env.NEXT_PUBLIC_BACKEND_HOST}${image.attributes.formats.large.url}`,
+        (art): TArtCarousselItem => {
+          const formatedThumbnail = getMediaFromFormat(art.attributes.thumbnail.data, 'large');
+
+          return {
+            id: art.id,
+            name: art.attributes.name,
+            thumbnail: {
+              url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
               // @ts-expect-error,
-              placeholder: image.attributes.placeholder,
-              width: image.attributes.formats.large.width,
-              height: image.attributes.formats.large.height,
-            }),
-          ) ?? [],
-          art_tags: art.attributes?.art_tags?.data.map(
-            (tag): TArtCarousselItemTag => ({
-              id: tag.id,
-              tag: tag.attributes.tag,
-            }),
-          ),
-          height: art.attributes.height,
-          width: art.attributes.width,
-          depth: art.attributes.depth,
-          description: art.attributes.description,
-          sold_out: art.attributes.sold_out,
-        }),
+              placeholder: art.attributes.thumbnail.data.attributes.placeholder,
+              width: formatedThumbnail.width,
+              height: formatedThumbnail.height,
+            },
+            images: art.attributes?.images?.data?.map(
+              (image): TArtCarousselImage => {
+                const formatedImage = getMediaFromFormat(image, 'large');
+
+                return {
+                  url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`,
+                  // @ts-expect-error,
+                  placeholder: image.attributes.placeholder,
+                  width: formatedImage.width,
+                  height: formatedImage.height,
+                };
+              },
+            ) ?? [],
+            art_tags: art.attributes?.art_tags?.data.map(
+              (tag): TArtCarousselItemTag => ({
+                id: tag.id,
+                tag: tag.attributes.tag,
+              }),
+            ),
+            height: art.attributes.height,
+            width: art.attributes.width,
+            depth: art.attributes.depth,
+            description: art.attributes.description,
+            date: art.attributes.date as string | undefined,
+            sold_out: art.attributes.sold_out,
+          };
+        },
       ) ?? [],
     [response?.data],
   );
 
   const slides = React.useMemo<TKeenSlideProps[]>(() => {
+    const setArtTagFilter = (artTagId: number) => {
+      const artTagFilter: Record<string, unknown> = {
+        art_tags: { id: artTagId }
+      };
+
+      setFilters(artTagFilter);
+    };
+
     return artItems.map(
       (item): TKeenSlideProps => ({
         children: (
@@ -140,16 +162,22 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
               <div>
                 <h2 className="mb-4 text-xl font-medium md:text-2xl">{item.name}</h2>
                 <div>
-                  {item.art_tags?.map((tag) => (
-                    <p className="text-foreground" key={tag.id}>
-                      {tag.tag}
+                  { item.description && <p className="mb-4 text-justify text-foreground">{item.description}</p> }
+                  {!!item.art_tags?.length && <div className='mb-4'>
+                    {item.art_tags.map((tag) => (
+                      <span className="mr-2 inline-block cursor-pointer truncate text-foreground underline decoration-2 underline-offset-4 hover:underline-offset-2" key={tag.id} onClick={() => setArtTagFilter(tag.id)}>
+                        {tag.tag}
+                      </span>
+                    ))}
+                  </div>}
+                  <div className='flex flex-col space-y-4 lg:flex-row lg:justify-between lg:space-y-0'>
+                    <p>
+                      {item.depth
+                        ? `${item.height} x ${item.width} x ${item.depth} cm`
+                        : `${item.height} x ${item.width} cm`}
                     </p>
-                  ))}
-                  <p className="text-foreground">
-                    {item.depth
-                      ? `${item.height} x ${item.width} x ${item.depth} cm`
-                      : `${item.height} x ${item.width} cm`}
-                  </p>
+                    { item.date && <p>{item.date}</p>}
+                  </div>
                   <div className={cn(item?.sold_out ? 'cursor-not-allowed' : 'cursor-pointer')}>
                     <Button
                       type="button"
@@ -175,7 +203,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
         ),
       }),
     );
-  }, [artItems, savedArts, toggleSavedArt]);
+  }, [artItems, savedArts, setFilters, toggleSavedArt]);
 
   React.useEffect(() => {
     setSlides(slides);
@@ -233,6 +261,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                 blurDataURL={artItem.thumbnail.placeholder}
                 placeholder={artItem.thumbnail.placeholder ? 'blur' : 'empty'}
                 alt={artItem.name}
+                title={artItem.name}
                 width={artItem.thumbnail.width}
                 height={artItem.thumbnail.height}
                 className="cursor-pointer object-contain"

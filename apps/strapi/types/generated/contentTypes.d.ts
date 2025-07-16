@@ -432,6 +432,15 @@ export interface ApiArtCategoryArtCategory extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    order: Attribute.Integer &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<0>;
     publishedAt: Attribute.DateTime;
     slug: Attribute.UID<'api::art-category.art-category', 'name'> &
       Attribute.Required &

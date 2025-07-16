@@ -54,7 +54,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 };
 const RootLayout = async ({ children }: Readonly<TLayoutProps>) => {
   const queryClient = getQueryClient();
-  await prefetchArtCategories(queryClient, { populate: 'image' });
+  await prefetchArtCategories(queryClient, { sort: 'order', populate: 'image' });
   await prefetchArts(queryClient, { populate: 'thumbnail', filters: { id: { $in: [null] }, sold_out: { $eq: false } } });
 
   const organizationStructuredJsonLd: WithContext<Organization> = {

@@ -7,7 +7,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "name",
-      "defaultSortBy": "name",
+      "defaultSortBy": "order",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -21,21 +21,21 @@
       },
       "name": {
         "edit": {
-          "label": "name",
+          "label": "Nom",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "name",
+          "label": "Nom",
           "searchable": true,
           "sortable": true
         }
       },
       "arts": {
         "edit": {
-          "label": "arts",
+          "label": "Œuvres associés",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -43,28 +43,28 @@
           "mainField": "name"
         },
         "list": {
-          "label": "arts",
+          "label": "oeuvres",
           "searchable": false,
           "sortable": false
         }
       },
       "image": {
         "edit": {
-          "label": "image",
+          "label": "Image",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "image",
+          "label": "Image",
           "searchable": false,
           "sortable": false
         }
       },
       "slug": {
         "edit": {
-          "label": "slug",
+          "label": "identifiant",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -78,7 +78,7 @@
       },
       "art_tag_categories": {
         "edit": {
-          "label": "art_tag_categories",
+          "label": "Tags",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -93,7 +93,7 @@
       },
       "metaDescription": {
         "edit": {
-          "label": "metaDescription",
+          "label": "Meta Description SEO",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -107,7 +107,7 @@
       },
       "metaKeywords": {
         "edit": {
-          "label": "metaKeywords",
+          "label": "Mots Clés SEO",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -121,7 +121,7 @@
       },
       "title": {
         "edit": {
-          "label": "title",
+          "label": "Titre",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -129,6 +129,20 @@
         },
         "list": {
           "label": "title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "order": {
+        "edit": {
+          "label": "Ordre d'affichage",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Ordre d'affichage",
           "searchable": true,
           "sortable": true
         }
@@ -193,12 +207,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "name",
-        "arts",
-        "image"
-      ],
       "edit": [
         [
           {
@@ -212,34 +220,44 @@
         ],
         [
           {
+            "name": "title",
+            "size": 4
+          },
+          {
+            "name": "order",
+            "size": 4
+          },
+          {
+            "name": "slug",
+            "size": 4
+          }
+        ],
+        [
+          {
             "name": "image",
             "size": 6
           },
           {
-            "name": "slug",
+            "name": "art_tag_categories",
             "size": 6
           }
         ],
         [
-          {
-            "name": "art_tag_categories",
-            "size": 6
-          },
           {
             "name": "metaDescription",
             "size": 6
-          }
-        ],
-        [
+          },
           {
             "name": "metaKeywords",
             "size": 6
-          },
-          {
-            "name": "title",
-            "size": 6
           }
         ]
+      ],
+      "list": [
+        "order",
+        "name",
+        "image",
+        "arts"
       ]
     },
     "uid": "api::art-category.art-category"
