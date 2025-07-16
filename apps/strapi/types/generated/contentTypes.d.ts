@@ -409,6 +409,21 @@ export interface ApiArtCategoryArtCategory extends Schema.CollectionType {
       'oneToMany',
       'api::art-category.art-category'
     >;
+    metaDescription: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+    metaKeywords: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     name: Attribute.String &
       Attribute.Required &
       Attribute.Unique &
@@ -419,6 +434,13 @@ export interface ApiArtCategoryArtCategory extends Schema.CollectionType {
       }>;
     publishedAt: Attribute.DateTime;
     slug: Attribute.UID<'api::art-category.art-category', 'name'> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {

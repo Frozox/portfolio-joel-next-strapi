@@ -3,6 +3,7 @@
 import Slider from '@/components/slider/slider';
 import { Button } from '@/components/ui/button';
 import { TKeenSlideProps } from '@/components/ui/keenSlider';
+import { ContentLoader } from '@/components/ui/loading';
 import { env } from '@/env.mjs';
 import { useContact } from '@/helpers/context/contact/contactContext';
 import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
@@ -82,7 +83,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
   const {
     artsQuery: { response },
   } = useArtFilter();
-  const { sliderInstance, setSlides } = useKeenSlider();
+  const { sliderInstance, setSlides, slides: keenSlides } = useKeenSlider();
   const { savedArts, toggleSavedArt } = useContact();
 
   const selectedArtItemRef = React.useRef<HTMLDivElement>(null);
@@ -208,14 +209,16 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
 
   return (
     <div>
-      <motion.div
-        className="flex py-2 lg:h-[calc(100vh-15rem)]"
-        ref={selectedArtItemRef}
-      >
-        <Slider
-          className="relative"
-        />
-      </motion.div>
+      <ContentLoader isLoading={!keenSlides.length && !!slides.length} isError={false} className='flex h-[30vh] py-2 lg:h-[calc(100vh-15rem)]'>
+        <motion.div
+          className="flex py-2 lg:h-[calc(100vh-15rem)]"
+          ref={selectedArtItemRef}
+        >
+          <Slider
+            className="relative"
+          />
+        </motion.div>
+      </ContentLoader>
       <div className="md:container">
         <div className="columns-2 justify-center gap-4 space-y-4 p-2 lg:columns-3 lg:p-8">
           {artItems.map((artItem) => (

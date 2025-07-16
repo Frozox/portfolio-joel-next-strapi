@@ -16,6 +16,9 @@ export interface ArtCategory {
     image: { data: Media };
     slug: string;
     art_tag_categories?: { data: ArtTagCategory[] };
+    metaDescription?: string;
+    metaKeywords?: string;
+    title: string;
     locale: string;
     localizations?: { data: ArtCategory[] };
   };
@@ -27,6 +30,9 @@ export interface ArtCategory_Plain {
   image: Media_Plain;
   slug: string;
   art_tag_categories?: ArtTagCategory_Plain[];
+  metaDescription?: string;
+  metaKeywords?: string;
+  title: string;
   locale: string;
   localizations?: ArtCategory_Plain[];
 }
@@ -38,6 +44,9 @@ export interface ArtCategory_NoRelations {
   image: number;
   slug: string;
   art_tag_categories?: number[];
+  metaDescription?: string;
+  metaKeywords?: string;
+  title: string;
   locale: string;
   localizations?: ArtCategory[];
 }
@@ -49,6 +58,9 @@ export interface ArtCategory_AdminPanelLifeCycle {
   image: AdminPanelRelationPropertyModification<Media_Plain>;
   slug: string;
   art_tag_categories?: AdminPanelRelationPropertyModification<ArtTagCategory_Plain>;
+  metaDescription?: string;
+  metaKeywords?: string;
+  title: string;
   locale: string;
   localizations?: ArtCategory[];
 }

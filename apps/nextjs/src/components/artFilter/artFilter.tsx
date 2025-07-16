@@ -311,18 +311,18 @@ export const ArtFilter = ({ className }: { className?: string }) => {
   }, [filterCategories, filterItems, setFilters]);
 
   return (
-    <div className={cn('fixed z-40 w-full', className)}>
+    <div className={cn('fixed z-40 w-full sm:px-5', className)}>
       <hr className="h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
-      <NavigationMenu className="space-x-2 md:space-x-0">
+      <NavigationMenu className="max-w-full space-x-2 sm:justify-start sm:space-x-0">
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger disabled={isLoading || isError}>
               <div className="inline-flex">
                 <FilterIcon />
-                <span className="ml-1 flex items-center justify-center">
+                <span className="ml-1 hidden items-center justify-center sm:flex">
                   Filtres
                 </span>
-                <span className="ml-2 mr-1 rounded-lg bg-foreground p-1 text-xs text-background">
+                <span className="mx-1 rounded-lg bg-foreground p-1 text-xs text-background sm:ml-2">
                   {filterItems.filter((i) => i.checked).length}
                 </span>
               </div>
@@ -355,7 +355,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
           <NavigationMenuItem>
             <NavigationMenuTrigger disabled={isLoading || isError}>
               <ArrowDownAZIcon />
-              <span className="ml-1 flex items-center justify-center">
+              <span className="ml-1 hidden items-center justify-center sm:flex">
                 Trier
               </span>
             </NavigationMenuTrigger>
@@ -382,7 +382,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
             >
               <div className="inline-flex">
                 <Trash2Icon />
-                <span className="ml-1 flex items-center justify-center">
+                <span className="ml-1 hidden items-center justify-center sm:flex">
                   Vider
                 </span>
               </div>

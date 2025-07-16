@@ -91,6 +91,48 @@
           "sortable": false
         }
       },
+      "metaDescription": {
+        "edit": {
+          "label": "metaDescription",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metaDescription",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "metaKeywords": {
+        "edit": {
+          "label": "metaKeywords",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "metaKeywords",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -181,6 +223,20 @@
         [
           {
             "name": "art_tag_categories",
+            "size": 6
+          },
+          {
+            "name": "metaDescription",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "metaKeywords",
+            "size": 6
+          },
+          {
+            "name": "title",
             "size": 6
           }
         ]

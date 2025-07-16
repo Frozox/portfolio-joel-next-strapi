@@ -1,11 +1,14 @@
 import { ArtFilter } from '@/components/artFilter/artFilter';
+import JsonLdLoader from '@/components/seo/jsonLdLoader';
 import { Title } from '@/components/ui/title';
 import getQueryClient from '@/helpers/hook/react-query';
-import { prefetchArts, prefetchArtTagCategories } from '@/helpers/hook/strapi/request';
+import { fetchArtCategories, prefetchArts, prefetchArtTagCategories } from '@/helpers/hook/strapi/request';
 import { ArtFilterProvider } from '@/helpers/provider/strapi/artFilterProvider';
 import { defaultPaginationFilter } from '@/libs/pagination';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+import { Product, WithContext } from 'schema-dts';
 
 type TLayoutProps = {
   children: React.ReactNode
@@ -14,9 +17,23 @@ type TLayoutProps = {
   },
 }
 
-export const generateMetadata = ({ params }: TLayoutProps): Metadata => {
+const getCurrentArtCategory = async (slug: string) => {
+  const queryClient = getQueryClient();
+  const { data } = await fetchArtCategories(queryClient,  { filters: { slug }, populate: 'image'});
+  if (!data.length) redirect('/');
+  return data[0];
+};
+
+export const generateMetadata = async ({ params }: TLayoutProps): Promise<Metadata> => {
+  const currentArtCategory = await getCurrentArtCategory(params.categorySlug);
+
   return {
-    title: `Joel Chapeau • ${params.categorySlug.replace(/./, c => c.toUpperCase())}`,
+    title: currentArtCategory.attributes.name,
+    description: currentArtCategory.attributes.metaDescription,
+    keywords: currentArtCategory.attributes.metaKeywords,
+    alternates: {
+      canonical: currentArtCategory.attributes.slug
+    }
   };
 };
 
@@ -24,15 +41,25 @@ const CategoryLayout = async ({ children, params }: Readonly<TLayoutProps>) => {
   const queryClient = getQueryClient();
   await prefetchArtTagCategories(queryClient, { populate: '*', sort: 'display_name', filters: { art_categories: { slug: params.categorySlug } } });
   await prefetchArts(queryClient, { populate: '*', filters: { art_category: { slug: params.categorySlug } }, pagination: defaultPaginationFilter });
+  const currentArtCategory = await getCurrentArtCategory(params.categorySlug);
+  
+  const artCategoryStructuredJsonLd: WithContext<Product> = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: currentArtCategory.attributes.name,
+    image: currentArtCategory.attributes.image.data.attributes.formats.thumbnail.url,
+    description: currentArtCategory.attributes.metaDescription,
+  };
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Title title={params.categorySlug} className='mb-10 mt-8'/>
+      <JsonLdLoader key={currentArtCategory.attributes.slug} jsonLd={artCategoryStructuredJsonLd}/>
       <ArtFilterProvider activeCategorySlug={params.categorySlug}>
         <div className="h-11">
           <ArtFilter className="sticky mx-auto h-11 max-w-[2500px] bg-background md:fixed" />
         </div>
         <div className="h-[calc(100%-2.75rem)] w-full">
+          <Title h1={currentArtCategory.attributes.name} h2={currentArtCategory.attributes.title} className='mb-8 mt-14 lg:mb-0'/>
           {children}
         </div>
       </ArtFilterProvider>

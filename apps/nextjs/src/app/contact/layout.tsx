@@ -7,14 +7,19 @@ type TLayoutProps = {
 
 export const generateMetadata = (): Metadata => {
   return {
-    title: 'Joel Chapeau • Contact',
+    title: 'Contact',
+    description: 'Contactez Joël Chapeau pour toute demande d\'information, d\'exposition ou d\'achat d\'œuvre. Réponse rapide par mail ou via le formulaire de contact.',
+    keywords: ['joel chapeau contact', 'joel contact'],
+    alternates: {
+      canonical: 'contact'
+    }
   };
 };
 
 const ContactLayout = ({children} : Readonly<TLayoutProps>) => {
   return (
     <>
-      <Title title='contact' className='mb-10 mt-8'/>
+      <Title h1='contact' h2='Contacter Joel Chapeau' className='mb-10 mt-8'/>
       {children}
     </>
   );

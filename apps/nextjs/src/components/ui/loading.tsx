@@ -2,6 +2,7 @@ import { cn } from '@/libs/utils';
 
 export type TLoadingError = {
   error?: string | null
+  className?: string
 }
 
 export type TContentLoader = {
@@ -14,7 +15,7 @@ export type TContentLoader = {
 
 export const Loading = ({ className }: { className?: string }) => {
   return (
-    <div className={cn('fixed inset-x-0 inset-y-0 flex justify-center items-center bg-background', className)}>
+    <div className={cn('flex justify-center items-center bg-background', className)}>
       <div className="relative inline-flex">
         <div className="size-8 rounded-full bg-foreground"></div>
         <div className="absolute left-0 top-0 size-8 animate-ping rounded-full bg-foreground"></div>
@@ -24,9 +25,9 @@ export const Loading = ({ className }: { className?: string }) => {
   );
 };
 
-export const LoadingError = ({ error }: TLoadingError) => {
+export const LoadingError = ({ error, className }: TLoadingError) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-background">
+    <div className={cn('flex items-center justify-center bg-background', className)}>
       <div className="relative inline-flex">
         <div className="text-2xl text-foreground md:text-4xl">{error ?? (<>Une erreur est survenue :(</>)}</div>
       </div>
@@ -37,7 +38,7 @@ export const LoadingError = ({ error }: TLoadingError) => {
 export const ContentLoader = ({ error, isLoading, isError, children, className }: TContentLoader) => {
   return (
     isError ? (
-      <LoadingError error={error} />
+      <LoadingError error={error} className={className} />
     ) : (
       isLoading ? (
         <Loading className={className} />

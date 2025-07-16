@@ -13,7 +13,7 @@ const StrapiTextMediaComponent = (component: TStrapiTextMediaComponent) => {
         <Image src={`${env.NEXT_PUBLIC_BACKEND_HOST}${component.media.data.attributes.formats.medium.url}`} alt={component.media.data.attributes.alternativeText} width={component.media.data.attributes.formats.medium.width} height={component.media.data.attributes.formats.medium.height}/>
       </div>
       <div className='basis-3/5'>
-        {component.title && <h2 className='mb-4 text-center text-2xl font-bold lg:text-left'>{component.title}</h2>}
+        {component.title && <h3 className='mb-4 text-center text-2xl font-bold lg:text-left'>{component.title}</h3>}
         <span className='text-justify'  dangerouslySetInnerHTML={{ __html: component.content }}/>
       </div>
     </div>

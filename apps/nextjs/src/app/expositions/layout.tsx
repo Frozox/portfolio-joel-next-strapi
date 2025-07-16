@@ -10,7 +10,12 @@ type TLayoutProps = {
 
 export const generateMetadata = (): Metadata => {
   return {
-    title: 'Joel Chapeau • News',
+    title: 'Expositions',
+    description: 'Découvrez les expositions de Joël Chapeau, artiste peintre à Grenade : aquarelles, acryliques et techniques mixtes présentées en galeries et espaces culturels.',
+    keywords: ['joel chapeau exposition', 'joel exposition', 'exposition grenade'],
+    alternates: {
+      canonical: 'expositions'
+    }
   };
 };
 
@@ -20,7 +25,7 @@ const NewsLayout = async ({children} : Readonly<TLayoutProps>) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Title title='nouveautés'  className='mb-10 mt-8'/>
+      <Title h1='expositions' h2='Expositions & Actualités'  className='mb-10 mt-8'/>
       {children}
     </HydrationBoundary>
   );

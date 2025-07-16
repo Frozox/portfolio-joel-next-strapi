@@ -13,7 +13,8 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories"
+          "art_tag_categories",
+          "title"
         ]
       },
       "conditions": []
@@ -28,7 +29,8 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories"
+          "art_tag_categories",
+          "title"
         ]
       },
       "conditions": []
@@ -43,7 +45,8 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories"
+          "art_tag_categories",
+          "title"
         ]
       },
       "conditions": []

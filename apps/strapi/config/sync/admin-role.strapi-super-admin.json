@@ -13,7 +13,10 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories"
+          "art_tag_categories",
+          "metaDescription",
+          "metaKeywords",
+          "title"
         ],
         "locales": [
           "en",
@@ -56,7 +59,10 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories"
+          "art_tag_categories",
+          "metaDescription",
+          "metaKeywords",
+          "title"
         ],
         "locales": [
           "en",
@@ -75,7 +81,10 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories"
+          "art_tag_categories",
+          "metaDescription",
+          "metaKeywords",
+          "title"
         ],
         "locales": [
           "en",

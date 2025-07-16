@@ -2,11 +2,11 @@
 
 import getQueryClient from '@/helpers/hook/react-query';
 import { QueryClientProvider as DefaultProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools/production';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
 
 const ReactQueryDevtoolsProduction = React.lazy(() =>
-  import('@tanstack/react-query-devtools/production').then(
+  import('@tanstack/react-query-devtools').then(
     (d) => ({
       default: d.ReactQueryDevtools
     })

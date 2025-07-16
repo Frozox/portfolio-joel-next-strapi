@@ -68,6 +68,17 @@ const genericRequestPost = async <T>(
   return await strapiInstance.create<T>(contentType, body, params);
 };
 
+const fetchQuery = <T>(
+  queryClient: QueryClient,
+  contentType: StrapiContentTypes,
+  params?: StrapiRequestParams
+): Promise<StrapiResponse<T>> => queryClient.fetchQuery({
+    queryKey: [contentType, params],
+    queryFn: async () => {
+      return await strapiInstance.find(contentType, params);
+    }
+  });
+
 const prefetchQuery = (
   queryClient: QueryClient,
   contentType: StrapiContentTypes,
@@ -82,6 +93,9 @@ const prefetchQuery = (
 
 export const useGetArtCategories = (params?: StrapiRequestParams) =>
   useGenericRequestFindMany<ArtCategory>(StrapiContentTypes.ArtCategories, params);
+
+export const fetchArtCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
+  fetchQuery<ArtCategory[]>(queryClient, StrapiContentTypes.ArtCategories , params);
 
 export const prefetchArtCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
   prefetchQuery(queryClient, StrapiContentTypes.ArtCategories , params);

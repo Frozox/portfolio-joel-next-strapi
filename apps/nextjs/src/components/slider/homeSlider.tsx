@@ -1,4 +1,5 @@
 import Slider from '@/components/slider/slider';
+import { ContentLoader } from '@/components/ui/loading';
 import { env } from '@/env.mjs';
 import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
 import { useArtCategory } from '@/helpers/context/strapi/artCategoryContext';
@@ -9,8 +10,8 @@ import { DirectionAwareHover } from '../ui/directionAwareHover';
 import { TKeenSlideProps } from '../ui/keenSlider';
 
 const HomeSlider = () => {
-  const { artCategories } = useArtCategory();
-  const { setSlides } = useKeenSlider();
+  const { artCategories, isError, isLoading } = useArtCategory();
+  const { setSlides, slides: keenSlides } = useKeenSlider();
 
   const slides = React.useMemo<TKeenSlideProps[]>(() => {
     if (artCategories.length === 0) return [];
@@ -23,7 +24,7 @@ const HomeSlider = () => {
             image.attributes.placeholder
           }>
             <div className="m-4">
-              <h2 className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</h2>
+              <p className="pb-10 text-5xl md:text-6xl">{item.attributes.name}</p>
               <Link href={`/${item.attributes.slug}`}>
                 <Button type="button" variant="outline" className="w-fit border-white bg-transparent p-6 text-xl hover:bg-background md:min-w-60 md:text-2xl">Voir les travaux</Button>
               </Link>
@@ -40,7 +41,9 @@ const HomeSlider = () => {
   }, [slides, setSlides]);
 
   return (
-    <Slider className='lg:h-[50vh] xl:h-[70vh] 2xl:h-[80vh]'/>
+    <ContentLoader isLoading={isLoading || !keenSlides.length && !!slides.length} isError={isError} className='h-[30vh] w-full lg:h-[50vh] xl:h-[70vh] 2xl:h-[80vh]'>
+      <Slider className='lg:h-[50vh] xl:h-[70vh] 2xl:h-[80vh]'/>
+    </ContentLoader>
   );
 };
 

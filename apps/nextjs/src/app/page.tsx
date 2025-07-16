@@ -1,58 +1,60 @@
 'use client';
 
 import HomeSlider from '@/components/slider/homeSlider';
-import { ContentLoader } from '@/components/ui/loading';
 import { Title } from '@/components/ui/title';
-import { useArtCategory } from '@/helpers/context/strapi/artCategoryContext';
 import { KeenSliderProvider } from '@/helpers/provider/keen/keenSliderProvider';
 import { easeInOutBack } from '@/libs/easing';
 import { autoSlider, moveToSelectedSlide } from '@/libs/keenPlugins';
+import { QuoteIcon } from 'lucide-react';
 import Image from 'next/image';
 
 const Home = () => {
-  const { isError, isLoading } = useArtCategory();
-
   return (
     <>
-      <Title title='joël chapeau' className='mb-10 mt-5 lg:mb-0'/>
+      <Title h1='joel chapeau' h2='Bienvenue dans mon univers artistique' className='mb-10 mt-5'/>
       <div className="size-full">
-        <ContentLoader isLoading={isLoading} isError={isError}>
-          <div className="h-full animate-content-load">
-            <div className='items-center lg:flex lg:h-full'>
-              <KeenSliderProvider options={{
-                mode: 'snap',
-                slides: {
-                  perView: 2,
-                  spacing: 20,
-                  origin: 'center',
-                },
-                defaultAnimation: {
-                  duration: 1800,
-                  easing: easeInOutBack
-                },
-                breakpoints: {
-                  '(max-width: 1024px)': {
-                    slides: {
-                      perView: 1,
-                      spacing: 20,
-                      origin: 'center',
-                    }
+        <div className="h-full animate-content-load">
+          <div className='items-center lg:flex lg:h-full'>
+            <KeenSliderProvider options={{
+              mode: 'snap',
+              slides: {
+                perView: 2,
+                spacing: 20,
+                origin: 'center',
+              },
+              defaultAnimation: {
+                duration: 1800,
+                easing: easeInOutBack
+              },
+              breakpoints: {
+                '(max-width: 1024px)': {
+                  slides: {
+                    perView: 1,
+                    spacing: 20,
+                    origin: 'center',
                   }
-                },
-              }}
-              plugins={[autoSlider, moveToSelectedSlide]}
-              >
-                <HomeSlider />
-              </KeenSliderProvider>
-            </div>
-            <div className="mt-16 flex flex-col items-center justify-center text-center lg:mt-0 xl:mt-8">
-              <Image src="/joel.jpg" className="rounded-full" height={200} width={200} alt="joel" />
-              <div className="mt-8">nunc vel risus commodo viverra maecenas accumsan lacus vel facilisis</div>
-              <hr className="my-8 h-px w-64 border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
-              <div className="mb-8">enim praesent elementum</div>
+                }
+              },
+            }}
+            plugins={[autoSlider, moveToSelectedSlide]}
+            >
+              <HomeSlider />
+            </KeenSliderProvider>
+          </div>
+          <div className="container mt-12 flex flex-col items-center justify-center pb-10 text-center text-base md:text-lg">
+            <Image src="/joel.jpg" className="rounded-full" height={200} width={200} alt="joel" />
+            <div className='relative mt-6'>
+              <QuoteIcon size={40} className='absolute'/>
+              <p className='pb-6 text-2xl'>Bienvenue</p>
+              <p>Je m&apos;appelle Joël Chapeau, artiste peintre installé à Grenade, en région Occitanie.</p>
+              <p>Depuis plus de dix ans, la peinture est pour moi une passion, un terrain d&apos;exploration et un espace de liberté.</p>
+              <p>Autodidacte, je me suis formé au sein de l&apos;atelier du LAC, où j&apos;ai appris à expérimenter différents médiums; aquarelle, acrylique, techniques mixtes.</p>
+              <p>Je travaille aussi bien l&apos;abstrait que le figuratif, inspiré par la nature, le corps et mes racines provençales.</p>
+              <p>Sur ce site, je vous invite à découvrir mon travail, mes recherches et mes expositions.</p>
+              <p>Bonne visite !</p>
             </div>
           </div>
-        </ContentLoader>
+        </div>
       </div>
     </>
   );
