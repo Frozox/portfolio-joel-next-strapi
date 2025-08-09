@@ -2,6 +2,8 @@
   "name": "Author",
   "code": "strapi-author",
   "description": "Authors can manage the content they have created.",
+  "documentId": "vdz90z2642to8346xzydj6hz",
+  "locale": null,
   "permissions": [
     {
       "action": "plugin::content-manager.explorer.create",
@@ -13,14 +15,14 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories",
-          "title",
-          "order"
+          "title"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "csf3yx5182dq9id97ep5gjym",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.read",
@@ -32,14 +34,14 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories",
-          "title",
-          "order"
+          "title"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "mzz79hpftuf721slv4boaclv",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.update",
@@ -51,14 +53,14 @@
           "arts",
           "image",
           "slug",
-          "art_tag_categories",
-          "title",
-          "order"
+          "title"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "k1iy9b2m3ryhqvqoh9awpo1e",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.create",
@@ -67,14 +69,14 @@
       "properties": {
         "fields": [
           "name",
-          "art_tags",
-          "display_name",
-          "art_categories"
+          "display_name"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "gpcoc2wjoqvisupf2vyxrr1u",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.read",
@@ -83,14 +85,14 @@
       "properties": {
         "fields": [
           "name",
-          "art_tags",
-          "display_name",
-          "art_categories"
+          "display_name"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "wtwfuuy7jlvi35vj6vor4flt",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.update",
@@ -99,14 +101,14 @@
       "properties": {
         "fields": [
           "name",
-          "art_tags",
-          "display_name",
-          "art_categories"
+          "display_name"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "p927m0bf02pzzvywn026xnlo",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.create",
@@ -115,13 +117,14 @@
       "properties": {
         "fields": [
           "tag",
-          "arts",
-          "art_tag_category"
+          "arts"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "owunaup3gbebq7v2ez0k15e7",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.read",
@@ -130,13 +133,14 @@
       "properties": {
         "fields": [
           "tag",
-          "arts",
-          "art_tag_category"
+          "arts"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "caj2yqsq2ern0334r8nlxicj",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.update",
@@ -145,13 +149,14 @@
       "properties": {
         "fields": [
           "tag",
-          "arts",
-          "art_tag_category"
+          "arts"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "ubp0euu18lfwardnd0c6yqus",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.create",
@@ -174,7 +179,9 @@
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "txne3t59274nnjmwpw3r0ere",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.read",
@@ -197,7 +204,9 @@
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "l26r9xsne6lagu9zbbbju9cp",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.update",
@@ -220,7 +229,9 @@
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "xxg98vnazvchefu57u6dohq0",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.create",
@@ -233,7 +244,9 @@
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "u0uye8978idrcz4619dmg88g",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.read",
@@ -246,7 +259,9 @@
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "hf41y8dveplx487fdvyl2o3x",
+      "locale": null
     },
     {
       "action": "plugin::content-manager.explorer.update",
@@ -259,28 +274,36 @@
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "pq1jo0p5h05dn274lzrxdrkl",
+      "locale": null
     },
     {
       "action": "plugin::upload.assets.copy-link",
       "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "documentId": "b9x1b8naft9wriuj4k8kzgsd",
+      "locale": null
     },
     {
       "action": "plugin::upload.assets.create",
       "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "documentId": "cnlrh6jry76bbt3jrab2ttyc",
+      "locale": null
     },
     {
       "action": "plugin::upload.assets.download",
       "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "documentId": "d4g17fzl0y1rtnshbj77ztwh",
+      "locale": null
     },
     {
       "action": "plugin::upload.assets.update",
@@ -289,14 +312,18 @@
       "properties": {},
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "cjrk7eh198lt69eh95nm9s4q",
+      "locale": null
     },
     {
       "action": "plugin::upload.configure-view",
       "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "documentId": "o0sfyxkqetqer2uifn07q6qa",
+      "locale": null
     },
     {
       "action": "plugin::upload.read",
@@ -305,7 +332,9 @@
       "properties": {},
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "documentId": "xmfugrd8r5iec5yyagd4w58r",
+      "locale": null
     }
   ]
 }

@@ -10,8 +10,8 @@ export interface ArtTagCategory {
   id: number;
   attributes: {
     createdAt: Date;    updatedAt: Date;    publishedAt?: Date;    name: string;
-    art_tags: { data: ArtTag[] };
     display_name: string;
+    art_tags: { data: ArtTag[] };
     art_categories?: { data: ArtCategory[] };
     locale: string;
     localizations?: { data: ArtTagCategory[] };
@@ -20,8 +20,8 @@ export interface ArtTagCategory {
 export interface ArtTagCategory_Plain {
   id: number;
   createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  name: string;
-  art_tags: ArtTag_Plain[];
   display_name: string;
+  art_tags: ArtTag_Plain[];
   art_categories?: ArtCategory_Plain[];
   locale: string;
   localizations?: ArtTagCategory_Plain[];
@@ -30,8 +30,8 @@ export interface ArtTagCategory_Plain {
 export interface ArtTagCategory_NoRelations {
   id: number;
   createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  name: string;
-  art_tags: number[];
   display_name: string;
+  art_tags: number[];
   art_categories?: number[];
   locale: string;
   localizations?: ArtTagCategory[];
@@ -40,8 +40,8 @@ export interface ArtTagCategory_NoRelations {
 export interface ArtTagCategory_AdminPanelLifeCycle {
   id: number;
   createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  name: string;
-  art_tags: AdminPanelRelationPropertyModification<ArtTag_Plain>;
   display_name: string;
+  art_tags: AdminPanelRelationPropertyModification<ArtTag_Plain>;
   art_categories?: AdminPanelRelationPropertyModification<ArtCategory_Plain>;
   locale: string;
   localizations?: ArtTagCategory[];

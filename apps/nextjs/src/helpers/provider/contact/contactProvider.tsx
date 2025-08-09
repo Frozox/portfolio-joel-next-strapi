@@ -1,19 +1,31 @@
 'use client';
 
-import { env } from '@/env.mjs';
-import ContactContext, { TSavedArt } from '@/helpers/context/contact/contactContext';
-import { useGetArts } from '@/helpers/hook/strapi/request';
-import { getMediaFromFormat } from '@/libs/mediaFormat';
+import { env } from '@env';
+import ContactContext, {
+  TSavedArt,
+} from '@helpers/context/contact/contactContext';
+import { useGetArts } from '@helpers/hook/strapi/request';
+import { getMediaFromFormat } from '@libs/mediaFormat';
 import React from 'react';
 
 type TContactProviderProps = {
-  children: React.ReactNode,
-}
+  children: React.ReactNode;
+};
 
 export const ContactProvider = ({ children }: TContactProviderProps) => {
   const [savedArts, setSavedArts] = React.useState<TSavedArt[]>([]);
-  const [defaultSavedArtsId, setDefaultSavedArtsId] = React.useState<number[]|undefined>();
-  const artsQuery = useGetArts({ populate: 'thumbnail', filters: { id: { $in: defaultSavedArtsId?.length ? [...defaultSavedArtsId] : [null] }, sold_out: { $eq: false } } });
+  const [defaultSavedArtsId, setDefaultSavedArtsId] = React.useState<
+    number[] | undefined
+  >();
+  const artsQuery = useGetArts({
+    populate: 'thumbnail',
+    filters: {
+      id: {
+        $in: defaultSavedArtsId?.length ? [...defaultSavedArtsId] : [null],
+      },
+      sold_out: { $eq: false },
+    },
+  });
 
   const toggleSavedArt = (art: TSavedArt) => {
     setSavedArts((prevSavedArts) => {
@@ -24,7 +36,7 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
       }
     });
   };
-  
+
   const clearSavedArts = () => {
     setSavedArts([]);
   };
@@ -32,15 +44,15 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
   React.useEffect(() => {
     if (!artsQuery.response?.data) return;
     const defaultSavedArts: TSavedArt[] = artsQuery.response.data.map((art) => {
-      const formatedThumbnail = getMediaFromFormat(art.attributes.thumbnail.data, 'thumbnail');
+      const formatedThumbnail = getMediaFromFormat(art.thumbnail, 'thumbnail');
 
       return {
         id: art.id,
-        name: art.attributes.name,
+        name: art.name,
         thumbnail: {
           url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
           // @ts-expect-error,
-          placeholder: art.attributes.thumbnail.data.attributes.placeholder,
+          thumbhash: art.thumbnail.thumbhash,
           width: formatedThumbnail.width,
           height: formatedThumbnail.height,
         },
@@ -52,7 +64,9 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
 
   React.useEffect(() => {
     try {
-      const savedArts: number[] = JSON.parse(localStorage.getItem('savedArts') || '[]');
+      const savedArts: number[] = JSON.parse(
+        localStorage.getItem('savedArts') || '[]'
+      );
       if (!Array.isArray(savedArts)) return;
       if (!savedArts.every((art) => typeof art === 'number')) return;
       setDefaultSavedArtsId(savedArts);
@@ -63,11 +77,16 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
 
   React.useEffect(() => {
     if (defaultSavedArtsId === undefined) return;
-    localStorage.setItem('savedArts', JSON.stringify(savedArts.map((art) => art.id)));
+    localStorage.setItem(
+      'savedArts',
+      JSON.stringify(savedArts.map((art) => art.id))
+    );
   }, [savedArts, defaultSavedArtsId]);
 
   return (
-    <ContactContext.Provider value={{ savedArts, toggleSavedArt, clearSavedArts }}>
+    <ContactContext.Provider
+      value={{ savedArts, toggleSavedArt, clearSavedArts }}
+    >
       {children}
     </ContactContext.Provider>
   );

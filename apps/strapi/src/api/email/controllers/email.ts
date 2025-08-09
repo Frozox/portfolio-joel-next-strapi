@@ -2,8 +2,9 @@
  * A set of functions called "actions" for `email`
  */
 
+import { Media_Plain } from "@common/sharedSchemas/Media";
+import { ContactEmail, ContactEmailPopulated } from "@interfaces/common/email";
 import Joi from "joi";
-import { ContactEmail, ContactEmailPopulated } from "../../../../types/email/email";
 
 export default {
   sendContactForm: async (ctx, next) => {
@@ -22,18 +23,18 @@ export default {
     }
 
     try {
-      const arts = await strapi.entityService.findMany("api::art.art", { populate: 'thumbnail', filters: { id: { $in: emailBody.arts }, sold_out: { $eq: false } }});
+      const arts = await strapi.documents("api::art.art").findMany({ populate: 'thumbnail', filters: { id: { $in: emailBody.arts }, sold_out: { $eq: false } }})
 
       const populatedBody: ContactEmailPopulated = {
         ...emailBody,
-        arts: arts.map((art): ContactEmailPopulated['arts'][0] => ({
-          id: art.id,
+        arts: arts.map((art) => ({
+          id: art.id as number,
           name: art.name,
           thumbnail: {
             url: `${strapi.config.get('server.url')}${art.thumbnail.url}`,
-            width: art.thumbnail.width,
-            height: art.thumbnail.height,
-          },
+            width: art.thumbnail?.width,
+            height: art.thumbnail?.height,
+          } as Media_Plain,
         })),
       };
 

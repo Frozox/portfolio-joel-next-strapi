@@ -18,8 +18,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@app/*": ["./src/app/*"],
+      "@components/*": ["./src/components/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@libs/*": ["./src/libs/*"],
+      "@env": ["./src/env.mjs"]
+    },
+    "target": "ES2017"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

@@ -1,3 +1,5 @@
+import { Art_Plain } from "../../src/api/art/content-types/art/art";
+
 export interface GenericEmail {
     email: string;
     fullname: string;
@@ -10,13 +12,5 @@ export interface ContactEmail extends GenericEmail {
 }
 
 export interface ContactEmailPopulated extends GenericEmail {
-    arts: {
-        id: number;
-        name: string;
-        thumbnail: {
-            url: string;
-            width: number;
-            height: number;
-        };
-    }[];
+    arts: Partial<Art_Plain>[]
 }

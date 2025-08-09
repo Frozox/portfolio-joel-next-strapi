@@ -1,20 +1,20 @@
 'use client';
 
-import { cn } from '@/libs/utils';
+import LazyImage from '@components/ui/lazyImage';
+import { cn } from '@libs/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
 import { useRef, useState } from 'react';
 
 export const DirectionAwareHover = ({
   imageUrl,
-  blurData,
+  thumbhash,
   children,
   childrenClassName,
   imageClassName,
   className,
 }: {
   imageUrl: string;
-  blurData?: string;
+  thumbhash?: ArrayBuffer;
   children: React.ReactNode | string;
   childrenClassName?: string;
   imageClassName?: string;
@@ -67,38 +67,36 @@ export const DirectionAwareHover = ({
       onMouseEnter={handleMouseEnter}
       ref={ref}
       className={cn(
-        'w-full h-full bg-transparent overflow-hidden group/card relative',
+        'group/card relative h-full w-full overflow-hidden bg-transparent',
         className
       )}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode='wait'>
         <motion.div
-          className="relative size-full"
-          initial="initial"
+          className='relative size-full'
+          initial='initial'
           whileHover={direction}
-          exit="exit"
+          exit='exit'
         >
-          <motion.div className="absolute inset-0 z-10 hidden size-full bg-black/40 transition duration-500 group-hover/card:block" />
+          <motion.div className='absolute inset-0 z-10 hidden size-full bg-black/40 transition duration-500 group-hover/card:block' />
           <motion.div
             variants={variants}
-            className="relative size-full bg-gray-50 dark:bg-black"
+            className='relative size-full bg-gray-50 dark:bg-black'
             transition={{
               duration: 0.2,
               ease: 'easeOut',
             }}
           >
-            <Image
-              alt="image"
+            <LazyImage
+              alt='image'
               className={cn(
-                'h-full w-full object-cover scale-[1.15]',
+                'h-full w-full scale-[1.15] object-cover',
                 imageClassName
               )}
-              width="1000"
-              height="1000"
+              thumbhash={thumbhash}
+              width={1000}
+              height={1000}
               src={imageUrl}
-              blurDataURL={blurData}
-              placeholder={blurData ? 'blur' : 'empty'}
-              unoptimized
             />
           </motion.div>
           <motion.div
@@ -108,7 +106,7 @@ export const DirectionAwareHover = ({
               ease: 'easeOut',
             }}
             className={cn(
-              'text-white absolute bottom-4 left-4 z-40',
+              'absolute bottom-4 left-4 z-40 text-white',
               childrenClassName
             )}
           >

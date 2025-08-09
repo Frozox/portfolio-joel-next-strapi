@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/libs/utils';
+import { cn } from '@libs/utils';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -26,7 +26,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   };
 
   return (
-    <div className="mx-auto grid size-full max-w-7xl grid-cols-1 gap-4  p-10 md:grid-cols-3 ">
+    <div className='mx-auto grid size-full max-w-7xl grid-cols-1 gap-4  p-10 md:grid-cols-3 '>
       {cards.map((card, i) => (
         <div key={i} className={cn(card.className, '')}>
           <motion.div
@@ -35,10 +35,10 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
               card.className,
               'relative overflow-hidden',
               selected?.id === card.id
-                ? 'rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col'
+                ? 'absolute inset-0 z-50 m-auto flex h-1/2 w-full cursor-pointer flex-col flex-wrap items-center justify-center rounded-lg md:w-1/2'
                 : lastSelected?.id === card.id
-                  ? 'z-40 bg-white rounded-xl h-full w-full'
-                  : 'bg-white rounded-xl h-full w-full'
+                  ? 'z-40 h-full w-full rounded-xl bg-white'
+                  : 'h-full w-full rounded-xl bg-white'
             )}
             layout
           >
@@ -50,7 +50,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
       <motion.div
         onClick={handleOutsideClick}
         className={cn(
-          'absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10',
+          'absolute left-0 top-0 z-10 h-full w-full bg-black opacity-0',
           selected?.id ? 'pointer-events-auto' : 'pointer-events-none'
         )}
         animate={{ opacity: selected?.id ? 0.3 : 0 }}
@@ -64,21 +64,21 @@ const BlurImage = ({ card }: { card: Card }) => {
   return (
     <Image
       src={card.thumbnail}
-      height="500"
-      width="500"
+      height='500'
+      width='500'
       onLoad={() => setLoaded(true)}
       className={cn(
-        'object-cover object-top absolute inset-0 h-full w-full transition duration-200',
+        'absolute inset-0 h-full w-full object-cover object-top transition duration-200',
         loaded ? 'blur-none' : 'blur-md'
       )}
-      alt="thumbnail"
+      alt='thumbnail'
     />
   );
 };
 
 const SelectedCard = ({ selected }: { selected: Card | null }) => {
   return (
-    <div className="relative z-[60] flex size-full flex-col justify-end rounded-lg bg-transparent shadow-2xl">
+    <div className='relative z-[60] flex size-full flex-col justify-end rounded-lg bg-transparent shadow-2xl'>
       <motion.div
         initial={{
           opacity: 0,
@@ -86,7 +86,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
         animate={{
           opacity: 0.6,
         }}
-        className="absolute inset-0 z-10 size-full bg-black opacity-60"
+        className='absolute inset-0 z-10 size-full bg-black opacity-60'
       />
       <motion.div
         initial={{
@@ -101,7 +101,7 @@ const SelectedCard = ({ selected }: { selected: Card | null }) => {
           duration: 0.3,
           ease: 'easeInOut',
         }}
-        className="relative z-[70] px-8 pb-4"
+        className='relative z-[70] px-8 pb-4'
       >
         {selected?.content}
       </motion.div>

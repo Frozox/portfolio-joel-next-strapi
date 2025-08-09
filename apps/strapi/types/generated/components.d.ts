@@ -1,6 +1,6 @@
-import type { Attribute, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface VisualComponentsMediaComponent extends Schema.Component {
+export interface VisualComponentsMediaComponent extends Struct.ComponentSchema {
   collectionName: 'components_visual_components_media';
   info: {
     description: '';
@@ -8,15 +8,16 @@ export interface VisualComponentsMediaComponent extends Schema.Component {
     icon: 'picture';
   };
   attributes: {
-    media: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    media_position: Attribute.Enumeration<['left', 'right', 'center']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'left'>;
+    media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    media_position: Schema.Attribute.Enumeration<['left', 'right', 'center']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
   };
 }
 
-export interface VisualComponentsSpacerComponent extends Schema.Component {
+export interface VisualComponentsSpacerComponent
+  extends Struct.ComponentSchema {
   collectionName: 'components_visual_components_spacers';
   info: {
     description: '';
@@ -26,7 +27,7 @@ export interface VisualComponentsSpacerComponent extends Schema.Component {
   attributes: {};
 }
 
-export interface VisualComponentsTextComponent extends Schema.Component {
+export interface VisualComponentsTextComponent extends Struct.ComponentSchema {
   collectionName: 'components_visual_components_texts';
   info: {
     description: '';
@@ -34,20 +35,21 @@ export interface VisualComponentsTextComponent extends Schema.Component {
     icon: 'pencil';
   };
   attributes: {
-    content: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'rich';
+          preset: 'defaultHtml';
         }
       >;
-    title: Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface VisualComponentsTextMediaComponent extends Schema.Component {
+export interface VisualComponentsTextMediaComponent
+  extends Struct.ComponentSchema {
   collectionName: 'components_visual_components_text_medias';
   info: {
     description: '';
@@ -55,29 +57,29 @@ export interface VisualComponentsTextMediaComponent extends Schema.Component {
     icon: 'dashboard';
   };
   attributes: {
-    content: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+    content: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
         {
           output: 'HTML';
-          preset: 'rich';
+          preset: 'defaultHtml';
         }
       >;
-    media: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    media_mobile_position: Attribute.Enumeration<['top', 'bottom']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'top'>;
-    media_position: Attribute.Enumeration<['left', 'right']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'left'>;
-    title: Attribute.String;
+    media: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    media_mobile_position: Schema.Attribute.Enumeration<['top', 'bottom']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'top'>;
+    media_position: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
+    title: Schema.Attribute.String;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'visual-components.media-component': VisualComponentsMediaComponent;
       'visual-components.spacer-component': VisualComponentsSpacerComponent;
       'visual-components.text-component': VisualComponentsTextComponent;

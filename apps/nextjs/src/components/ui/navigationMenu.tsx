@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 
-import { cn } from '@/libs/utils';
+import { cn } from '@libs/utils';
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -55,8 +55,8 @@ const NavigationMenuTrigger = React.forwardRef<
   >
     {children}{' '}
     <ChevronDown
-      className="relative top-px ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180"
-      aria-hidden="true"
+      className='relative top-px ml-1 size-3 transition duration-200 group-data-[state=open]:rotate-180'
+      aria-hidden='true'
     />
   </NavigationMenuPrimitive.Trigger>
 ));
@@ -109,13 +109,20 @@ const NavigationMenuIndicator = React.forwardRef<
     )}
     {...props}
   >
-    <div className="relative top-[60%] size-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
+    <div className='relative top-[60%] size-2 rotate-45 rounded-tl-sm bg-border shadow-md' />
   </NavigationMenuPrimitive.Indicator>
 ));
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName;
 
 export {
-  NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle, NavigationMenuViewport
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+  NavigationMenuViewport,
 };
-

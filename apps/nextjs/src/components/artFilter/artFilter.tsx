@@ -1,13 +1,13 @@
 'use client';
 
-import { Checkbox } from '@/components/ui/checkbox';
+import { Checkbox } from '@components/ui/checkbox';
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '@/components/ui/navigationMenu';
+} from '@components/ui/navigationMenu';
 import {
   Pagination,
   PaginationContent,
@@ -16,9 +16,9 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
-import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
-import { cn } from '@/libs/utils';
+} from '@components/ui/pagination';
+import { useArtFilter } from '@helpers/context/strapi/artFilterContext';
+import { cn } from '@libs/utils';
 import useEventListener from '@use-it/event-listener';
 import * as KeyCode from 'keycode-js';
 import { FilterIcon, Trash2Icon } from 'lucide-react';
@@ -69,12 +69,12 @@ export const ArtFilterCheckboxItem = ({
       <Checkbox
         checked={checked}
         defaultChecked={defaultChecked}
-        className="mr-2"
+        className='mr-2'
         id={`filter-${categoryId}-${tagId}`}
         {...props}
       />
       <label
-        className="cursor-pointer select-none"
+        className='cursor-pointer select-none'
         htmlFor={`filter-${categoryId}-${tagId}`}
       >
         {value}
@@ -83,7 +83,7 @@ export const ArtFilterCheckboxItem = ({
   );
 };
 
-export const ArtFilterPagination = ({className}:{className:string}) => {
+export const ArtFilterPagination = ({ className }: { className: string }) => {
   const {
     artsQuery: { response, isError, isLoading },
     pagination,
@@ -102,10 +102,13 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
   useEventListener('keydown', (e: KeyboardEvent) => {
     if (KeyCode.CODE_LEFT === e.code && metaPagination.page > 1)
       setPagination({ ...pagination, page: metaPagination.page - 1 });
-    else if (KeyCode.CODE_RIGHT === e.code && metaPagination.page < metaPagination.pageCount)
+    else if (
+      KeyCode.CODE_RIGHT === e.code &&
+      metaPagination.page < metaPagination.pageCount
+    )
       setPagination({ ...pagination, page: metaPagination.page + 1 });
   });
-  
+
   React.useEffect(() => {
     if (!response?.meta) return;
     setMetaPagination(response.meta.pagination as TMetaPagination);
@@ -123,7 +126,7 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
 
   return (
     <div className={cn('select-none', className)}>
-      <hr className="mb-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
+      <hr className='mb-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25' />
       <Pagination>
         <PaginationContent>
           <PaginationItem>
@@ -148,7 +151,7 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
                           setPagination({ ...pagination, page: 1 })
                         }
                         disabled={metaPagination.page === 1}
-                        className="size-full"
+                        className='size-full'
                       >
                         1
                       </button>
@@ -186,7 +189,7 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
                           disabled={
                             metaPagination.page === metaPagination.pageCount
                           }
-                          className="size-full"
+                          className='size-full'
                         >
                           {metaPagination.pageCount}
                         </button>
@@ -196,20 +199,25 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
                 )) || (
                 <>
                   {Array.from({ length: extraPagesToDisplay }).map((_, j) => {
-                    const page = metaPagination.page <= 2 ? j + 2 :
-                      (metaPagination.page >= metaPagination.pageCount ? j + metaPagination.page - 2 :
-                        j + metaPagination.page - 1);
+                    const page =
+                        metaPagination.page <= 2
+                          ? j + 2
+                          : metaPagination.page >= metaPagination.pageCount
+                            ? j + metaPagination.page - 2
+                            : j + metaPagination.page - 1;
 
                     return (
                       <React.Fragment key={j}>
                         <PaginationItem>
-                          <PaginationLink isActive={metaPagination.page === page}>
+                          <PaginationLink
+                            isActive={metaPagination.page === page}
+                          >
                             <button
                               onClick={() =>
                                 setPagination({ ...pagination, page })
                               }
                               disabled={metaPagination.page === page}
-                              className="size-full"
+                              className='size-full'
                             >
                               {page}
                             </button>
@@ -229,7 +237,7 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
               }
               disabled={metaPagination.page >= metaPagination.pageCount}
               className={cn(
-                metaPagination.page >= metaPagination.pageCount && 'opacity-50',
+                metaPagination.page >= metaPagination.pageCount && 'opacity-50'
               )}
             >
               <PaginationNext />
@@ -237,7 +245,7 @@ export const ArtFilterPagination = ({className}:{className:string}) => {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-      <hr className="mt-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
+      <hr className='mt-2 h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25' />
     </div>
   );
 };
@@ -246,7 +254,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
   const {
     artTagCategoriesQuery: { response, isError, isLoading },
     setFilters,
-    filters: currentFilters
+    filters: currentFilters,
   } = useArtFilter();
   const [filterCategories, setFilterCategories] = React.useState<
     TFilterCategory[]
@@ -262,31 +270,31 @@ export const ArtFilter = ({ className }: { className?: string }) => {
     ] = response?.data.reduce(
       (
         accumulator: [TFilterCategory[], TFilterItem[]],
-        currentArtTagCategory,
+        currentArtTagCategory
       ) => {
         return [
           [
             ...accumulator[0],
             {
               id: currentArtTagCategory.id,
-              name: currentArtTagCategory.attributes.display_name,
+              name: currentArtTagCategory.display_name,
             } as TFilterCategory,
           ],
           [
             ...accumulator[1],
-            ...currentArtTagCategory.attributes.art_tags.data.map(
+            ...currentArtTagCategory.art_tags.map(
               (tag) =>
                 ({
                   tagId: tag.id,
                   categoryId: currentArtTagCategory.id,
-                  value: tag.attributes.tag,
+                  value: tag.tag,
                   checked: false,
-                }) as TFilterItem,
+                }) as TFilterItem
             ),
           ],
         ];
       },
-      [[], []],
+      [[], []]
     );
 
     setFilterCategories(formatedFilterCategories);
@@ -312,34 +320,36 @@ export const ArtFilter = ({ className }: { className?: string }) => {
   }, [filterCategories, filterItems, setFilters]);
 
   React.useEffect(() => {
-    if (!currentFilters || !currentFilters.art_tags || !currentFilters.art_tags) return;
+    if (!currentFilters || !currentFilters.art_tags || !currentFilters.art_tags)
+      return;
 
     setFilterItems((prev) =>
       prev.map((t) => {
-        if (t.tagId !== (currentFilters.art_tags as { id: number }).id) return t;
+        if (t.tagId !== (currentFilters.art_tags as { id: number }).id)
+          return t;
         return { ...t, checked: !t.checked };
-      }),
+      })
     );
   }, [currentFilters]);
 
   return (
     <div className={cn('fixed z-40 w-full sm:px-5', className)}>
-      <hr className="h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
-      <NavigationMenu className="max-w-full space-x-2 sm:justify-start sm:space-x-0">
+      <hr className='h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25' />
+      <NavigationMenu className='max-w-full space-x-2 sm:justify-start sm:space-x-0'>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger disabled={isLoading || isError}>
-              <div className="inline-flex">
+              <div className='inline-flex'>
                 <FilterIcon />
-                <span className="ml-1 hidden items-center justify-center sm:flex">
+                <span className='ml-1 hidden items-center justify-center sm:flex'>
                   Filtres
                 </span>
-                <span className="mx-1 rounded-lg bg-foreground p-1 text-xs text-background sm:ml-2">
+                <span className='mx-1 rounded-lg bg-foreground p-1 text-xs text-background sm:ml-2'>
                   {filterItems.filter((i) => i.checked).length}
                 </span>
               </div>
             </NavigationMenuTrigger>
-            <NavigationMenuContent className="grid w-[calc(100vw-1rem)] grid-cols-2 gap-4 p-4 md:w-[600px] md:grid-cols-4">
+            <NavigationMenuContent className='grid w-[calc(100vw-1rem)] grid-cols-2 gap-4 p-4 md:w-[600px] md:grid-cols-4'>
               {filterCategories.map((category) => (
                 <ArtFilterCheckboxList key={category.id} {...category}>
                   {filterItems
@@ -351,7 +361,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
                             prev.map((t) => {
                               if (t.tagId !== tag.tagId) return t;
                               return { ...t, checked: !t.checked };
-                            }),
+                            })
                           )
                         }
                         key={tag.tagId}
@@ -384,17 +394,17 @@ export const ArtFilter = ({ className }: { className?: string }) => {
           <NavigationMenuItem>
             <button
               disabled={filterItems.filter((i) => i.checked).length === 0}
-              type="button"
+              type='button'
               onClick={() =>
                 setFilterItems((prev) =>
-                  prev.map((t) => ({ ...t, checked: false })),
+                  prev.map((t) => ({ ...t, checked: false }))
                 )
               }
-              className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+              className='group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
             >
-              <div className="inline-flex">
+              <div className='inline-flex'>
                 <Trash2Icon />
-                <span className="ml-1 hidden items-center justify-center sm:flex">
+                <span className='ml-1 hidden items-center justify-center sm:flex'>
                   Vider
                 </span>
               </div>
@@ -402,7 +412,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <hr className="h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25" />
+      <hr className='h-px w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25' />
     </div>
   );
 };

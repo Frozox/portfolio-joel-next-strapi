@@ -1,10 +1,10 @@
-import { StrapiContentTypes, strapiInstance } from '@/helpers/hook/strapi';
-import { ArtCategory } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
-import { ArtTagCategory } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
-import { ArtTag } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
-import { Art } from '@portfolio/strapi/src/api/art/content-types/art/art';
-import { New } from '@portfolio/strapi/src/api/new/content-types/new/new';
-import { GenericEmail } from '@portfolio/strapi/types/email/email';
+import { StrapiContentTypes, strapiInstance } from '@helpers/hook/strapi';
+import { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
+import { ArtTagCategory_Plain } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
+import { ArtTag_Plain } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
+import { Art_Plain } from '@portfolio/strapi/src/api/art/content-types/art/art';
+import { New_Plain } from '@portfolio/strapi/src/api/new/content-types/new/new';
+import { GenericEmail } from '@portfolio/strapi/types/common/email';
 import { QueryClient, useQuery } from '@tanstack/react-query';
 import React from 'react';
 import {
@@ -72,57 +72,85 @@ const fetchQuery = <T>(
   queryClient: QueryClient,
   contentType: StrapiContentTypes,
   params?: StrapiRequestParams
-): Promise<StrapiResponse<T>> => queryClient.fetchQuery({
-    queryKey: [contentType, params],
-    queryFn: async () => {
-      return await strapiInstance.find(contentType, params);
-    }
-  });
+): Promise<StrapiResponse<T>> =>
+    queryClient.fetchQuery({
+      queryKey: [contentType, params],
+      queryFn: async () => {
+        return await strapiInstance.find(contentType, params);
+      },
+    });
 
 const prefetchQuery = (
   queryClient: QueryClient,
   contentType: StrapiContentTypes,
   params?: StrapiRequestParams
-) => queryClient.prefetchQuery({
-  queryKey: [contentType, params],
-  queryFn: async () => {
-    return await strapiInstance.find(contentType, params);
-  },
-});
-
+) =>
+  queryClient.prefetchQuery({
+    queryKey: [contentType, params],
+    queryFn: async () => {
+      return await strapiInstance.find(contentType, params);
+    },
+  });
 
 export const useGetArtCategories = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<ArtCategory>(StrapiContentTypes.ArtCategories, params);
+  useGenericRequestFindMany<ArtCategory_Plain>(
+    StrapiContentTypes.ArtCategories,
+    params
+  );
 
-export const fetchArtCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
-  fetchQuery<ArtCategory[]>(queryClient, StrapiContentTypes.ArtCategories , params);
+export const fetchArtCategories = (
+  queryClient: QueryClient,
+  params?: StrapiRequestParams
+) =>
+  fetchQuery<ArtCategory_Plain[]>(
+    queryClient,
+    StrapiContentTypes.ArtCategories,
+    params
+  );
 
-export const prefetchArtCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
-  prefetchQuery(queryClient, StrapiContentTypes.ArtCategories , params);
+export const prefetchArtCategories = (
+  queryClient: QueryClient,
+  params?: StrapiRequestParams
+) => prefetchQuery(queryClient, StrapiContentTypes.ArtCategories, params);
 
 export const useGetArts = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<Art>(StrapiContentTypes.Arts, params);
+  useGenericRequestFindMany<Art_Plain>(StrapiContentTypes.Arts, params);
 
-export const prefetchArts = (queryClient: QueryClient, params?: StrapiRequestParams) =>
-  prefetchQuery(queryClient, StrapiContentTypes.Arts, params);
+export const prefetchArts = (
+  queryClient: QueryClient,
+  params?: StrapiRequestParams
+) => prefetchQuery(queryClient, StrapiContentTypes.Arts, params);
 
 export const useGetArtTagCategories = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<ArtTagCategory>(StrapiContentTypes.ArtTagCategories, params);
+  useGenericRequestFindMany<ArtTagCategory_Plain>(
+    StrapiContentTypes.ArtTagCategories,
+    params
+  );
 
-export const prefetchArtTagCategories = (queryClient: QueryClient, params?: StrapiRequestParams) =>
-  prefetchQuery(queryClient, StrapiContentTypes.ArtTagCategories, params);
+export const prefetchArtTagCategories = (
+  queryClient: QueryClient,
+  params?: StrapiRequestParams
+) => prefetchQuery(queryClient, StrapiContentTypes.ArtTagCategories, params);
 
 export const useGetArtTags = (params?: StrapiRequestParams) =>
-  useGenericRequestFindMany<ArtTag>(StrapiContentTypes.ArtTags, params);
+  useGenericRequestFindMany<ArtTag_Plain>(StrapiContentTypes.ArtTags, params);
 
-export const prefetchArtTags = (queryClient: QueryClient, params?: StrapiRequestParams) =>
-  prefetchQuery(queryClient, StrapiContentTypes.ArtTags, params);
+export const prefetchArtTags = (
+  queryClient: QueryClient,
+  params?: StrapiRequestParams
+) => prefetchQuery(queryClient, StrapiContentTypes.ArtTags, params);
 
 export const useGetNews = (params?: StrapiRequestParams) =>
-  useGenericRequestFindSingle<New>(StrapiContentTypes.News, params);
+  useGenericRequestFindSingle<New_Plain>(StrapiContentTypes.News, params);
 
-export const prefetchNews = (queryClient: QueryClient, params?: StrapiRequestParams) =>
-  prefetchQuery(queryClient, StrapiContentTypes.News, params);
+export const prefetchNews = (
+  queryClient: QueryClient,
+  params?: StrapiRequestParams
+) => prefetchQuery(queryClient, StrapiContentTypes.News, params);
 
 export const sendContactForm = (body: any, params?: StrapiRequestParams) =>
-  genericRequestPost<GenericEmail>(StrapiContentTypes.ContactForm, body, params);
+  genericRequestPost<GenericEmail>(
+    StrapiContentTypes.ContactForm,
+    body,
+    params
+  );

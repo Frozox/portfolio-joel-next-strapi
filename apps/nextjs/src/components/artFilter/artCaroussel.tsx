@@ -1,17 +1,17 @@
 'use client';
 
-import Slider from '@/components/slider/slider';
-import { Button } from '@/components/ui/button';
-import { TKeenSlideProps } from '@/components/ui/keenSlider';
-import { ContentLoader } from '@/components/ui/loading';
-import { env } from '@/env.mjs';
-import { useContact } from '@/helpers/context/contact/contactContext';
-import { useKeenSlider } from '@/helpers/context/keen/keenSliderContext';
-import { useArtFilter } from '@/helpers/context/strapi/artFilterContext';
-import { getMediaFromFormat } from '@/libs/mediaFormat';
-import { cn } from '@/libs/utils';
+import Slider from '@components/slider/slider';
+import { Button } from '@components/ui/button';
+import { TKeenSlideProps } from '@components/ui/keenSlider';
+import LazyImage from '@components/ui/lazyImage';
+import { ContentLoader } from '@components/ui/loading';
+import { env } from '@env';
+import { useContact } from '@helpers/context/contact/contactContext';
+import { useKeenSlider } from '@helpers/context/keen/keenSliderContext';
+import { useArtFilter } from '@helpers/context/strapi/artFilterContext';
+import { getMediaFromFormat } from '@libs/mediaFormat';
+import { cn } from '@libs/utils';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import React from 'react';
 
 type TArtCaroussel = React.HTMLAttributes<HTMLElement> & {};
@@ -23,7 +23,7 @@ type TArtCarousselSlider = React.HTMLAttributes<HTMLElement> & {
 
 type TArtCarousselImage = {
   url: string;
-  placeholder: string;
+  thumbhash: ArrayBuffer;
   width: number;
   height: number;
 };
@@ -54,29 +54,43 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
     <div className='relative size-full'>
       {props.slides.map((image, index) => {
         return (
-          <div key={index} className={cn('size-full transition-opacity duration-300 ease-in-out', index !== activeSlide && 'opacity-0 size-0')}>
+          <div
+            key={index}
+            className={cn(
+              'size-full transition-opacity duration-300 ease-in-out',
+              index !== activeSlide && 'size-0 opacity-0'
+            )}
+          >
             <canvas
               height={image.height}
               width={image.width}
-              className="max-h-full max-w-full"
+              className='max-h-full max-w-full'
             />
-            <Image
-              src={image.url}
-              alt={props.name}
-              title={props.name}
-              width={image.width}
-              height={image.height}
-              placeholder='blur'
-              blurDataURL={image.placeholder}
-              className="absolute bottom-0"
-            />
+            <div className='absolute bottom-0'>
+              <LazyImage
+                src={image.url}
+                alt={props.name}
+                title={props.name}
+                thumbhash={image.thumbhash}
+                width={image.width}
+                height={image.height}
+              />
+            </div>
           </div>
         );
       })}
       <div className='absolute inset-x-0 bottom-2 flex justify-center gap-3'>
-        {props.slides.length > 1 && props.slides.map((image, index) => (
-          <div key={index} className={cn('size-4 rounded-full border border-black bg-white cursor-pointer transition-all duration-300 ease-in-out', index === activeSlide && 'w-8')} onClick={() => setActiveSlide(index)} />
-        ))}
+        {props.slides.length > 1 &&
+          props.slides.map((image, index) => (
+            <div
+              key={index}
+              className={cn(
+                'size-4 cursor-pointer rounded-full border border-black bg-white transition-all duration-300 ease-in-out',
+                index === activeSlide && 'w-8'
+              )}
+              onClick={() => setActiveSlide(index)}
+            />
+          ))}
       </div>
     </div>
   );
@@ -85,64 +99,60 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
 export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
   const {
     artsQuery: { response },
-    setFilters
+    setFilters,
   } = useArtFilter();
   const { sliderInstance, setSlides, slides: keenSlides } = useKeenSlider();
   const { savedArts, toggleSavedArt } = useContact();
 
-
   const selectedArtItemRef = React.useRef<HTMLDivElement>(null);
   const artItems = React.useMemo<TArtCarousselItem[]>(
-    () => 
-      response?.data.map(
-        (art): TArtCarousselItem => {
-          const formatedThumbnail = getMediaFromFormat(art.attributes.thumbnail.data, 'large');
+    () =>
+      response?.data.map((art): TArtCarousselItem => {
+        const formatedThumbnail = getMediaFromFormat(art.thumbnail, 'large');
 
-          return {
-            id: art.id,
-            name: art.attributes.name,
-            thumbnail: {
-              url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
-              // @ts-expect-error,
-              placeholder: art.attributes.thumbnail.data.attributes.placeholder,
-              width: formatedThumbnail.width,
-              height: formatedThumbnail.height,
-            },
-            images: art.attributes?.images?.data?.map(
-              (image): TArtCarousselImage => {
-                const formatedImage = getMediaFromFormat(image, 'large');
+        return {
+          id: art.id,
+          name: art.name,
+          thumbnail: {
+            url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
+            // @ts-expect-error,
+            thumbhash: art.thumbnail.thumbhash,
+            width: formatedThumbnail.width,
+            height: formatedThumbnail.height,
+          },
+          images:
+            art.images?.map((image): TArtCarousselImage => {
+              const formatedImage = getMediaFromFormat(image, 'large');
 
-                return {
-                  url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`,
-                  // @ts-expect-error,
-                  placeholder: image.attributes.placeholder,
-                  width: formatedImage.width,
-                  height: formatedImage.height,
-                };
-              },
-            ) ?? [],
-            art_tags: art.attributes?.art_tags?.data.map(
-              (tag): TArtCarousselItemTag => ({
-                id: tag.id,
-                tag: tag.attributes.tag,
-              }),
-            ),
-            height: art.attributes.height,
-            width: art.attributes.width,
-            depth: art.attributes.depth,
-            description: art.attributes.description,
-            date: art.attributes.date as string | undefined,
-            sold_out: art.attributes.sold_out,
-          };
-        },
-      ) ?? [],
-    [response?.data],
+              return {
+                url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`,
+                // @ts-expect-error,
+                thumbhash: image.thumbhash,
+                width: formatedImage.width,
+                height: formatedImage.height,
+              };
+            }) ?? [],
+          art_tags: art.art_tags?.map(
+            (tag): TArtCarousselItemTag => ({
+              id: tag.id,
+              tag: tag.tag,
+            })
+          ),
+          height: art.height,
+          width: art.width,
+          depth: art.depth,
+          description: art.description,
+          date: art.date as string | undefined,
+          sold_out: art.sold_out,
+        };
+      }) ?? [],
+    [response?.data]
   );
 
   const slides = React.useMemo<TKeenSlideProps[]>(() => {
     const setArtTagFilter = (artTagId: number) => {
       const artTagFilter: Record<string, unknown> = {
-        art_tags: { id: artTagId }
+        art_tags: { id: artTagId },
       };
 
       setFilters(artTagFilter);
@@ -152,56 +162,81 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
       (item): TKeenSlideProps => ({
         children: (
           <div
-            className="flex size-full flex-col justify-center px-2 lg:flex-row lg:px-4"
+            className='flex size-full flex-col justify-center px-2 lg:flex-row lg:px-4'
             key={item.id}
           >
-            <div className="self-center lg:self-auto">
-              <ArtCarousselSlider name={item.name} slides={[item.thumbnail, ...item.images]}/>
+            <div className='self-center lg:self-auto'>
+              <ArtCarousselSlider
+                name={item.name}
+                slides={[item.thumbnail, ...item.images]}
+              />
             </div>
-            <div className="mt-6 flex justify-center lg:relative lg:mx-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end">
+            <div className='mt-6 flex justify-center lg:relative lg:mx-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end'>
               <div>
-                <h2 className="mb-4 text-xl font-medium md:text-2xl">{item.name}</h2>
+                <h2 className='mb-4 text-xl font-medium md:text-2xl'>
+                  {item.name}
+                </h2>
                 <div>
-                  { item.description && <p className="mb-4 text-justify text-foreground">{item.description}</p> }
-                  {!!item.art_tags?.length && <div className='mb-4'>
-                    {item.art_tags.map((tag) => (
-                      <span className="mr-2 inline-block cursor-pointer truncate text-foreground underline decoration-2 underline-offset-4 hover:underline-offset-2" key={tag.id} onClick={() => setArtTagFilter(tag.id)}>
-                        {tag.tag}
-                      </span>
-                    ))}
-                  </div>}
+                  {item.description && (
+                    <p className='mb-4 text-justify text-foreground'>
+                      {item.description}
+                    </p>
+                  )}
+                  {!!item.art_tags?.length && (
+                    <div className='mb-4'>
+                      {item.art_tags.map((tag) => (
+                        <span
+                          className='mr-2 inline-block cursor-pointer truncate text-foreground underline decoration-2 underline-offset-4 hover:underline-offset-2'
+                          key={tag.id}
+                          onClick={() => setArtTagFilter(tag.id)}
+                        >
+                          {tag.tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <div className='flex flex-col space-y-4 lg:flex-row lg:justify-between lg:space-y-0'>
                     <p>
                       {item.depth
                         ? `${item.height} x ${item.width} x ${item.depth} cm`
                         : `${item.height} x ${item.width} cm`}
                     </p>
-                    { item.date && <p>{item.date}</p>}
+                    {item.date && <p>{item.date}</p>}
                   </div>
-                  <div className={cn(item?.sold_out ? 'cursor-not-allowed' : 'cursor-pointer')}>
+                  <div
+                    className={cn(
+                      item?.sold_out ? 'cursor-not-allowed' : 'cursor-pointer'
+                    )}
+                  >
                     <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => toggleSavedArt({
-                        id: item.id,
-                        name: item.name,
-                        thumbnail: item.thumbnail,
-                      })}
+                      type='button'
+                      variant='outline'
+                      onClick={() =>
+                        toggleSavedArt({
+                          id: item.id,
+                          name: item.name,
+                          thumbnail: item.thumbnail,
+                        })
+                      }
                       disabled={item?.sold_out ?? false}
-                      className="mt-4 w-fit border-foreground bg-transparent p-6 text-xl text-foreground hover:bg-foreground hover:text-background md:min-w-60 md:text-2xl"
+                      className='mt-4 w-fit border-foreground bg-transparent p-6 text-xl text-foreground hover:bg-foreground hover:text-background md:min-w-60 md:text-2xl'
                     >
-                      {item?.sold_out ? 'Indisponible' : (
-                        savedArts.find((savedArt) => savedArt.id === item.id) ? 'Enregistré 💾' :  'Enregistrer'
-                      )}
+                      {item?.sold_out
+                        ? 'Indisponible'
+                        : savedArts.find((savedArt) => savedArt.id === item.id)
+                          ? 'Enregistré 💾'
+                          : 'Enregistrer'}
                     </Button>
                   </div>
-                  <p className='mt-4 text-sm text-foreground'>les œuvres enregistrés se retrouvent dans la page de contact</p>
+                  <p className='mt-4 text-sm text-foreground'>
+                    les œuvres enregistrés se retrouvent dans la page de contact
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         ),
-      }),
+      })
     );
   }, [artItems, savedArts, setFilters, toggleSavedArt]);
 
@@ -211,7 +246,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
 
   const selectArtItem = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
-    artItem: TArtCarousselItem,
+    artItem: TArtCarousselItem
   ) => {
     if (window.scrollY === 0) {
       sliderInstance.current?.moveToIdx(artItems.indexOf(artItem));
@@ -231,40 +266,41 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
         sliderInstance.current?.moveToIdx(artItems.indexOf(artItem));
         scrollController.abort();
       },
-      { signal: scrollController.signal },
+      { signal: scrollController.signal }
     );
   };
 
   return (
     <div>
-      <ContentLoader isLoading={!keenSlides.length && !!slides.length} isError={false} className='flex h-[30vh] py-2 lg:h-[calc(100vh-15rem)]'>
+      <ContentLoader
+        isLoading={!keenSlides.length && !!slides.length}
+        isError={false}
+        className='flex h-[30vh] py-2 lg:h-[calc(100vh-15rem)]'
+      >
         <motion.div
-          className="flex py-2 lg:h-[calc(100vh-15rem)]"
+          className='flex py-2 lg:h-[calc(100vh-15rem)]'
           ref={selectedArtItemRef}
         >
-          <Slider
-            className="relative"
-          />
+          <Slider className='relative' />
         </motion.div>
       </ContentLoader>
-      <div className="md:container">
-        <div className="columns-2 justify-center gap-4 space-y-4 p-2 lg:columns-3 lg:p-8">
+      <div className='md:container'>
+        <div className='columns-2 justify-center gap-4 space-y-4 p-2 lg:columns-3 lg:p-8'>
           {artItems.map((artItem) => (
             <motion.div
               key={artItem.id}
-              className="h-min w-full"
+              className='h-min w-full'
               whileHover={{ scale: 0.98 }}
               onClick={(e) => selectArtItem(e, artItem)}
             >
-              <Image
+              <LazyImage
                 src={artItem.thumbnail.url}
-                blurDataURL={artItem.thumbnail.placeholder}
-                placeholder={artItem.thumbnail.placeholder ? 'blur' : 'empty'}
                 alt={artItem.name}
                 title={artItem.name}
+                thumbhash={artItem.thumbnail.thumbhash}
                 width={artItem.thumbnail.width}
                 height={artItem.thumbnail.height}
-                className="cursor-pointer object-contain"
+                className='cursor-pointer object-contain'
               />
             </motion.div>
           ))}

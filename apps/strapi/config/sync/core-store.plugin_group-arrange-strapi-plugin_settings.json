@@ -1,0 +1,9 @@
+{
+  "key": "plugin_group-arrange-strapi-plugin_settings",
+  "value": {
+    "alwaysShowFieldTypeInList": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

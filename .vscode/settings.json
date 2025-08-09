@@ -13,5 +13,6 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
-  "eslint.workingDirectories": ["apps/nextjs", "apps/strapi"]
+  "eslint.workingDirectories": ["apps/nextjs", "apps/strapi"],
+  "css.customData": [".vscode/tailwind.json"]
 }

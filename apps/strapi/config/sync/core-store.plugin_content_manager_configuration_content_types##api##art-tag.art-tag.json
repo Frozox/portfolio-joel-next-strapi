@@ -58,7 +58,7 @@
           "mainField": "name"
         },
         "list": {
-          "label": "art_tag_category",
+          "label": "Catégorie",
           "searchable": true,
           "sortable": true
         }
@@ -120,9 +120,23 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
+      "list": [
+        "tag",
+        "arts",
+        "art_tag_category",
+        "documentId"
+      ],
       "edit": [
         [
           {
@@ -134,11 +148,6 @@
             "size": 6
           }
         ]
-      ],
-      "list": [
-        "tag",
-        "art_tag_category",
-        "arts"
       ]
     },
     "uid": "api::art-tag.art-tag"

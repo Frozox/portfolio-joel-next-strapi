@@ -3,7 +3,7 @@
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import * as React from 'react';
 
-import { cn } from '@/libs/utils';
+import { cn } from '@libs/utils';
 
 const TooltipProvider = TooltipPrimitive.Provider;
 
@@ -11,11 +11,7 @@ const Tooltip = ({ ...props }: TooltipPrimitive.TooltipProps) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <TooltipPrimitive.Root
-      open={open}
-      onOpenChange={setOpen}
-      {...props}
-    >
+    <TooltipPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
       <div onClick={() => setOpen(true)}>{props.children}</div>
     </TooltipPrimitive.Root>
   );
@@ -40,4 +36,3 @@ const TooltipContent = React.forwardRef<
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };
-

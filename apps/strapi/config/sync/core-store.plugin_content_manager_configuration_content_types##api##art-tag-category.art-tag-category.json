@@ -33,6 +33,20 @@
           "sortable": true
         }
       },
+      "display_name": {
+        "edit": {
+          "label": "Nom d'affichage",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Nom d'affichage",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "art_tags": {
         "edit": {
           "label": "Tags",
@@ -46,20 +60,6 @@
           "label": "Tags",
           "searchable": false,
           "sortable": false
-        }
-      },
-      "display_name": {
-        "edit": {
-          "label": "Nom d'affichage",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Nom d'affichage",
-          "searchable": true,
-          "sortable": true
         }
       },
       "art_categories": {
@@ -134,6 +134,14 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
@@ -150,11 +158,11 @@
         ],
         [
           {
-            "name": "art_tags",
+            "name": "art_categories",
             "size": 6
           },
           {
-            "name": "art_categories",
+            "name": "art_tags",
             "size": 6
           }
         ]
@@ -162,8 +170,8 @@
       "list": [
         "name",
         "display_name",
-        "art_categories",
-        "art_tags"
+        "art_tags",
+        "art_categories"
       ]
     },
     "uid": "api::art-tag-category.art-tag-category"

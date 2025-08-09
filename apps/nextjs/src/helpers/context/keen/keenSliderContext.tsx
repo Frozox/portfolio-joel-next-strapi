@@ -1,6 +1,6 @@
 'use client';
 
-import { TKeenSlideProps } from '@/components/ui/keenSlider';
+import { TKeenSlideProps } from '@components/ui/keenSlider';
 import {
   KeenSliderHooks,
   KeenSliderInstance,
@@ -15,7 +15,7 @@ type TKeenSliderContext = {
     {},
     {},
     KeenSliderHooks
-    > | null>;
+  > | null>;
   slides: TKeenSlideProps[];
   options: KeenSliderOptions;
   plugins: KeenSliderPlugin[];

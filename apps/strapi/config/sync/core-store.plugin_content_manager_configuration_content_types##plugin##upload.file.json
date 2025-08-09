@@ -244,18 +244,18 @@
           "sortable": true
         }
       },
-      "placeholder": {
+      "thumbhash": {
         "edit": {
-          "label": "placeholder",
+          "label": "thumbhash",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "placeholder",
-          "searchable": true,
-          "sortable": true
+          "label": "thumbhash",
+          "searchable": false,
+          "sortable": false
         }
       },
       "createdAt": {
@@ -312,6 +312,14 @@
         },
         "list": {
           "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
           "searchable": true,
           "sortable": true
         }
@@ -411,8 +419,8 @@
         ],
         [
           {
-            "name": "placeholder",
-            "size": 6
+            "name": "thumbhash",
+            "size": 12
           }
         ]
       ]

@@ -2,11 +2,11 @@
  * email service
  */
 
-import { ContactEmailPopulated } from "../../../../types/email/email";
+import { ContactEmailPopulated } from "@interfaces/common/email";
 
 export default () => ({
   async sendContactEmail(body: ContactEmailPopulated) {
-    return await strapi.plugin("email-designer").services.email.sendTemplatedEmail(
+    return await strapi.plugin("email-designer-5").services.email.sendTemplatedEmail(
       {
         to: process.env.EMAIL_ADDRESS_FROM,
       },
@@ -18,7 +18,7 @@ export default () => ({
   },
 
   async sendContactEmailConfirmation(body: ContactEmailPopulated) {
-    return await strapi.plugin("email-designer").services.email.sendTemplatedEmail(
+    return await strapi.plugin("email-designer-5").services.email.sendTemplatedEmail(
       {
         to: body.email,
       },

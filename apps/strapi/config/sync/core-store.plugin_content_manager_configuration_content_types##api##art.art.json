@@ -232,9 +232,23 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
+      "list": [
+        "name",
+        "thumbnail",
+        "art_category",
+        "date"
+      ],
       "edit": [
         [
           {
@@ -290,12 +304,6 @@
             "size": 4
           }
         ]
-      ],
-      "list": [
-        "name",
-        "thumbnail",
-        "art_category",
-        "date"
       ]
     },
     "uid": "api::art.art"

@@ -1,15 +1,15 @@
 'use client';
 
-import { type ArtCategory } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
+import { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
 import React from 'react';
 import { StrapiError } from 'strapi-sdk-js';
 
 type TArtCategoryContext = {
-  artCategories: ArtCategory[],
-  error: StrapiError | null
-  isError: boolean,
-  isLoading: boolean
-}
+  artCategories: ArtCategory_Plain[];
+  error: StrapiError | null;
+  isError: boolean;
+  isLoading: boolean;
+};
 
 const ArtCategoryContext = React.createContext<TArtCategoryContext>({
   artCategories: [],

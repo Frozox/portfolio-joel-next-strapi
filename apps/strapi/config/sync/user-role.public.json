@@ -2,57 +2,93 @@
   "name": "Public",
   "description": "Default role given to unauthenticated user.",
   "type": "public",
+  "documentId": "es12xt8wu2xqfpydcegaqa51",
+  "locale": null,
   "permissions": [
     {
-      "action": "api::art-category.art-category.find"
+      "action": "api::art-category.art-category.find",
+      "documentId": "t17lcn9f6vecos8ono1qwap7",
+      "locale": null
     },
     {
-      "action": "api::art-category.art-category.findOne"
+      "action": "api::art-category.art-category.findOne",
+      "documentId": "ovjq9xnbv2qc3z7yg4oi05o3",
+      "locale": null
     },
     {
-      "action": "api::art-tag-category.art-tag-category.find"
+      "action": "api::art-tag-category.art-tag-category.find",
+      "documentId": "p6xz3d0gix7vpwhjuvpk9e2a",
+      "locale": null
     },
     {
-      "action": "api::art-tag-category.art-tag-category.findOne"
+      "action": "api::art-tag-category.art-tag-category.findOne",
+      "documentId": "mm3nojy4vrpiqhzj00dh0klf",
+      "locale": null
     },
     {
-      "action": "api::art-tag.art-tag.find"
+      "action": "api::art-tag.art-tag.find",
+      "documentId": "y691m4qak4of9wxrnxfph964",
+      "locale": null
     },
     {
-      "action": "api::art-tag.art-tag.findOne"
+      "action": "api::art-tag.art-tag.findOne",
+      "documentId": "bdtjl3drsdaazhbhvjjlbavq",
+      "locale": null
     },
     {
-      "action": "api::art.art.find"
+      "action": "api::art.art.find",
+      "documentId": "h9jb92e1x2tfbnj06u7amvkd",
+      "locale": null
     },
     {
-      "action": "api::art.art.findOne"
+      "action": "api::art.art.findOne",
+      "documentId": "o4hai07qttdy6ukihsnlimmp",
+      "locale": null
     },
     {
-      "action": "api::email.email.sendContactForm"
+      "action": "api::email.email.sendContactForm",
+      "documentId": "xpg9nq4iqxf9bnj5xun6l7az",
+      "locale": null
     },
     {
-      "action": "api::new.new.find"
+      "action": "api::new.new.find",
+      "documentId": "hez6z198sppbwu3mg6bozlwj",
+      "locale": null
     },
     {
-      "action": "plugin::i18n.locales.listLocales"
+      "action": "plugin::i18n.locales.listLocales",
+      "documentId": "qjrgdajiu22ugh8wd5rf03h6",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.callback"
+      "action": "plugin::users-permissions.auth.callback",
+      "documentId": "u8lqbxsxk47rbuuugf66pb03",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.connect"
+      "action": "plugin::users-permissions.auth.connect",
+      "documentId": "qza2w3s0rww458fcaz5ricfk",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.emailConfirmation"
+      "action": "plugin::users-permissions.auth.emailConfirmation",
+      "documentId": "ptmzoeo8id8jz5dg78qg2adq",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.forgotPassword"
+      "action": "plugin::users-permissions.auth.forgotPassword",
+      "documentId": "arb9mnersfi4julcrg3v0sll",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.resetPassword"
+      "action": "plugin::users-permissions.auth.resetPassword",
+      "documentId": "uxt3ftixgafab9bme35u8n1m",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.sendEmailConfirmation"
+      "action": "plugin::users-permissions.auth.sendEmailConfirmation",
+      "documentId": "z1v10ulvsc7dlhx92g9y8fvi",
+      "locale": null
     }
   ]
 }

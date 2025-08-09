@@ -1,11 +1,15 @@
 export default ({ env }) => ({
-  placeholder: {
+  'strapi-thumbhash': {
     enabled: true,
     config: {
-      size: 10,
-    },
+      // Set recreateOnBootStrap to true if you'd like to generate all hashes
+      // on bootstrap. Depending on the amount of files, it may take some time.
+      // It won't recreate hashes if they already exist.
+      recreateOnBootStrap: false,
+      regenerateOnUpdate: true
+    }
   },
-  "schemas-to-ts": {
+  'schemas-to-ts': {
     enabled: true,
     config: {
       acceptedNodeEnvs: ["development"],
@@ -30,7 +34,7 @@ export default ({ env }) => ({
       },
     }
   },
-  'email-designer': {
+  'email-designer-5': {
     enabled: true,
     config: {
       editor: {

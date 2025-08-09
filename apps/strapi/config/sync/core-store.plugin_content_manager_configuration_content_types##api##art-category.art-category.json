@@ -7,7 +7,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "name",
-      "defaultSortBy": "order",
+      "defaultSortBy": "name",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -76,21 +76,6 @@
           "sortable": true
         }
       },
-      "art_tag_categories": {
-        "edit": {
-          "label": "Tags",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "name"
-        },
-        "list": {
-          "label": "art_tag_categories",
-          "searchable": false,
-          "sortable": false
-        }
-      },
       "metaDescription": {
         "edit": {
           "label": "Meta Description SEO",
@@ -133,18 +118,19 @@
           "sortable": true
         }
       },
-      "order": {
+      "art_tag_categories": {
         "edit": {
-          "label": "Ordre d'affichage",
+          "label": "Tags",
           "description": "",
           "placeholder": "",
           "visible": true,
-          "editable": true
+          "editable": true,
+          "mainField": "name"
         },
         "list": {
-          "label": "Ordre d'affichage",
-          "searchable": true,
-          "sortable": true
+          "label": "Tags",
+          "searchable": false,
+          "sortable": false
         }
       },
       "createdAt": {
@@ -204,6 +190,14 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
@@ -224,21 +218,17 @@
             "size": 4
           },
           {
-            "name": "order",
+            "name": "slug",
             "size": 4
           },
           {
-            "name": "slug",
+            "name": "art_tag_categories",
             "size": 4
           }
         ],
         [
           {
             "name": "image",
-            "size": 6
-          },
-          {
-            "name": "art_tag_categories",
             "size": 6
           }
         ],
@@ -254,10 +244,10 @@
         ]
       ],
       "list": [
-        "order",
         "name",
         "image",
-        "arts"
+        "arts",
+        "art_tag_categories"
       ]
     },
     "uid": "api::art-category.art-category"

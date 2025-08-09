@@ -15,11 +15,10 @@ export interface ArtCategory {
     arts: { data: Art[] };
     image: { data: Media };
     slug: string;
-    art_tag_categories?: { data: ArtTagCategory[] };
     metaDescription?: string;
     metaKeywords?: string;
     title: string;
-    order: number;
+    art_tag_categories?: { data: ArtTagCategory[] };
     locale: string;
     localizations?: { data: ArtCategory[] };
   };
@@ -30,11 +29,10 @@ export interface ArtCategory_Plain {
   arts: Art_Plain[];
   image: Media_Plain;
   slug: string;
-  art_tag_categories?: ArtTagCategory_Plain[];
   metaDescription?: string;
   metaKeywords?: string;
   title: string;
-  order: number;
+  art_tag_categories?: ArtTagCategory_Plain[];
   locale: string;
   localizations?: ArtCategory_Plain[];
 }
@@ -45,11 +43,10 @@ export interface ArtCategory_NoRelations {
   arts: number[];
   image: number;
   slug: string;
-  art_tag_categories?: number[];
   metaDescription?: string;
   metaKeywords?: string;
   title: string;
-  order: number;
+  art_tag_categories?: number[];
   locale: string;
   localizations?: ArtCategory[];
 }
@@ -60,11 +57,10 @@ export interface ArtCategory_AdminPanelLifeCycle {
   arts: AdminPanelRelationPropertyModification<Art_Plain>;
   image: AdminPanelRelationPropertyModification<Media_Plain>;
   slug: string;
-  art_tag_categories?: AdminPanelRelationPropertyModification<ArtTagCategory_Plain>;
   metaDescription?: string;
   metaKeywords?: string;
   title: string;
-  order: number;
+  art_tag_categories?: AdminPanelRelationPropertyModification<ArtTagCategory_Plain>;
   locale: string;
   localizations?: ArtCategory[];
 }

@@ -8,7 +8,7 @@ module.exports = {
     'next/core-web-vitals',
     'prettier',
     'plugin:tailwindcss/recommended',
-    'plugin:@tanstack/eslint-plugin-query/recommended'
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   rules: {
     quotes: ['error', 'single'],
@@ -19,7 +19,7 @@ module.exports = {
     'tailwindcss/no-contradicting-classname': 'error',
     '@tanstack/query/exhaustive-deps': 'error',
     '@tanstack/query/no-rest-destructuring': 'warn',
-    '@tanstack/query/stable-query-client': 'error'
+    '@tanstack/query/stable-query-client': 'error',
   },
   overrides: [
     {

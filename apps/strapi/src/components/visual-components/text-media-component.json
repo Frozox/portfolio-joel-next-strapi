@@ -20,29 +20,29 @@
     },
     "media_position": {
       "type": "enumeration",
+      "required": true,
+      "default": "left",
       "enum": [
         "left",
         "right"
-      ],
-      "required": true,
-      "default": "left"
+      ]
     },
     "media_mobile_position": {
       "type": "enumeration",
+      "required": true,
+      "default": "top",
       "enum": [
         "top",
         "bottom"
-      ],
-      "default": "top",
-      "required": true
+      ]
     },
     "content": {
       "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "output": "HTML",
-        "preset": "rich"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
+        "preset": "defaultHtml"
+      }
     },
     "title": {
       "type": "string"
