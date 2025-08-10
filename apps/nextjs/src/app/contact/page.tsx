@@ -51,7 +51,7 @@ const Contact = () => {
   React.useEffect(() => {
     form.setValue(
       'arts',
-      savedArts.map((art) => art.id)
+      savedArts.map((art) => art.documentId)
     );
   }, [savedArts, form]);
 
@@ -180,11 +180,13 @@ const Contact = () => {
               <FormControl>
                 <div className='flex flex-wrap gap-4'>
                   {(field.value?.length &&
-                    field.value?.map((id) => {
-                      const currentArt = savedArts.find((art) => art.id === id);
+                    field.value?.map((documentId) => {
+                      const currentArt = savedArts.find(
+                        (art) => art.documentId === documentId
+                      );
                       if (!currentArt) return;
                       return (
-                        <div key={id} className='relative'>
+                        <div key={documentId} className='relative'>
                           <div>
                             <LazyImage
                               src={currentArt.thumbnail.url}

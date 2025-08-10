@@ -114,6 +114,14 @@
       },
       "required": true,
       "default": false
+    },
+    "sortOrder": {
+      "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

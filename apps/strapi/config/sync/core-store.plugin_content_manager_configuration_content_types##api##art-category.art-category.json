@@ -7,7 +7,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "name",
-      "defaultSortBy": "name",
+      "defaultSortBy": "sortOrder",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -43,7 +43,7 @@
           "mainField": "name"
         },
         "list": {
-          "label": "oeuvres",
+          "label": "Oeuvres",
           "searchable": false,
           "sortable": false
         }
@@ -131,6 +131,20 @@
           "label": "Tags",
           "searchable": false,
           "sortable": false
+        }
+      },
+      "sortOrder": {
+        "edit": {
+          "label": "sortOrder",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Ordre d'affichage",
+          "searchable": true,
+          "sortable": true
         }
       },
       "createdAt": {
@@ -247,7 +261,8 @@
         "name",
         "image",
         "arts",
-        "art_tag_categories"
+        "art_tag_categories",
+        "sortOrder"
       ]
     },
     "uid": "api::art-category.art-category"

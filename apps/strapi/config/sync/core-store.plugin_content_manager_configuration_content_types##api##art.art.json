@@ -7,7 +7,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "name",
-      "defaultSortBy": "name",
+      "defaultSortBy": "sortOrder",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -175,6 +175,20 @@
           "sortable": true
         }
       },
+      "sortOrder": {
+        "edit": {
+          "label": "sortOrder",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Ordre d'affichage",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -243,12 +257,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "name",
-        "thumbnail",
-        "art_category",
-        "date"
-      ],
       "edit": [
         [
           {
@@ -304,6 +312,13 @@
             "size": 4
           }
         ]
+      ],
+      "list": [
+        "name",
+        "thumbnail",
+        "art_category",
+        "date",
+        "sortOrder"
       ]
     },
     "uid": "api::art.art"

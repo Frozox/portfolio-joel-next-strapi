@@ -25,7 +25,7 @@ const StrapiMediaComponent = (component: TStrapiMediaComponent) => {
         title={component.media.name}
         width={formatedMedia.width}
         height={formatedMedia.height}
-        // @ts-expect-error,
+        // @ts-expect-error
         thumbhash={component.media.thumbhash}
       />
     </div>

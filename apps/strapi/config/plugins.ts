@@ -1,4 +1,10 @@
+
+import type { EmailConfig } from "strapi-plugin-email-designer-5/dist/server/src";
+
 export default ({ env }) => ({
+  'sortable-entries': {
+    enabled: true,
+  },
   'strapi-thumbhash': {
     enabled: true,
     config: {
@@ -37,28 +43,24 @@ export default ({ env }) => ({
   'email-designer-5': {
     enabled: true,
     config: {
-      editor: {
-        options: {
-          mergeTags: [
-            {
-              name: 'Email',
-              value: '{{ email }}',
-            },
-            {
-              name: 'Fullname',
-              value: '{{ fullname }}',
-            },
-            {
-              name: 'Message',
-              value: '{{ message }}',
-            },
-            {
-              name: 'Arts',
-              value: '{{ arts }}',
-            }
-          ],
+      mergeTags: {
+        email: {
+          name: 'Email',
+          value: '{{ email }}',
         },
-      },
-    },
+        fullname: {
+          name: 'Fullname',
+          value: '{{ fullname }}',
+        },
+        message: {
+          name: 'Message',
+          value: '{{ message }}',
+        },
+        arts: {
+          name: 'Arts',
+          value: '{{ arts }}',
+        }
+      }
+    } as EmailConfig,
   }
 });

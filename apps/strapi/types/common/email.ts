@@ -8,7 +8,7 @@ export interface GenericEmail {
 }
 
 export interface ContactEmail extends GenericEmail {
-    arts: number[];
+    arts: string[];
 }
 
 export interface ContactEmailPopulated extends GenericEmail {

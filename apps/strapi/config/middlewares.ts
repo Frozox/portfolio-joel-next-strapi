@@ -31,6 +31,7 @@ export default [
             "editor.unlayer.com/embed.js",
           ],
           "frame-src": ["'self'", "editor.unlayer.com"],
+          upgradeInsecureRequests: null,
         },
       },
     },

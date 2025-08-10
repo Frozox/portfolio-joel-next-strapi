@@ -37,6 +37,7 @@
     "strapi-plugin-config-sync": "3.1.2",
     "strapi-plugin-email-designer-5": "0.0.7",
     "strapi-plugin-schemas-to-ts": "1.3.2",
+    "strapi-plugin-sortable-entries": "^1.1.0",
     "strapi-thumbhash-v5": "2.0.1",
     "styled-components": "6.1.19"
   },

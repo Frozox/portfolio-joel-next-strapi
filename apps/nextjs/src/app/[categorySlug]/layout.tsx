@@ -59,6 +59,7 @@ const CategoryLayout = async ({ children, params }: Readonly<TLayoutProps>) => {
   await prefetchArts(queryClient, {
     filters: { art_category: { slug: categorySlug } },
     pagination: defaultPaginationFilter,
+    sort: 'sortOrder',
     populate: '*',
   });
   await prefetchArts(queryClient, {
@@ -67,6 +68,7 @@ const CategoryLayout = async ({ children, params }: Readonly<TLayoutProps>) => {
       art_category: { slug: categorySlug },
     },
     pagination: defaultPaginationFilter,
+    sort: 'sortOrder',
     populate: '*',
   });
   const currentArtCategory = await getCurrentArtCategory(categorySlug);

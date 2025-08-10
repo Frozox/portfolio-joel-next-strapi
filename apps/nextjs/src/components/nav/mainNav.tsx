@@ -26,6 +26,7 @@ const MainNav = ({ className }: MainNavProps) => {
   const { savedArts } = useContact();
   const currentPath = usePathname();
 
+  const mobileDropDownButtonRef = useRef<HTMLButtonElement>(null);
   const mobileDropDownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = useCallback(() => {
@@ -34,10 +35,8 @@ const MainNav = ({ className }: MainNavProps) => {
 
   useEffect(() => {
     const handleOutSideClick = (e: MouseEvent) => {
-      if (!dropdownOpened) return;
-      if (!mobileDropDownRef.current?.contains(e.target as Node)) {
-        toggleDropdown();
-      }
+      if (!dropdownOpened || mobileDropDownButtonRef.current == e.target) return;
+      if (!mobileDropDownRef.current?.contains(e.target as Node)) toggleDropdown();
     };
 
     window.addEventListener('mousedown', handleOutSideClick);
@@ -62,13 +61,14 @@ const MainNav = ({ className }: MainNavProps) => {
           </span>
         </Link>
         <Button
+          ref={mobileDropDownButtonRef}
           onClick={toggleDropdown}
           type='button'
           variant='ghost'
           className='relative inline-flex size-10 items-center justify-center rounded-lg p-1 text-sm text-black focus:outline-none focus:ring-2 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-200 md:hidden'
         >
           <span className='sr-only'>Ouvrir le menu</span>
-          <AlignJustifyIcon className='size-full' />
+          <AlignJustifyIcon className='pointer-events-none size-full' />
           {savedArts.length > 0 && !dropdownOpened && (
             <span className='absolute -right-3 -top-3 flex size-5 items-center justify-center rounded-full bg-red-600 p-2 text-sm text-white'>
               {savedArts.length}

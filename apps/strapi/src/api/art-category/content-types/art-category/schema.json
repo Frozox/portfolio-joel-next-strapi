@@ -86,6 +86,14 @@
       "relation": "manyToMany",
       "target": "api::art-tag-category.art-tag-category",
       "inversedBy": "art_categories"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

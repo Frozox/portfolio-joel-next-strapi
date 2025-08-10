@@ -236,6 +236,9 @@ importers:
       strapi-plugin-schemas-to-ts:
         specifier: 1.3.2
         version: 1.3.2(@strapi/design-system@2.0.0-rc.29)(@strapi/icons@2.0.0-rc.29)(@types/react@18.3.1)(react-dom@18.3.1)(react-router-dom@6.30.1)(react@18.3.1)(styled-components@6.1.19)(typescript@5.9.2)
+      strapi-plugin-sortable-entries:
+        specifier: ^1.1.0
+        version: 1.1.0(@babel/runtime@7.27.6)(@codemirror/autocomplete@6.18.6)(@codemirror/language@6.11.2)(@codemirror/lint@6.8.5)(@codemirror/search@6.5.11)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.1)(@strapi/sdk-plugin@5.3.2)(@strapi/strapi@5.20.0)(@types/react-dom@18.3.1)(@types/react@18.3.1)(codemirror@6.0.2)(react-dom@18.3.1)(react-router-dom@6.30.1)(react@18.3.1)(styled-components@6.1.19)(typescript@5.9.2)
       strapi-thumbhash-v5:
         specifier: 2.0.1
         version: 2.0.1(@strapi/strapi@5.20.0)
@@ -2646,6 +2649,15 @@ packages:
       tslib: 2.8.1
     dev: false
 
+  /@formatjs/ecma402-abstract@2.3.4:
+    resolution: {integrity: sha512-qrycXDeaORzIqNhBOx0btnhpD1c+/qFIHAN9znofuMJX6QBwtbrmlpWfD4oiUUD2vJUOIYFA/gYtg2KAMGG7sA==}
+    dependencies:
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/intl-localematcher': 0.6.1
+      decimal.js: 10.6.0
+      tslib: 2.8.1
+    dev: false
+
   /@formatjs/fast-memoize@2.0.1:
     resolution: {integrity: sha512-M2GgV+qJn5WJQAYewz7q2Cdl6fobQa69S1AzSM2y0P68ZDbK5cWrJIcPCO395Of1ksftGZoOt4LYCO/j9BKBSA==}
     dependencies:
@@ -2661,6 +2673,20 @@ packages:
   /@formatjs/fast-memoize@2.2.3:
     resolution: {integrity: sha512-3jeJ+HyOfu8osl3GNSL4vVHUuWFXR03Iz9jjgI7RwjG6ysu/Ymdr0JRCPHfF5yGbTE6JCrd63EpvX1/WybYRbA==}
     dependencies:
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/fast-memoize@2.2.7:
+    resolution: {integrity: sha512-Yabmi9nSvyOMrlSeGGWDiH7rf3a7sIwplbvo/dlz9WCIjzIQAfy1RMf4S0X3yG724n5Ghu2GmEl5NJIV6O9sZQ==}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/icu-messageformat-parser@2.11.2:
+    resolution: {integrity: sha512-AfiMi5NOSo2TQImsYAg8UYddsNJ/vUEv/HaNqiFjnI3ZFfWihUtD5QtuX6kHl8+H+d3qvnE/3HZrfzgdWpsLNA==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/icu-skeleton-parser': 1.8.14
       tslib: 2.8.1
     dev: false
 
@@ -2699,6 +2725,13 @@ packages:
     resolution: {integrity: sha512-QWLAYvM0n8hv7Nq5BEs4LKIjevpVpbGLAJgOaYzg9wABEoX1j0JO1q2/jVkO6CVlq0dbsxZCngS5aXbysYueqA==}
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.2
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/icu-skeleton-parser@1.8.14:
+    resolution: {integrity: sha512-i4q4V4qslThK4Ig8SxyD76cp3+QJ3sAqr7f6q9VVfeGtxG9OhiAk3y9XF6Q41OymsKzsGQ6OQQoJNY4/lI8TcQ==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
       tslib: 2.8.1
     dev: false
 
@@ -2775,6 +2808,12 @@ packages:
       tslib: 2.8.1
     dev: false
 
+  /@formatjs/intl-localematcher@0.6.1:
+    resolution: {integrity: sha512-ePEgLgVCqi2BBFnTMWPfIghu6FkbZnnBVhO2sSxvLfrdFw7wCHAHiDoM2h4NRgjbaY7+B7HgOLZGkK187pZTZg==}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
+
   /@formatjs/intl@2.10.0(typescript@5.4.4):
     resolution: {integrity: sha512-X3xT9guVkKDS86EKV80lS0KxoazUglkJTGZO66sKY7otgl0VeStPA8B3u8UkKT47PexVV98fUzjpkchYmbe9nw==}
     peerDependencies:
@@ -2843,6 +2882,22 @@ packages:
       '@formatjs/intl-displaynames': 6.3.1
       '@formatjs/intl-listformat': 7.2.1
       intl-messageformat: 10.3.4
+      tslib: 2.8.1
+      typescript: 5.9.2
+    dev: false
+
+  /@formatjs/intl@3.1.6(typescript@5.9.2):
+    resolution: {integrity: sha512-tDkXnA4qpIFcDWac8CyVJq6oW8DR7W44QDUBsfXWIIJD/FYYen0QoH46W7XsVMFfPOVKkvbufjboZrrWbEfmww==}
+    peerDependencies:
+      typescript: ^5.6.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/icu-messageformat-parser': 2.11.2
+      intl-messageformat: 10.7.16
       tslib: 2.8.1
       typescript: 5.9.2
     dev: false
@@ -9633,6 +9688,10 @@ packages:
       ms: 2.1.3
       supports-color: 5.5.0
 
+  /decimal.js@10.6.0:
+    resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
+    dev: false
+
   /decode-html@2.0.0:
     resolution: {integrity: sha512-lVJ+EBozhAXA2nSQG+xAgcD0P5K3uejnIIvM09uoQfS8AALkQ+HhHcEUvKovXi0EIpIZWjm0y8X7ULjaJpgY9w==}
     dev: false
@@ -12093,6 +12152,15 @@ packages:
       '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/fast-memoize': 2.2.0
       '@formatjs/icu-messageformat-parser': 2.7.6
+      tslib: 2.8.1
+    dev: false
+
+  /intl-messageformat@10.7.16:
+    resolution: {integrity: sha512-UmdmHUmp5CIKKjSoE10la5yfU+AYJAaiYLsodbjL4lji83JNvgOQUjGaGhGrpFCb0Uh7sl7qfP1IyILa8Z40ug==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/icu-messageformat-parser': 2.11.2
       tslib: 2.8.1
     dev: false
 
@@ -15280,6 +15348,27 @@ packages:
       typescript: 5.9.2
     dev: false
 
+  /react-intl@7.1.11(react@18.3.1)(typescript@5.9.2):
+    resolution: {integrity: sha512-tnVoRCWvW5Ie2ikYSdPF7z3+880yCe/9xPmitFeRPw3RYDcCfR4m8ZYa4MBq19W4adt9Z+PQA4FaMBCJ7E+HCQ==}
+    peerDependencies:
+      react: 16 || 17 || 18 || 19
+      typescript: ^5.6.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/icu-messageformat-parser': 2.11.2
+      '@formatjs/intl': 3.1.6(typescript@5.9.2)
+      '@types/hoist-non-react-statics': 3.3.6
+      '@types/react': 18.3.18
+      hoist-non-react-statics: 3.3.2
+      intl-messageformat: 10.7.16
+      react: 18.3.1
+      tslib: 2.8.1
+      typescript: 5.9.2
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -16775,6 +16864,42 @@ packages:
       - react-router-dom
       - styled-components
       - supports-color
+      - typescript
+    dev: false
+
+  /strapi-plugin-sortable-entries@1.1.0(@babel/runtime@7.27.6)(@codemirror/autocomplete@6.18.6)(@codemirror/language@6.11.2)(@codemirror/lint@6.8.5)(@codemirror/search@6.5.11)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.1)(@strapi/sdk-plugin@5.3.2)(@strapi/strapi@5.20.0)(@types/react-dom@18.3.1)(@types/react@18.3.1)(codemirror@6.0.2)(react-dom@18.3.1)(react-router-dom@6.30.1)(react@18.3.1)(styled-components@6.1.19)(typescript@5.9.2):
+    resolution: {integrity: sha512-ocK372aXDu/R/qUqNnb2PAfqp6Il6cukCVQh7U8smW955KU7FcUcuWh++kK1eluk/FS88nv48jH2A8nDl8WoAg==}
+    peerDependencies:
+      '@strapi/sdk-plugin': ^5.3.2
+      '@strapi/strapi': ^5.18.0
+      react: ^18.3.1
+      react-dom: ^18.3.1
+      react-router-dom: ^6.30.1
+      styled-components: ^6.1.19
+    dependencies:
+      '@dnd-kit/core': 6.3.1(react-dom@18.3.1)(react@18.3.1)
+      '@dnd-kit/sortable': 10.0.0(@dnd-kit/core@6.3.1)(react@18.3.1)
+      '@strapi/design-system': 2.0.0-rc.29(@babel/runtime@7.27.6)(@codemirror/autocomplete@6.18.6)(@codemirror/language@6.11.2)(@codemirror/lint@6.8.5)(@codemirror/search@6.5.11)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.1)(@strapi/icons@2.0.0-rc.29)(@types/react-dom@18.3.1)(@types/react@18.3.1)(codemirror@6.0.2)(react-dom@18.3.1)(react@18.3.1)(styled-components@6.1.19)
+      '@strapi/icons': 2.0.0-rc.29(react-dom@18.3.1)(react@18.3.1)(styled-components@6.1.19)
+      '@strapi/sdk-plugin': 5.3.2(@types/node@20.17.23)
+      '@strapi/strapi': 5.20.0(@babel/runtime@7.27.6)(@codemirror/autocomplete@6.18.6)(@codemirror/language@6.11.2)(@codemirror/lint@6.8.5)(@codemirror/search@6.5.11)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.38.1)(@types/node@20.17.23)(@types/react-dom@18.3.1)(@types/react@18.3.1)(better-sqlite3@12.2.0)(codemirror@6.0.2)(esbuild@0.25.8)(koa@2.16.1)(pg@8.16.3)(react-dom@18.3.1)(react-router-dom@6.30.1)(react@18.3.1)(redux@4.2.1)(styled-components@6.1.19)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-intl: 7.1.11(react@18.3.1)(typescript@5.9.2)
+      react-router-dom: 6.30.1(react-dom@18.3.1)(react@18.3.1)
+      styled-components: 6.1.19(react-dom@18.3.1)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@babel/runtime'
+      - '@codemirror/autocomplete'
+      - '@codemirror/language'
+      - '@codemirror/lint'
+      - '@codemirror/search'
+      - '@codemirror/state'
+      - '@codemirror/theme-one-dark'
+      - '@codemirror/view'
+      - '@types/react'
+      - '@types/react-dom'
+      - codemirror
       - typescript
     dev: false
 

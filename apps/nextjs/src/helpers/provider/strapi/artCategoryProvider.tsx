@@ -10,7 +10,7 @@ export const ArtCategoryProvider = ({
   children: React.ReactNode;
 }) => {
   const { response, error, isError, isLoading } = useGetArtCategories({
-    sort: 'id',
+    sort: 'sortOrder',
     populate: 'image',
   });
 

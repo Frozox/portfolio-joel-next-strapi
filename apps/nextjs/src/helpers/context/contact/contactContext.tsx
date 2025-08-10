@@ -3,7 +3,7 @@
 import React from 'react';
 
 export type TSavedArt = {
-  id: number;
+  documentId: string;
   name: string;
   thumbnail: {
     url: string;

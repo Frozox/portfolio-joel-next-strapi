@@ -12,6 +12,6 @@ export const ContactFormSchema = z.object({
     .string({ message: 'Champ requis.' })
     .min(1, { message: 'Champ requis.' })
     .max(1000, { message: 'Le message est trop long.' }),
-  arts: z.number().array(),
+  arts: z.string().array(),
   h_captcha_response: z.string().optional(),
 });

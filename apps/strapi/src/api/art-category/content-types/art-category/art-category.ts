@@ -19,6 +19,7 @@ export interface ArtCategory {
     metaKeywords?: string;
     title: string;
     art_tag_categories?: { data: ArtTagCategory[] };
+    sortOrder?: number;
     locale: string;
     localizations?: { data: ArtCategory[] };
   };
@@ -33,6 +34,7 @@ export interface ArtCategory_Plain {
   metaKeywords?: string;
   title: string;
   art_tag_categories?: ArtTagCategory_Plain[];
+  sortOrder?: number;
   locale: string;
   localizations?: ArtCategory_Plain[];
 }
@@ -47,6 +49,7 @@ export interface ArtCategory_NoRelations {
   metaKeywords?: string;
   title: string;
   art_tag_categories?: number[];
+  sortOrder?: number;
   locale: string;
   localizations?: ArtCategory[];
 }
@@ -61,6 +64,7 @@ export interface ArtCategory_AdminPanelLifeCycle {
   metaKeywords?: string;
   title: string;
   art_tag_categories?: AdminPanelRelationPropertyModification<ArtTagCategory_Plain>;
+  sortOrder?: number;
   locale: string;
   localizations?: ArtCategory[];
 }

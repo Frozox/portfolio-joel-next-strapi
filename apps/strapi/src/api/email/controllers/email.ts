@@ -15,7 +15,7 @@ export default {
       fullname: Joi.string().required(),
       message: Joi.string().max(1000).required(),
       h_captcha_response: Joi.string().required(),
-      arts: Joi.array().required(),
+      arts: Joi.array().items(Joi.string()).required(),
     }).validate(emailBody);
 
     if (validationError) {
@@ -23,7 +23,7 @@ export default {
     }
 
     try {
-      const arts = await strapi.documents("api::art.art").findMany({ populate: 'thumbnail', filters: { id: { $in: emailBody.arts }, sold_out: { $eq: false } }})
+      const arts = await strapi.documents("api::art.art").findMany({ populate: 'thumbnail', filters: { documentId: { $in: emailBody.arts }, sold_out: { $eq: false } }})
 
       const populatedBody: ContactEmailPopulated = {
         ...emailBody,

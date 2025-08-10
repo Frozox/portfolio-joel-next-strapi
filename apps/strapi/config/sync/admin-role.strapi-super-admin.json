@@ -18,7 +18,8 @@
           "metaDescription",
           "metaKeywords",
           "title",
-          "art_tag_categories"
+          "art_tag_categories",
+          "sortOrder"
         ],
         "locales": [
           "en",
@@ -26,7 +27,7 @@
         ]
       },
       "conditions": [],
-      "documentId": "iok6cvuxsodrjjyud5of55p2",
+      "documentId": "ntbc7j8dtcf4gb7nkd5vk0ny",
       "locale": null
     },
     {
@@ -70,7 +71,8 @@
           "metaDescription",
           "metaKeywords",
           "title",
-          "art_tag_categories"
+          "art_tag_categories",
+          "sortOrder"
         ],
         "locales": [
           "en",
@@ -78,7 +80,7 @@
         ]
       },
       "conditions": [],
-      "documentId": "gogbs987epy9an2gbys7rbpi",
+      "documentId": "agehozy93ic86lic6hvamyfy",
       "locale": null
     },
     {
@@ -94,7 +96,8 @@
           "metaDescription",
           "metaKeywords",
           "title",
-          "art_tag_categories"
+          "art_tag_categories",
+          "sortOrder"
         ],
         "locales": [
           "en",
@@ -102,7 +105,7 @@
         ]
       },
       "conditions": [],
-      "documentId": "xsuyrme44euhyewmdc6morrx",
+      "documentId": "sw188n6lwunucqvcpdkucb31",
       "locale": null
     },
     {
@@ -294,7 +297,8 @@
           "depth",
           "art_category",
           "art_tags",
-          "sold_out"
+          "sold_out",
+          "sortOrder"
         ],
         "locales": [
           "en",
@@ -302,7 +306,7 @@
         ]
       },
       "conditions": [],
-      "documentId": "t4ljdlnttbwm2t3h1mazwdds",
+      "documentId": "qm8xuanz7zvi600nbybozrhj",
       "locale": null
     },
     {
@@ -349,7 +353,8 @@
           "depth",
           "art_category",
           "art_tags",
-          "sold_out"
+          "sold_out",
+          "sortOrder"
         ],
         "locales": [
           "en",
@@ -357,7 +362,7 @@
         ]
       },
       "conditions": [],
-      "documentId": "mjuk7mwgz0ioqb286si5krb5",
+      "documentId": "jx07rijmp0t7j1s3ipx8ri3s",
       "locale": null
     },
     {
@@ -376,7 +381,8 @@
           "depth",
           "art_category",
           "art_tags",
-          "sold_out"
+          "sold_out",
+          "sortOrder"
         ],
         "locales": [
           "en",
@@ -384,7 +390,7 @@
         ]
       },
       "conditions": [],
-      "documentId": "jbbvl6gmgizbfzk8aop3z49w",
+      "documentId": "h37wccq3sa9sunjy9m0w973k",
       "locale": null
     },
     {

@@ -15,12 +15,13 @@ type TContactProviderProps = {
 export const ContactProvider = ({ children }: TContactProviderProps) => {
   const [savedArts, setSavedArts] = React.useState<TSavedArt[]>([]);
   const [defaultSavedArtsId, setDefaultSavedArtsId] = React.useState<
-    number[] | undefined
+    string[] | undefined
   >();
   const artsQuery = useGetArts({
+    sort: 'sortOrder',
     populate: 'thumbnail',
     filters: {
-      id: {
+      documentId: {
         $in: defaultSavedArtsId?.length ? [...defaultSavedArtsId] : [null],
       },
       sold_out: { $eq: false },
@@ -29,8 +30,12 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
 
   const toggleSavedArt = (art: TSavedArt) => {
     setSavedArts((prevSavedArts) => {
-      if (prevSavedArts.find((savedArt) => savedArt.id === art.id)) {
-        return prevSavedArts.filter((savedArt) => savedArt.id !== art.id);
+      if (
+        prevSavedArts.find((savedArt) => savedArt.documentId === art.documentId)
+      ) {
+        return prevSavedArts.filter(
+          (savedArt) => savedArt.documentId !== art.documentId
+        );
       } else {
         return [...prevSavedArts, art];
       }
@@ -42,16 +47,30 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
   };
 
   React.useEffect(() => {
-    if (!artsQuery.response?.data) return;
+    try {
+      const savedArts: number[] = JSON.parse(
+        localStorage.getItem('savedArts') || '[]'
+      );
+      if (!Array.isArray(savedArts)) return;
+      if (!savedArts.every((art) => typeof art === 'string')) return;
+      setDefaultSavedArtsId(savedArts);
+    } catch (error) {
+      setDefaultSavedArtsId([]);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!artsQuery.response?.data || !artsQuery.response?.data.length) return;
     const defaultSavedArts: TSavedArt[] = artsQuery.response.data.map((art) => {
       const formatedThumbnail = getMediaFromFormat(art.thumbnail, 'thumbnail');
 
       return {
-        id: art.id,
+        // @ts-expect-error
+        documentId: art.documentId,
         name: art.name,
         thumbnail: {
           url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
-          // @ts-expect-error,
+          // @ts-expect-error
           thumbhash: art.thumbnail.thumbhash,
           width: formatedThumbnail.width,
           height: formatedThumbnail.height,
@@ -63,23 +82,10 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
   }, [artsQuery.response?.data]);
 
   React.useEffect(() => {
-    try {
-      const savedArts: number[] = JSON.parse(
-        localStorage.getItem('savedArts') || '[]'
-      );
-      if (!Array.isArray(savedArts)) return;
-      if (!savedArts.every((art) => typeof art === 'number')) return;
-      setDefaultSavedArtsId(savedArts);
-    } catch (error) {
-      setDefaultSavedArtsId([]);
-    }
-  }, []);
-
-  React.useEffect(() => {
     if (defaultSavedArtsId === undefined) return;
     localStorage.setItem(
       'savedArts',
-      JSON.stringify(savedArts.map((art) => art.id))
+      JSON.stringify(savedArts.map((art) => art.documentId))
     );
   }, [savedArts, defaultSavedArtsId]);
 

@@ -30,6 +30,7 @@ export const ArtFilterProvider = ({
     filters: { art_categories: { slug: activeCategorySlug } },
   });
   const artsQuery = useGetArts({
+    sort: 'sortOrder',
     populate: '*',
     filters: { art_category: { slug: activeCategorySlug }, ...filters },
     pagination,

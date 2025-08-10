@@ -30,6 +30,7 @@ type TArtCarousselImage = {
 
 type TArtCarousselItem = {
   id: number;
+  documentId: string;
   name: string;
   height: number;
   width: number;
@@ -112,10 +113,12 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
 
         return {
           id: art.id,
+          // @ts-expect-error
+          documentId: art.documentId,
           name: art.name,
           thumbnail: {
             url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
-            // @ts-expect-error,
+            // @ts-expect-error
             thumbhash: art.thumbnail.thumbhash,
             width: formatedThumbnail.width,
             height: formatedThumbnail.height,
@@ -126,7 +129,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
 
               return {
                 url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`,
-                // @ts-expect-error,
+                // @ts-expect-error
                 thumbhash: image.thumbhash,
                 width: formatedImage.width,
                 height: formatedImage.height,
@@ -213,7 +216,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                       variant='outline'
                       onClick={() =>
                         toggleSavedArt({
-                          id: item.id,
+                          documentId: item.documentId,
                           name: item.name,
                           thumbnail: item.thumbnail,
                         })
@@ -223,7 +226,10 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                     >
                       {item?.sold_out
                         ? 'Indisponible'
-                        : savedArts.find((savedArt) => savedArt.id === item.id)
+                        : savedArts.find(
+                          (savedArt) =>
+                            savedArt.documentId === item.documentId
+                        )
                           ? 'Enregistré 💾'
                           : 'Enregistrer'}
                     </Button>
