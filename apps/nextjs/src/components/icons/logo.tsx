@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import type { SVGProps } from 'react';
 
 interface TLogoIconProps extends SVGProps<SVGSVGElement> {
   className: string;

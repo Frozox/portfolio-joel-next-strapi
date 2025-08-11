@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { createContext } from 'react';
 
-export type TSavedArt = {
+export interface TSavedArt {
   documentId: string;
   name: string;
   thumbnail: {
@@ -11,20 +11,20 @@ export type TSavedArt = {
     width: number;
     height: number;
   };
-};
+}
 
-type TContactContext = {
+interface TContactContext {
   savedArts: TSavedArt[];
   toggleSavedArt: (art: TSavedArt) => void;
   clearSavedArts: () => void;
-};
+}
 
-const ContactContext = React.createContext<TContactContext>({
+const ContactContext = createContext<TContactContext>({
   savedArts: [],
   toggleSavedArt: () => {},
   clearSavedArts: () => {},
 });
 
-export const useContact = () => React.useContext(ContactContext);
+export const useContact = () => React.use(ContactContext);
 
 export default ContactContext;

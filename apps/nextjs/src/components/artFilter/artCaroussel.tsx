@@ -2,7 +2,7 @@
 
 import Slider from '@components/slider/slider';
 import { Button } from '@components/ui/button';
-import { TKeenSlideProps } from '@components/ui/keenSlider';
+import type { TKeenSlideProps } from '@components/ui/keenSlider';
 import LazyImage from '@components/ui/lazyImage';
 import { ContentLoader } from '@components/ui/loading';
 import { env } from '@env';
@@ -12,23 +12,21 @@ import { useArtFilter } from '@helpers/context/strapi/artFilterContext';
 import { getMediaFromFormat } from '@libs/mediaFormat';
 import { cn } from '@libs/utils';
 import { motion } from 'framer-motion';
-import React from 'react';
-
-type TArtCaroussel = React.HTMLAttributes<HTMLElement> & {};
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 type TArtCarousselSlider = React.HTMLAttributes<HTMLElement> & {
   name: string;
   slides: TArtCarousselImage[];
 };
 
-type TArtCarousselImage = {
+interface TArtCarousselImage {
   url: string;
   thumbhash: ArrayBuffer;
   width: number;
   height: number;
-};
+}
 
-type TArtCarousselItem = {
+interface TArtCarousselItem {
   id: number;
   documentId: string;
   name: string;
@@ -41,15 +39,15 @@ type TArtCarousselItem = {
   thumbnail: TArtCarousselImage;
   images: TArtCarousselImage[];
   art_tags?: TArtCarousselItemTag[];
-};
+}
 
-type TArtCarousselItemTag = {
+interface TArtCarousselItemTag {
   id: number;
   tag: string;
-};
+}
 
 export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
-  const [activeSlide, setActiveSlide] = React.useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   return (
     <div className='relative size-full'>
@@ -89,7 +87,9 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
                 'size-4 cursor-pointer rounded-full border border-black bg-white transition-all duration-300 ease-in-out',
                 index === activeSlide && 'w-8'
               )}
-              onClick={() => setActiveSlide(index)}
+              onClick={() => {
+                setActiveSlide(index);
+              }}
             />
           ))}
       </div>
@@ -97,7 +97,7 @@ export const ArtCarousselSlider = ({ ...props }: TArtCarousselSlider) => {
   );
 };
 
-export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
+export const ArtCaroussel = () => {
   const {
     artsQuery: { response },
     setFilters,
@@ -105,20 +105,22 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
   const { sliderInstance, setSlides, slides: keenSlides } = useKeenSlider();
   const { savedArts, toggleSavedArt } = useContact();
 
-  const selectedArtItemRef = React.useRef<HTMLDivElement>(null);
-  const artItems = React.useMemo<TArtCarousselItem[]>(
+  const selectedArtItemRef = useRef<HTMLDivElement>(null);
+  const artItems = useMemo<TArtCarousselItem[]>(
     () =>
       response?.data.map((art): TArtCarousselItem => {
         const formatedThumbnail = getMediaFromFormat(art.thumbnail, 'large');
 
         return {
           id: art.id,
-          // @ts-expect-error
+          // @ts-expect-error - documentId not exists in media type
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           documentId: art.documentId,
           name: art.name,
           thumbnail: {
             url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
-            // @ts-expect-error
+            // @ts-expect-error - thumbhash not exists in media type
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             thumbhash: art.thumbnail.thumbhash,
             width: formatedThumbnail.width,
             height: formatedThumbnail.height,
@@ -129,7 +131,8 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
 
               return {
                 url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`,
-                // @ts-expect-error
+                // @ts-expect-error - thumbhash not exists in media type
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 thumbhash: image.thumbhash,
                 width: formatedImage.width,
                 height: formatedImage.height,
@@ -152,7 +155,7 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
     [response?.data]
   );
 
-  const slides = React.useMemo<TKeenSlideProps[]>(() => {
+  const slides = useMemo<TKeenSlideProps[]>(() => {
     const setArtTagFilter = (artTagId: number) => {
       const artTagFilter: Record<string, unknown> = {
         art_tags: { id: artTagId },
@@ -191,7 +194,9 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                         <span
                           className='mr-2 inline-block cursor-pointer truncate text-foreground underline decoration-2 underline-offset-4 hover:underline-offset-2'
                           key={tag.id}
-                          onClick={() => setArtTagFilter(tag.id)}
+                          onClick={() => {
+                            setArtTagFilter(tag.id);
+                          }}
                         >
                           {tag.tag}
                         </span>
@@ -200,36 +205,37 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
                   )}
                   <div className='flex flex-col space-y-4 lg:flex-row lg:justify-between lg:space-y-0'>
                     <p>
-                      {item.depth
-                        ? `${item.height} x ${item.width} x ${item.depth} cm`
-                        : `${item.height} x ${item.width} cm`}
+                      {!!item.depth &&
+                        `${item.height.toFixed()} x ${item.width.toFixed()} x ${item.depth.toFixed()} cm`}
+                      {!item.depth &&
+                        `${item.height.toFixed()} x ${item.width.toFixed()} cm`}
                     </p>
                     {item.date && <p>{item.date}</p>}
                   </div>
                   <div
                     className={cn(
-                      item?.sold_out ? 'cursor-not-allowed' : 'cursor-pointer'
+                      item.sold_out ? 'cursor-not-allowed' : 'cursor-pointer'
                     )}
                   >
                     <Button
                       type='button'
                       variant='outline'
-                      onClick={() =>
+                      onClick={() => {
                         toggleSavedArt({
                           documentId: item.documentId,
                           name: item.name,
                           thumbnail: item.thumbnail,
-                        })
-                      }
-                      disabled={item?.sold_out ?? false}
+                        });
+                      }}
+                      disabled={item.sold_out ?? false}
                       className='mt-4 w-fit border-foreground bg-transparent p-6 text-xl text-foreground hover:bg-foreground hover:text-background md:min-w-60 md:text-2xl'
                     >
-                      {item?.sold_out
+                      {item.sold_out
                         ? 'Indisponible'
                         : savedArts.find(
-                          (savedArt) =>
-                            savedArt.documentId === item.documentId
-                        )
+                              (savedArt) =>
+                                savedArt.documentId === item.documentId
+                            )
                           ? 'Enregistré 💾'
                           : 'Enregistrer'}
                     </Button>
@@ -246,12 +252,12 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
     );
   }, [artItems, savedArts, setFilters, toggleSavedArt]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSlides(slides);
   }, [slides, setSlides]);
 
   const selectArtItem = (
-    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    e: React.MouseEvent<HTMLElement>,
     artItem: TArtCarousselItem
   ) => {
     if (window.scrollY === 0) {
@@ -297,7 +303,9 @@ export const ArtCaroussel = ({ ...props }: TArtCaroussel) => {
               key={artItem.id}
               className='h-min w-full'
               whileHover={{ scale: 0.98 }}
-              onClick={(e) => selectArtItem(e, artItem)}
+              onClick={(e) => {
+                selectArtItem(e, artItem);
+              }}
             >
               <LazyImage
                 src={artItem.thumbnail.url}

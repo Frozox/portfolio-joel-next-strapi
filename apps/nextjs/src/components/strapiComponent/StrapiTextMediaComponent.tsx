@@ -1,9 +1,14 @@
-import { TStrapiComponent } from '@components/strapiComponent/StrapiComponentLoader';
+import type { TStrapiComponent } from '@components/strapiComponent/StrapiComponentLoader';
 import LazyImage from '@components/ui/lazyImage';
 import { env } from '@env';
 import { getMediaFromFormat } from '@libs/mediaFormat';
 import { cn } from '@libs/utils';
-import { TextMediaComponent_Plain } from '@portfolio/strapi/src/components/visual-components/interfaces/TextMediaComponent';
+import {
+  MediaMobilePosition,
+  MediaPosition,
+  type TextMediaComponent_Plain,
+} from '@portfolio/strapi/src/components/visual-components/interfaces/TextMediaComponent';
+import DOMPurify from 'isomorphic-dompurify';
 
 export type TStrapiTextMediaComponent =
   TStrapiComponent<TextMediaComponent_Plain>;
@@ -15,10 +20,10 @@ const StrapiTextMediaComponent = (component: TStrapiTextMediaComponent) => {
     <div
       className={cn(
         'flex',
-        component.media_position === 'left'
+        component.media_position === MediaPosition.Left
           ? 'lg:flex-row'
           : 'lg:flex-row-reverse',
-        component.media_mobile_position === 'top'
+        component.media_mobile_position === MediaMobilePosition.Top
           ? 'flex-col'
           : 'flex-col-reverse'
       )}
@@ -26,8 +31,10 @@ const StrapiTextMediaComponent = (component: TStrapiTextMediaComponent) => {
       <div
         className={cn(
           'flex shrink basis-2/5 flex-col justify-center',
-          component.media_position === 'left' ? 'lg:pr-6' : 'lg:pl-6',
-          component.media_mobile_position === 'top'
+          component.media_position === MediaPosition.Left
+            ? 'lg:pr-6'
+            : 'lg:pl-6',
+          component.media_mobile_position === MediaMobilePosition.Top
             ? 'mb-6 lg:mb-0'
             : 'mt-6 lg:mt-0'
         )}
@@ -38,7 +45,8 @@ const StrapiTextMediaComponent = (component: TStrapiTextMediaComponent) => {
           title={component.media.name}
           width={formatedMedia.width}
           height={formatedMedia.height}
-          // @ts-expect-error
+          // @ts-expect-error - thumbhash not exists in media type
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           thumbhash={component.media.thumbhash}
         />
       </div>
@@ -50,7 +58,10 @@ const StrapiTextMediaComponent = (component: TStrapiTextMediaComponent) => {
         )}
         <span
           className='text-justify'
-          dangerouslySetInnerHTML={{ __html: component.content }}
+          // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(component.content as string),
+          }}
         />
       </div>
     </div>

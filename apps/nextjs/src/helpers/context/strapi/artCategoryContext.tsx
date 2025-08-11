@@ -1,23 +1,23 @@
 'use client';
 
-import { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
-import React from 'react';
-import { StrapiError } from 'strapi-sdk-js';
+import type { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
+import React, { createContext } from 'react';
+import type { StrapiError } from 'strapi-sdk-js';
 
-type TArtCategoryContext = {
+interface TArtCategoryContext {
   artCategories: ArtCategory_Plain[];
   error: StrapiError | null;
   isError: boolean;
   isLoading: boolean;
-};
+}
 
-const ArtCategoryContext = React.createContext<TArtCategoryContext>({
+const ArtCategoryContext = createContext<TArtCategoryContext>({
   artCategories: [],
   error: null,
   isError: false,
   isLoading: true,
 });
 
-export const useArtCategory = () => React.useContext(ArtCategoryContext);
+export const useArtCategory = () => React.use(ArtCategoryContext);
 
 export default ArtCategoryContext;

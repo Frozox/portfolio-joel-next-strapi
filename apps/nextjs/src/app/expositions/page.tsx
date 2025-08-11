@@ -1,21 +1,19 @@
 'use client';
 
-import {
-  StrapiComponentLoader,
-  TStrapiComponent,
-} from '@components/strapiComponent/StrapiComponentLoader';
+import type { TStrapiComponent } from '@components/strapiComponent/StrapiComponentLoader';
+import { StrapiComponentLoader } from '@components/strapiComponent/StrapiComponentLoader';
 import { useGetNews } from '@helpers/hook/strapi/request';
 
 const News = () => {
-  const { response, isLoading, isError } = useGetNews({
+  const { response } = useGetNews({
     populate: 'content.media',
   });
 
   return (
     <div className='size-full animate-content-load'>
       <div className='container'>
-        {response?.data.content.map(
-          (component: TStrapiComponent, idx: number) => (
+        {(response?.data.content as TStrapiComponent[]).map(
+          (component, idx) => (
             <StrapiComponentLoader key={idx} component={component} />
           )
         )}

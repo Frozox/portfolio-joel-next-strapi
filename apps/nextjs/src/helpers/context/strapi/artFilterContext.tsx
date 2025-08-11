@@ -1,12 +1,12 @@
 'use client';
 
-import { TGenericFindQuery } from '@helpers/hook/strapi/request';
-import { ArtTagCategory_Plain } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
-import { Art_Plain } from '@portfolio/strapi/src/api/art/content-types/art/art';
-import React from 'react';
-import { PaginationByPage } from 'strapi-sdk-js';
+import type { TGenericFindQuery } from '@helpers/hook/strapi/request';
+import type { ArtTagCategory_Plain } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
+import type { Art_Plain } from '@portfolio/strapi/src/api/art/content-types/art/art';
+import React, { createContext } from 'react';
+import type { PaginationByPage } from 'strapi-sdk-js';
 
-type TArtFilterContext = {
+interface TArtFilterContext {
   artsQuery: TGenericFindQuery<Art_Plain[]>;
   artTagCategoriesQuery: TGenericFindQuery<ArtTagCategory_Plain[]>;
   filters: Record<string, unknown> | null;
@@ -15,9 +15,9 @@ type TArtFilterContext = {
     React.SetStateAction<Record<string, unknown> | null>
   >;
   setPagination: React.Dispatch<React.SetStateAction<PaginationByPage>>;
-};
+}
 
-const ArtFilterContext = React.createContext<TArtFilterContext>({
+const ArtFilterContext = createContext<TArtFilterContext>({
   artsQuery: {
     response: undefined,
     error: null,
@@ -36,6 +36,6 @@ const ArtFilterContext = React.createContext<TArtFilterContext>({
   setPagination: () => {},
 });
 
-export const useArtFilter = () => React.useContext(ArtFilterContext);
+export const useArtFilter = () => React.use(ArtFilterContext);
 
 export default ArtFilterContext;

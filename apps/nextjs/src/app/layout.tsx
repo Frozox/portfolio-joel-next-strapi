@@ -16,12 +16,12 @@ import { cn } from '@libs/utils';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { Lato as FontSans } from 'next/font/google';
-import { Organization, WithContext } from 'schema-dts';
+import type { Organization, WithContext } from 'schema-dts';
 import './globals.css';
 
-type TLayoutProps = {
+interface TLayoutProps {
   children: React.ReactNode;
-};
+}
 
 export const fontSans = FontSans({
   weight: '400',
@@ -29,7 +29,7 @@ export const fontSans = FontSans({
   variable: '--font-sans',
 });
 
-export const generateMetadata = async (): Promise<Metadata> => {
+export const generateMetadata = (): Metadata => {
   return {
     title: {
       template: '%s • Joel Chapeau',

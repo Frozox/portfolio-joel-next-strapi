@@ -2,15 +2,17 @@
 
 import { thumbHashArrayBufferToUrlData } from '@libs/thumbhash';
 import { cn } from '@libs/utils';
-import { motion, MotionConfig } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { HTMLAttributes, useRef, useState } from 'react';
+import type { HTMLAttributes } from 'react';
+import { useRef, useState } from 'react';
 
 export type LazyImageProps = HTMLAttributes<HTMLImageElement> & {
   src: string;
   width: number;
   height: number;
   thumbhash?: ArrayBuffer;
+  fullSize?: boolean;
   alt: string;
 };
 
@@ -21,52 +23,56 @@ const LazyImage = ({
   alt,
   width,
   height,
+  fullSize,
   ...props
 }: LazyImageProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const imageRef = useRef<HTMLImageElement>(null);
-  const onLoaded = () => setIsImageLoaded(true);
+  const onLoaded = () => {
+    setIsImageLoaded(true);
+  };
 
   return (
-    <div className='size-full'>
+    <div className={cn(fullSize && 'size-full')}>
       <div className='relative size-full'>
-        <MotionConfig transition={{ duration: 0 }}>
-          {thumbhash && (
-            <motion.div
-              initial={{ opacity: 1 }}
-              animate={{ opacity: !isImageLoaded ? 1 : 0 }}
-              transition={{ duration: 0.2 }}
-              className={cn(className, 'absolute size-full opacity-0')}
-            >
-              <Image
-                src={thumbHashArrayBufferToUrlData(thumbhash)}
-                height={height}
-                width={width}
-                alt={alt}
-                className={cn(className, 'p-1 blur-sm')}
-                {...props}
-              />
-            </motion.div>
-          )}
+        {thumbhash && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: !isImageLoaded && thumbhash ? 0 : 1 }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: !isImageLoaded ? 1 : 0 }}
             transition={{ duration: 0.2 }}
-            className='size-full'
+            className={cn(
+              className,
+              'pointer-events-none absolute size-full opacity-0'
+            )}
           >
             <Image
-              ref={imageRef}
-              src={src}
+              src={thumbHashArrayBufferToUrlData(thumbhash)}
               height={height}
               width={width}
               alt={alt}
-              onLoad={onLoaded}
-              className={className}
+              className={cn(className, 'size-full object-cover p-1 blur-sm')}
               {...props}
             />
           </motion.div>
-        </MotionConfig>
+        )}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: !isImageLoaded && thumbhash ? 0 : 1 }}
+          transition={{ duration: 0.2 }}
+          className='size-full'
+        >
+          <Image
+            ref={imageRef}
+            src={src}
+            height={height}
+            width={width}
+            alt={alt}
+            onLoad={onLoaded}
+            className={cn(className, 'pointer-events-auto')}
+            {...props}
+          />
+        </motion.div>
       </div>
     </div>
   );

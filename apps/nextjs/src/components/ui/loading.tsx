@@ -1,17 +1,17 @@
 import { cn } from '@libs/utils';
 
-export type TLoadingError = {
+export interface TLoadingError {
   error?: string | null;
   className?: string;
-};
+}
 
-export type TContentLoader = {
+export interface TContentLoader {
   children: React.ReactNode;
   error?: string | null;
   isLoading: boolean;
   isError: boolean;
   className?: string;
-};
+}
 
 export const Loading = ({ className }: { className?: string }) => {
   return (

@@ -1,7 +1,7 @@
 import { env } from '@env';
 import { StrapiContentTypes, strapiInstance } from '@helpers/hook/strapi';
-import { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
-import { MetadataRoute } from 'next';
+import type { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
+import type { MetadataRoute } from 'next';
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const { data: artCategories } = await strapiInstance.find<

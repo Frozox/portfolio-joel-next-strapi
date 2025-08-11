@@ -1,20 +1,19 @@
 'use client';
 
 import { env } from '@env';
-import ContactContext, {
-  TSavedArt,
-} from '@helpers/context/contact/contactContext';
+import type { TSavedArt } from '@helpers/context/contact/contactContext';
+import ContactContext from '@helpers/context/contact/contactContext';
 import { useGetArts } from '@helpers/hook/strapi/request';
 import { getMediaFromFormat } from '@libs/mediaFormat';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type TContactProviderProps = {
+interface TContactProviderProps {
   children: React.ReactNode;
-};
+}
 
 export const ContactProvider = ({ children }: TContactProviderProps) => {
-  const [savedArts, setSavedArts] = React.useState<TSavedArt[]>([]);
-  const [defaultSavedArtsId, setDefaultSavedArtsId] = React.useState<
+  const [savedArts, setSavedArts] = useState<TSavedArt[]>([]);
+  const [defaultSavedArtsId, setDefaultSavedArtsId] = useState<
     string[] | undefined
   >();
   const artsQuery = useGetArts({
@@ -46,31 +45,33 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
     setSavedArts([]);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     try {
-      const savedArts: number[] = JSON.parse(
-        localStorage.getItem('savedArts') || '[]'
-      );
+      const savedArts: string[] = JSON.parse(
+        localStorage.getItem('savedArts') ?? '[]'
+      ) as string[];
       if (!Array.isArray(savedArts)) return;
       if (!savedArts.every((art) => typeof art === 'string')) return;
       setDefaultSavedArtsId(savedArts);
-    } catch (error) {
+    } catch {
       setDefaultSavedArtsId([]);
     }
   }, []);
 
-  React.useEffect(() => {
-    if (!artsQuery.response?.data || !artsQuery.response?.data.length) return;
+  useEffect(() => {
+    if (!artsQuery.response?.data.length) return;
     const defaultSavedArts: TSavedArt[] = artsQuery.response.data.map((art) => {
       const formatedThumbnail = getMediaFromFormat(art.thumbnail, 'thumbnail');
 
       return {
-        // @ts-expect-error
+        // @ts-expect-error - documentId not exists in media type
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         documentId: art.documentId,
         name: art.name,
         thumbnail: {
           url: `${env.NEXT_PUBLIC_BACKEND_HOST}${formatedThumbnail.url}`,
-          // @ts-expect-error
+          // @ts-expect-error - thumbhash not exists in media type
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           thumbhash: art.thumbnail.thumbhash,
           width: formatedThumbnail.width,
           height: formatedThumbnail.height,
@@ -81,7 +82,7 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
     setSavedArts(defaultSavedArts);
   }, [artsQuery.response?.data]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (defaultSavedArtsId === undefined) return;
     localStorage.setItem(
       'savedArts',
@@ -90,9 +91,7 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
   }, [savedArts, defaultSavedArtsId]);
 
   return (
-    <ContactContext.Provider
-      value={{ savedArts, toggleSavedArt, clearSavedArts }}
-    >
+    <ContactContext.Provider value={{ savedArts, toggleSavedArt, clearSavedArts }}>
       {children}
     </ContactContext.Provider>
   );

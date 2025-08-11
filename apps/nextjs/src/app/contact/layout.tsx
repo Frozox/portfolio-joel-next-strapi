@@ -1,15 +1,15 @@
 import { Title } from '@components/ui/title';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
-type TLayoutProps = {
+interface TLayoutProps {
   children: React.ReactNode;
-};
+}
 
 export const generateMetadata = (): Metadata => {
   return {
     title: 'Contact',
     description:
-      'Contactez Joël Chapeau pour toute demande d\'information, d\'exposition ou d\'achat d\'œuvre. Réponse rapide par mail ou via le formulaire de contact.',
+      "Contactez Joël Chapeau pour toute demande d'information, d'exposition ou d'achat d'œuvre. Réponse rapide par mail ou via le formulaire de contact.",
     keywords: ['joel chapeau contact', 'joel contact'],
     alternates: {
       canonical: 'contact',

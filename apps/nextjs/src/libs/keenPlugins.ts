@@ -1,4 +1,4 @@
-import { KeenSliderInstance } from 'keen-slider/react';
+import type { KeenSliderInstance } from 'keen-slider/react';
 
 export const autoSlider = (slider: KeenSliderInstance) => {
   let timeout: ReturnType<typeof setTimeout>;

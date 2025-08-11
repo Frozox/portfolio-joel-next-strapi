@@ -1,24 +1,25 @@
 import { StrapiContentTypes, strapiInstance } from '@helpers/hook/strapi';
-import { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
-import { ArtTagCategory_Plain } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
-import { ArtTag_Plain } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
-import { Art_Plain } from '@portfolio/strapi/src/api/art/content-types/art/art';
-import { New_Plain } from '@portfolio/strapi/src/api/new/content-types/new/new';
-import { GenericEmail } from '@portfolio/strapi/types/common/email';
-import { QueryClient, useQuery } from '@tanstack/react-query';
-import React from 'react';
-import {
+import type { ArtCategory_Plain } from '@portfolio/strapi/src/api/art-category/content-types/art-category/art-category';
+import type { ArtTagCategory_Plain } from '@portfolio/strapi/src/api/art-tag-category/content-types/art-tag-category/art-tag-category';
+import type { ArtTag_Plain } from '@portfolio/strapi/src/api/art-tag/content-types/art-tag/art-tag';
+import type { Art_Plain } from '@portfolio/strapi/src/api/art/content-types/art/art';
+import type { New_Plain } from '@portfolio/strapi/src/api/new/content-types/new/new';
+import type { GenericEmail } from '@portfolio/strapi/types/common/email';
+import type { QueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
+import type {
   StrapiError,
   StrapiRequestParams,
   StrapiResponse,
 } from 'strapi-sdk-js';
 
-export type TGenericFindQuery<T> = {
+export interface TGenericFindQuery<T> {
   response: StrapiResponse<T> | undefined;
   error: StrapiError | null;
   isError: boolean;
   isLoading: boolean;
-};
+}
 
 const useGenericRequestFindMany = <T>(
   contentType: StrapiContentTypes,
@@ -34,7 +35,7 @@ const useGenericRequestFindMany = <T>(
     },
   });
 
-  return React.useMemo(
+  return useMemo(
     () => ({ response: data, error, isError, isLoading }),
     [data, error, isError, isLoading]
   );
@@ -54,7 +55,7 @@ const useGenericRequestFindSingle = <T>(
     },
   });
 
-  return React.useMemo(
+  return useMemo(
     () => ({ response: data, error, isError, isLoading }),
     [data, error, isError, isLoading]
   );
@@ -62,7 +63,7 @@ const useGenericRequestFindSingle = <T>(
 
 const genericRequestPost = async <T>(
   contentType: StrapiContentTypes,
-  body: any,
+  body: unknown,
   params?: StrapiRequestParams
 ): Promise<StrapiResponse<T>> => {
   return await strapiInstance.create<T>(contentType, body, params);
@@ -73,12 +74,12 @@ const fetchQuery = <T>(
   contentType: StrapiContentTypes,
   params?: StrapiRequestParams
 ): Promise<StrapiResponse<T>> =>
-    queryClient.fetchQuery({
-      queryKey: [contentType, params],
-      queryFn: async () => {
-        return await strapiInstance.find(contentType, params);
-      },
-    });
+  queryClient.fetchQuery({
+    queryKey: [contentType, params],
+    queryFn: async () => {
+      return await strapiInstance.find(contentType, params);
+    },
+  });
 
 const prefetchQuery = (
   queryClient: QueryClient,
@@ -148,7 +149,7 @@ export const prefetchNews = (
   params?: StrapiRequestParams
 ) => prefetchQuery(queryClient, StrapiContentTypes.News, params);
 
-export const sendContactForm = (body: any, params?: StrapiRequestParams) =>
+export const sendContactForm = (body: unknown, params?: StrapiRequestParams) =>
   genericRequestPost<GenericEmail>(
     StrapiContentTypes.ContactForm,
     body,

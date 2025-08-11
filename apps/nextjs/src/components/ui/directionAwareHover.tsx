@@ -26,33 +26,31 @@ export const DirectionAwareHover = ({
     'top' | 'bottom' | 'left' | 'right' | string
   >('left');
 
-  const handleMouseEnter = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
+  const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
 
     const direction = getDirection(event, ref.current);
     switch (direction) {
-    case 0:
-      setDirection('top');
-      break;
-    case 1:
-      setDirection('right');
-      break;
-    case 2:
-      setDirection('bottom');
-      break;
-    case 3:
-      setDirection('left');
-      break;
-    default:
-      setDirection('left');
-      break;
+      case 0:
+        setDirection('top');
+        break;
+      case 1:
+        setDirection('right');
+        break;
+      case 2:
+        setDirection('bottom');
+        break;
+      case 3:
+        setDirection('left');
+        break;
+      default:
+        setDirection('left');
+        break;
     }
   };
 
   const getDirection = (
-    ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    ev: React.MouseEvent<HTMLDivElement>,
     obj: HTMLElement
   ) => {
     const { width: w, height: h, left, top } = obj.getBoundingClientRect();
@@ -67,7 +65,7 @@ export const DirectionAwareHover = ({
       onMouseEnter={handleMouseEnter}
       ref={ref}
       className={cn(
-        'group/card relative h-full w-full overflow-hidden bg-transparent',
+        'group/card relative size-full overflow-hidden bg-transparent',
         className
       )}
     >
@@ -90,13 +88,14 @@ export const DirectionAwareHover = ({
             <LazyImage
               alt='image'
               className={cn(
-                'h-full w-full scale-[1.15] object-cover',
+                'size-full scale-[1.15] object-cover',
                 imageClassName
               )}
               thumbhash={thumbhash}
               width={1000}
               height={1000}
               src={imageUrl}
+              fullSize
             />
           </motion.div>
           <motion.div

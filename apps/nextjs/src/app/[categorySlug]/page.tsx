@@ -2,20 +2,9 @@
 
 import { ArtCaroussel } from '@components/artFilter/artCaroussel';
 import { ArtFilterPagination } from '@components/artFilter/artFilter';
-import { useArtFilter } from '@helpers/context/strapi/artFilterContext';
 import { KeenSliderProvider } from '@helpers/provider/keen/keenSliderProvider';
 
-type TCategoryProps = {
-  params: Promise<{
-    categorySlug: string;
-  }>;
-};
-
-const Category = ({ params }: TCategoryProps) => {
-  const {
-    artsQuery: { isError, isLoading },
-  } = useArtFilter();
-
+const Category = () => {
   return (
     <div className='flex size-full flex-col justify-between'>
       <div className='animate-content-load'>

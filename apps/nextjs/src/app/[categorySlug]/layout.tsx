@@ -11,16 +11,16 @@ import { ArtFilterProvider } from '@helpers/provider/strapi/artFilterProvider';
 import { getMediaFromFormat } from '@libs/mediaFormat';
 import { defaultPaginationFilter } from '@libs/pagination';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { Product, WithContext } from 'schema-dts';
+import type { Product, WithContext } from 'schema-dts';
 
-type TLayoutProps = {
+interface TLayoutProps {
   children: React.ReactNode;
   params: Promise<{
     categorySlug: string;
   }>;
-};
+}
 
 const getCurrentArtCategory = async (slug: string) => {
   const queryClient = getQueryClient();

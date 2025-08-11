@@ -5,16 +5,16 @@ import { useKeenSlider } from '@helpers/context/keen/keenSliderContext';
 import { useArtCategory } from '@helpers/context/strapi/artCategoryContext';
 import { getMediaFromFormat } from '@libs/mediaFormat';
 import Link from 'next/link';
-import React from 'react';
+import { useEffect, useMemo } from 'react';
 import { Button } from '../ui/button';
 import { DirectionAwareHover } from '../ui/directionAwareHover';
-import { TKeenSlideProps } from '../ui/keenSlider';
+import type { TKeenSlideProps } from '../ui/keenSlider';
 
 const HomeSlider = () => {
   const { artCategories, isError, isLoading } = useArtCategory();
   const { setSlides, slides: keenSlides } = useKeenSlider();
 
-  const slides = React.useMemo<TKeenSlideProps[]>(() => {
+  const slides = useMemo<TKeenSlideProps[]>(() => {
     if (artCategories.length === 0) return [];
     const formatedSlides: TKeenSlideProps[] = artCategories.map((item) => {
       const formatedImage = getMediaFromFormat(item.image, 'large');
@@ -23,7 +23,8 @@ const HomeSlider = () => {
         children: (
           <DirectionAwareHover
             imageUrl={`${env.NEXT_PUBLIC_BACKEND_HOST}${formatedImage.url}`}
-            // @ts-expect-error
+            // @ts-expect-error - thumbhash not exists in media type
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             thumbhash={item.image.thumbhash}
           >
             <div className='m-4'>
@@ -45,7 +46,7 @@ const HomeSlider = () => {
     return formatedSlides;
   }, [artCategories]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSlides(slides);
   }, [slides, setSlides]);
 

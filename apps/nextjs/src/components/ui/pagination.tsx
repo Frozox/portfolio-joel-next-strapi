@@ -1,7 +1,8 @@
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import * as React from 'react';
 
-import { ButtonProps, buttonVariants } from '@components/ui/button';
+import type { ButtonProps } from '@components/ui/button';
+import { buttonVariants } from '@components/ui/button';
 import { cn } from '@libs/utils';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
@@ -14,24 +15,28 @@ const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
 );
 Pagination.displayName = 'Pagination';
 
-const PaginationContent = React.forwardRef<
-  HTMLUListElement,
-  React.ComponentProps<'ul'>
->(({ className, ...props }, ref) => (
+const PaginationContent = ({
+  ref,
+  className,
+  ...props
+}: React.ComponentProps<'ul'> & {
+  ref?: React.RefObject<HTMLUListElement | null>;
+}) => (
   <ul
     ref={ref}
     className={cn('flex flex-row items-center gap-1', className)}
     {...props}
   />
-));
+);
 PaginationContent.displayName = 'PaginationContent';
 
-const PaginationItem = React.forwardRef<
-  HTMLLIElement,
-  React.ComponentProps<'li'>
->(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn('', className)} {...props} />
-));
+const PaginationItem = ({
+  ref,
+  className,
+  ...props
+}: React.ComponentProps<'li'> & {
+  ref?: React.RefObject<HTMLLIElement | null>;
+}) => <li ref={ref} className={cn('', className)} {...props} />;
 PaginationItem.displayName = 'PaginationItem';
 
 type PaginationLinkProps = {
@@ -70,7 +75,7 @@ const PaginationPrevious = ({
     {...props}
   >
     <ChevronLeft className='size-4' />
-    <span>Previous</span>
+    <span className='sr-only'>Previous</span>
   </PaginationLink>
 );
 PaginationPrevious.displayName = 'PaginationPrevious';
@@ -85,7 +90,7 @@ const PaginationNext = ({
     className={cn('gap-1 pr-2.5', className)}
     {...props}
   >
-    <span>Next</span>
+    <span className='sr-only'>Next</span>
     <ChevronRight className='size-4' />
   </PaginationLink>
 );
@@ -97,7 +102,7 @@ const PaginationEllipsis = ({
 }: React.ComponentProps<'span'>) => (
   <span
     aria-hidden
-    className={cn('flex h-9 w-9 items-center justify-center', className)}
+    className={cn('flex size-9 items-center justify-center', className)}
     {...props}
   >
     <MoreHorizontal className='size-4' />

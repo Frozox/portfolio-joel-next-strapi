@@ -1,5 +1,6 @@
-import { TextComponent } from '@portfolio/strapi/src/components/visual-components/interfaces/TextComponent';
-import { TStrapiComponent } from './StrapiComponentLoader';
+import type { TextComponent } from '@portfolio/strapi/src/components/visual-components/interfaces/TextComponent';
+import DOMPurify from 'isomorphic-dompurify';
+import type { TStrapiComponent } from './StrapiComponentLoader';
 
 export type TStrapiTextComponent = TStrapiComponent<TextComponent>;
 
@@ -13,7 +14,10 @@ const StrapiTextComponent = (component: TStrapiTextComponent) => {
       )}
       <span
         className='text-justify'
-        dangerouslySetInnerHTML={{ __html: component.content }}
+        // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(component.content as string),
+        }}
       />
     </div>
   );

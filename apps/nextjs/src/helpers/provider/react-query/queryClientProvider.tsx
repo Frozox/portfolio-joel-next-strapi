@@ -3,21 +3,23 @@
 import getQueryClient from '@helpers/hook/react-query';
 import { QueryClientProvider as DefaultProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import React from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 
-const ReactQueryDevtoolsProduction = React.lazy(() =>
+const ReactQueryDevtoolsProduction = lazy(() =>
   import('@tanstack/react-query-devtools').then((d) => ({
-    default: d.ReactQueryDevtools as React.ComponentType<any>,
+    default: d.ReactQueryDevtools as React.ComponentType<unknown>,
   }))
 );
 
 const QueryClientProvider = ({ children }: { children: React.ReactNode }) => {
   const queryClient = getQueryClient();
-  const [showDevtools, setShowDevtools] = React.useState(false);
+  const [showDevtools, setShowDevtools] = useState(false);
 
-  React.useEffect(() => {
-    // @ts-expect-error
-    window.toggleDevtools = () => setShowDevtools((old) => !old);
+  useEffect(() => {
+    // @ts-expect-error - toggleDevtools is set in window
+    window.toggleDevtools = () => {
+      setShowDevtools((old) => !old);
+    };
   }, []);
 
   return (

@@ -4,10 +4,12 @@ import FacebookIcon from '@components/icons/facebook';
 import InstagramIcon from '@components/icons/instagram';
 import LogoIcon from '@components/icons/logo';
 import { useArtCategory } from '@helpers/context/strapi/artCategoryContext';
+import { cn } from '@libs/utils';
 import Link from 'next/link';
-import React from 'react';
+import { usePathname } from 'next/navigation';
+import { Children } from 'react';
 
-interface FooterProps extends React.HtmlHTMLAttributes<HTMLElement> {}
+type TFooterProps = React.HtmlHTMLAttributes<HTMLElement>;
 interface FooterElementProps {
   title: string;
   children: React.ReactNode;
@@ -20,7 +22,7 @@ const FooterElement = (props: FooterElementProps) => {
         {props.title}
       </span>
       <ul className='mt-4 space-y-1 text-xs sm:text-base'>
-        {React.Children.map(props.children, (children) => (
+        {Children.map(props.children, (children) => (
           <li>{children}</li>
         ))}
       </ul>
@@ -28,8 +30,11 @@ const FooterElement = (props: FooterElementProps) => {
   );
 };
 
-const Footer = (props: FooterProps) => {
+const Footer = (props: TFooterProps) => {
   const { artCategories } = useArtCategory();
+  const currentPath = usePathname();
+
+  const currentPageStyle = 'underline underline-offset-4 decoration-1';
 
   return (
     <div {...props}>
@@ -50,19 +55,37 @@ const Footer = (props: FooterProps) => {
           <ul className='grid grid-cols-3 gap-8 lg:grid-cols-3'>
             <FooterElement title='Navigation'>
               <Link href={'/'}>
-                <span>Accueil</span>
+                <span className={cn(currentPath === '/' && currentPageStyle)}>
+                  Accueil
+                </span>
               </Link>
               <Link href={'/expositions'}>
-                <span>Expositions</span>
+                <span
+                  className={cn(
+                    currentPath === '/expositions' && currentPageStyle
+                  )}
+                >
+                  Expositions
+                </span>
               </Link>
               <Link href={'/contact'}>
-                <span>Contact</span>
+                <span
+                  className={cn(currentPath === '/contact' && currentPageStyle)}
+                >
+                  Contact
+                </span>
               </Link>
             </FooterElement>
             <FooterElement title='Travaux'>
               {...artCategories.map((artCategory) => (
                 <Link key={artCategory.slug} href={artCategory.slug}>
-                  <span>{artCategory.name}</span>
+                  <span
+                    className={cn(
+                      currentPath === `/${artCategory.slug}` && currentPageStyle
+                    )}
+                  >
+                    {artCategory.name}
+                  </span>
                 </Link>
               ))}
             </FooterElement>

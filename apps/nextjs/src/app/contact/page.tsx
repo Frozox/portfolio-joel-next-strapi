@@ -24,17 +24,19 @@ import { useContact } from '@helpers/context/contact/contactContext';
 import { sendContactForm } from '@helpers/hook/strapi/request';
 import { ContactFormSchema } from '@helpers/schemas/contact/contactForm';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { aspectRatioCalculatorFromHeight } from '@libs/aspectRatio';
 import { cn } from '@libs/utils';
 import { TooltipArrow, TooltipPortal } from '@radix-ui/react-tooltip';
 import { CircleX, Info } from 'lucide-react';
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
-import { z } from 'zod';
+import type { StrapiError } from 'strapi-sdk-js';
+import type { z } from 'zod';
 
 const Contact = () => {
   const { savedArts, toggleSavedArt, clearSavedArts } = useContact();
-  const hcaptchaRef = React.useRef<HCaptcha>(null);
+  const hcaptchaRef = useRef<HCaptcha>(null);
 
   const form = useForm<z.infer<typeof ContactFormSchema>>({
     resolver: zodResolver(ContactFormSchema),
@@ -46,9 +48,9 @@ const Contact = () => {
     },
   });
 
-  const [formSending, setFormSending] = React.useState(false);
+  const [formSending, setFormSending] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     form.setValue(
       'arts',
       savedArts.map((art) => art.documentId)
@@ -73,7 +75,7 @@ const Contact = () => {
         clearSavedArts();
         toast.success('Message envoyé !');
       })
-      .catch((res: any) => {
+      .catch((res: StrapiError) => {
         toast.error(res.error.message);
       })
       .finally(() => {
@@ -143,78 +145,88 @@ const Contact = () => {
         <FormField
           control={form.control}
           name='arts'
-          render={({ field }) => (
-            <FormItem className='col-span-2'>
-              <FormLabel className='relative'>
-                <span>œuvres enregistrées</span>
-                <TooltipProvider>
-                  <Tooltip delayDuration={0}>
-                    <TooltipTrigger
-                      asChild
-                      className='absolute -right-5 -top-1'
-                    >
-                      <button type='button'>
-                        <Info className='size-4' />
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipPortal>
-                      <TooltipContent
-                        className='max-w-72'
-                        side='top'
-                        align='start'
-                      >
-                        <p>
-                          Vous pouvez ajouter une ou plusieurs œuvres depuis
-                          l&apos;onglet travaux
-                        </p>
-                        <TooltipArrow
-                          width={10}
-                          height={5}
-                          className='rounded fill-foreground'
-                        />
-                      </TooltipContent>
-                    </TooltipPortal>
-                  </Tooltip>
-                </TooltipProvider>
-              </FormLabel>
-              <FormControl>
-                <div className='flex flex-wrap gap-4'>
-                  {(field.value?.length &&
-                    field.value?.map((documentId) => {
-                      const currentArt = savedArts.find(
-                        (art) => art.documentId === documentId
-                      );
-                      if (!currentArt) return;
-                      return (
-                        <div key={documentId} className='relative'>
-                          <div>
-                            <LazyImage
-                              src={currentArt.thumbnail.url}
-                              width={200}
-                              height={200}
-                              alt={currentArt.name}
-                              title={currentArt.name}
-                              thumbhash={currentArt.thumbnail.thumbhash}
-                              className='size-full max-h-28'
-                            />
-                            <p className='truncate'>{currentArt.name}</p>
-                          </div>
-                          <CircleX
-                            className='absolute -right-2 -top-2 cursor-pointer rounded-full border-2 border-transparent bg-background text-red-600 hover:scale-125'
-                            onClick={() => toggleSavedArt(currentArt)}
-                          />
-                        </div>
-                      );
-                    })) || (
-                    <p className='mx-2 text-sm text-muted-foreground'>
-                      Aucune œuvre enregistree
-                    </p>
-                  )}
+          render={({ field }) => {
+            const arts = field.value.map((documentId) => {
+              const currentArt = savedArts.find(
+                (art) => art.documentId === documentId
+              );
+              if (!currentArt) return;
+              return (
+                <div key={documentId} className='relative'>
+                  <div
+                    className='overflow-hidden'
+                    style={{
+                      width: `${aspectRatioCalculatorFromHeight(currentArt.thumbnail.width, currentArt.thumbnail.height, 9).toFixed()}rem`,
+                    }}
+                  >
+                    <LazyImage
+                      src={currentArt.thumbnail.url}
+                      width={200}
+                      height={200}
+                      alt={currentArt.name}
+                      title={currentArt.name}
+                      thumbhash={currentArt.thumbnail.thumbhash}
+                      className='h-36 w-auto'
+                    />
+                    <p className='truncate'>{currentArt.name}</p>
+                  </div>
+                  <CircleX
+                    className='absolute -right-2 -top-2 cursor-pointer rounded-full border-2 border-transparent bg-background text-red-600 hover:scale-125'
+                    onClick={() => {
+                      toggleSavedArt(currentArt);
+                    }}
+                  />
                 </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+              );
+            });
+            return (
+              <FormItem className='col-span-2'>
+                <FormLabel className='relative'>
+                  <span>œuvres enregistrées</span>
+                  <TooltipProvider>
+                    <Tooltip delayDuration={0}>
+                      <TooltipTrigger
+                        asChild
+                        className='absolute -right-5 -top-1'
+                      >
+                        <button type='button'>
+                          <Info className='size-4' />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipPortal>
+                        <TooltipContent
+                          className='max-w-72'
+                          side='top'
+                          align='start'
+                        >
+                          <p>
+                            Vous pouvez ajouter une ou plusieurs œuvres depuis
+                            l&apos;onglet travaux
+                          </p>
+                          <TooltipArrow
+                            width={10}
+                            height={5}
+                            className='rounded fill-foreground'
+                          />
+                        </TooltipContent>
+                      </TooltipPortal>
+                    </Tooltip>
+                  </TooltipProvider>
+                </FormLabel>
+                <FormControl>
+                  <div className='flex flex-wrap gap-4'>
+                    {!!arts.length && arts}
+                    {!arts.length && (
+                      <p className='mx-2 text-sm text-muted-foreground'>
+                        Aucune œuvre enregistree
+                      </p>
+                    )}
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
         />
         <div
           className={cn(
@@ -223,7 +235,7 @@ const Contact = () => {
           )}
         >
           <Button type='submit' disabled={formSending} className='w-full'>
-            {(formSending && (
+            {formSending && (
               <>
                 <span className='pr-2'>Envoyer</span>
                 <span className='animate-bounce text-xl font-bold'>.</span>
@@ -234,8 +246,8 @@ const Contact = () => {
                   .
                 </span>
               </>
-            )) ||
-              'Envoyer'}
+            )}
+            {!formSending && 'Envoyer'}
           </Button>
         </div>
         <div className='hidden'>

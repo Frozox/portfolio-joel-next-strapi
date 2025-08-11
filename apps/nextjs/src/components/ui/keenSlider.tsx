@@ -3,10 +3,10 @@ import { cn } from '@libs/utils';
 import 'keen-slider/keen-slider.min.css';
 import React from 'react';
 
-export type TKeenSliderProps = {
+export interface TKeenSliderProps {
   className?: string;
   children: React.ReactNode;
-};
+}
 
 export interface TKeenSlideProps {
   children: React.ReactNode;

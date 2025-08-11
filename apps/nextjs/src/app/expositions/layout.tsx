@@ -2,11 +2,11 @@ import { Title } from '@components/ui/title';
 import getQueryClient from '@helpers/hook/react-query';
 import { prefetchNews } from '@helpers/hook/strapi/request';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
-type TLayoutProps = {
+interface TLayoutProps {
   children: React.ReactNode;
-};
+}
 
 export const generateMetadata = (): Metadata => {
   return {

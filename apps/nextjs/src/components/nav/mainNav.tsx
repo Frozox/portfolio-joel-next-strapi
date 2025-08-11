@@ -14,9 +14,10 @@ import { cn } from '@libs/utils';
 import { AlignJustifyIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import type { HTMLAttributes } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-interface MainNavProps extends React.HTMLAttributes<HTMLElement> {
+interface MainNavProps extends HTMLAttributes<HTMLElement> {
   className: string;
 }
 
@@ -35,8 +36,10 @@ const MainNav = ({ className }: MainNavProps) => {
 
   useEffect(() => {
     const handleOutSideClick = (e: MouseEvent) => {
-      if (!dropdownOpened || mobileDropDownButtonRef.current == e.target) return;
-      if (!mobileDropDownRef.current?.contains(e.target as Node)) toggleDropdown();
+      if (!dropdownOpened || mobileDropDownButtonRef.current == e.target)
+        return;
+      if (!mobileDropDownRef.current?.contains(e.target as Node))
+        toggleDropdown();
     };
 
     window.addEventListener('mousedown', handleOutSideClick);
@@ -101,6 +104,7 @@ const MainNav = ({ className }: MainNavProps) => {
               <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
                   <button
+                    type='button'
                     disabled={
                       isLoading || isError || artCategories.length === 0
                     }

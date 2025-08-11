@@ -22,27 +22,27 @@ import { cn } from '@libs/utils';
 import useEventListener from '@use-it/event-listener';
 import * as KeyCode from 'keycode-js';
 import { FilterIcon, Trash2Icon } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type TMetaPagination = {
+interface TMetaPagination {
   page: number;
   pageSize: number;
   pageCount: number;
   total: number;
-};
+}
 
-type TFilterCategory = {
+interface TFilterCategory {
   id: string | number;
   name: string;
-};
+}
 
-type TFilterItem = {
+interface TFilterItem {
   tagId: string | number;
   categoryId: string | number;
   value: string;
   checked: boolean;
   defaultChecked?: boolean;
-};
+}
 
 export const ArtFilterCheckboxList = ({
   name,
@@ -70,12 +70,12 @@ export const ArtFilterCheckboxItem = ({
         checked={checked}
         defaultChecked={defaultChecked}
         className='mr-2'
-        id={`filter-${categoryId}-${tagId}`}
+        id={`filter-${categoryId.toString()}-${tagId.toString()}`}
         {...props}
       />
       <label
         className='cursor-pointer select-none'
-        htmlFor={`filter-${categoryId}-${tagId}`}
+        htmlFor={`filter-${categoryId.toString()}-${tagId.toString()}`}
       >
         {value}
       </label>
@@ -85,18 +85,18 @@ export const ArtFilterCheckboxItem = ({
 
 export const ArtFilterPagination = ({ className }: { className: string }) => {
   const {
-    artsQuery: { response, isError, isLoading },
+    artsQuery: { response },
     pagination,
     setPagination,
   } = useArtFilter();
 
-  const [metaPagination, setMetaPagination] = React.useState<TMetaPagination>({
+  const [metaPagination, setMetaPagination] = useState<TMetaPagination>({
     page: 1,
     pageSize: 0,
     pageCount: 1,
     total: 0,
   });
-  const [extraPagesToDisplay, setExtraPagesToDisplay] = React.useState(0);
+  const [extraPagesToDisplay, setExtraPagesToDisplay] = useState(0);
 
   // Switch pages with arrows
   useEventListener('keydown', (e: KeyboardEvent) => {
@@ -109,12 +109,12 @@ export const ArtFilterPagination = ({ className }: { className: string }) => {
       setPagination({ ...pagination, page: metaPagination.page + 1 });
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!response?.meta) return;
     setMetaPagination(response.meta.pagination as TMetaPagination);
   }, [response?.meta]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let extaPagesCount = 0;
     if (metaPagination.page > 2) extaPagesCount++;
     if (metaPagination.page < metaPagination.pageCount - 1) extaPagesCount++;
@@ -131,9 +131,10 @@ export const ArtFilterPagination = ({ className }: { className: string }) => {
         <PaginationContent>
           <PaginationItem>
             <button
-              onClick={() =>
-                setPagination({ ...pagination, page: metaPagination.page - 1 })
-              }
+              type='button'
+              onClick={() => {
+                setPagination({ ...pagination, page: metaPagination.page - 1 });
+              }}
               disabled={metaPagination.page <= 1}
               className={cn(metaPagination.page <= 1 && 'opacity-50')}
             >
@@ -143,13 +144,15 @@ export const ArtFilterPagination = ({ className }: { className: string }) => {
           {Array.from({ length: 3 }).map((_, i) => (
             <React.Fragment key={i}>
               {(i === 0 && (
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                 <>
                   <PaginationItem>
                     <PaginationLink isActive={metaPagination.page <= 1}>
                       <button
-                        onClick={() =>
-                          setPagination({ ...pagination, page: 1 })
-                        }
+                        type='button'
+                        onClick={() => {
+                          setPagination({ ...pagination, page: 1 });
+                        }}
                         disabled={metaPagination.page === 1}
                         className='size-full'
                       >
@@ -159,20 +162,21 @@ export const ArtFilterPagination = ({ className }: { className: string }) => {
                   </PaginationItem>
                   {metaPagination.page > 3 &&
                     metaPagination.pageCount !== 4 && (
-                    <PaginationItem>
-                      <PaginationEllipsis />
-                    </PaginationItem>
-                  )}
-                </>
-              )) ||
-                (i === 2 && metaPagination.pageCount > 1 && (
-                  <>
-                    {metaPagination.page < metaPagination.pageCount - 2 &&
-                      metaPagination.pageCount !== 4 && (
                       <PaginationItem>
                         <PaginationEllipsis />
                       </PaginationItem>
                     )}
+                </>
+              )) ||
+                (i === 2 && metaPagination.pageCount > 1 && (
+                  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                  <>
+                    {metaPagination.page < metaPagination.pageCount - 2 &&
+                      metaPagination.pageCount !== 4 && (
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )}
                     <PaginationItem>
                       <PaginationLink
                         isActive={
@@ -180,12 +184,13 @@ export const ArtFilterPagination = ({ className }: { className: string }) => {
                         }
                       >
                         <button
-                          onClick={() =>
+                          type='button'
+                          onClick={() => {
                             setPagination({
                               ...pagination,
                               page: metaPagination.pageCount,
-                            })
-                          }
+                            });
+                          }}
                           disabled={
                             metaPagination.page === metaPagination.pageCount
                           }
@@ -197,44 +202,46 @@ export const ArtFilterPagination = ({ className }: { className: string }) => {
                     </PaginationItem>
                   </>
                 )) || (
-                <>
-                  {Array.from({ length: extraPagesToDisplay }).map((_, j) => {
-                    const page =
+                  <>
+                    {Array.from({ length: extraPagesToDisplay }).map((_, j) => {
+                      const page =
                         metaPagination.page <= 2
                           ? j + 2
                           : metaPagination.page >= metaPagination.pageCount
                             ? j + metaPagination.page - 2
                             : j + metaPagination.page - 1;
 
-                    return (
-                      <React.Fragment key={j}>
-                        <PaginationItem>
-                          <PaginationLink
-                            isActive={metaPagination.page === page}
-                          >
-                            <button
-                              onClick={() =>
-                                setPagination({ ...pagination, page })
-                              }
-                              disabled={metaPagination.page === page}
-                              className='size-full'
+                      return (
+                        <React.Fragment key={j}>
+                          <PaginationItem>
+                            <PaginationLink
+                              isActive={metaPagination.page === page}
                             >
-                              {page}
-                            </button>
-                          </PaginationLink>
-                        </PaginationItem>
-                      </React.Fragment>
-                    );
-                  })}
-                </>
-              )}
+                              <button
+                                type='button'
+                                onClick={() => {
+                                  setPagination({ ...pagination, page });
+                                }}
+                                disabled={metaPagination.page === page}
+                                className='size-full'
+                              >
+                                {page}
+                              </button>
+                            </PaginationLink>
+                          </PaginationItem>
+                        </React.Fragment>
+                      );
+                    })}
+                  </>
+                )}
             </React.Fragment>
           ))}
           <PaginationItem>
             <button
-              onClick={() =>
-                setPagination({ ...pagination, page: metaPagination.page + 1 })
-              }
+              type='button'
+              onClick={() => {
+                setPagination({ ...pagination, page: metaPagination.page + 1 });
+              }}
               disabled={metaPagination.page >= metaPagination.pageCount}
               className={cn(
                 metaPagination.page >= metaPagination.pageCount && 'opacity-50'
@@ -256,18 +263,18 @@ export const ArtFilter = ({ className }: { className?: string }) => {
     setFilters,
     filters: currentFilters,
   } = useArtFilter();
-  const [filterCategories, setFilterCategories] = React.useState<
-    TFilterCategory[]
-  >([]);
-  const [filterItems, setFilterItems] = React.useState<TFilterItem[]>([]);
+  const [filterCategories, setFilterCategories] = useState<TFilterCategory[]>(
+    []
+  );
+  const [filterItems, setFilterItems] = useState<TFilterItem[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!response?.data) return;
 
     const [formatedFilterCategories, formatedFilterItems]: [
       TFilterCategory[],
       TFilterItem[],
-    ] = response?.data.reduce(
+    ] = response.data.reduce(
       (
         accumulator: [TFilterCategory[], TFilterItem[]],
         currentArtTagCategory
@@ -301,14 +308,14 @@ export const ArtFilter = ({ className }: { className?: string }) => {
     setFilterItems(formatedFilterItems);
   }, [response?.data]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (filterItems.length === 0) return;
 
     const filters: Record<string, unknown> = {
       $and: filterCategories.map((c) => ({
         art_tags: {
           $or: filterItems
-            .filter((i) => i.categoryId === c.id && i.checked === true)
+            .filter((i) => i.categoryId === c.id && i.checked)
             .map((i) => ({
               id: i.tagId,
             })),
@@ -319,9 +326,8 @@ export const ArtFilter = ({ className }: { className?: string }) => {
     setFilters(filters);
   }, [filterCategories, filterItems, setFilters]);
 
-  React.useEffect(() => {
-    if (!currentFilters || !currentFilters.art_tags || !currentFilters.art_tags)
-      return;
+  useEffect(() => {
+    if (!currentFilters?.art_tags) return;
 
     setFilterItems((prev) =>
       prev.map((t) => {
@@ -356,14 +362,14 @@ export const ArtFilter = ({ className }: { className?: string }) => {
                     .filter((t) => t.categoryId === category.id)
                     .map((tag) => (
                       <ArtFilterCheckboxItem
-                        onClick={() =>
+                        onClick={() => {
                           setFilterItems((prev) =>
                             prev.map((t) => {
                               if (t.tagId !== tag.tagId) return t;
                               return { ...t, checked: !t.checked };
                             })
-                          )
-                        }
+                          );
+                        }}
                         key={tag.tagId}
                         {...tag}
                       />
@@ -395,11 +401,11 @@ export const ArtFilter = ({ className }: { className?: string }) => {
             <button
               disabled={filterItems.filter((i) => i.checked).length === 0}
               type='button'
-              onClick={() =>
+              onClick={() => {
                 setFilterItems((prev) =>
                   prev.map((t) => ({ ...t, checked: false }))
-                )
-              }
+                );
+              }}
               className='group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
             >
               <div className='inline-flex'>
