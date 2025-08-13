@@ -64,7 +64,7 @@
       },
       "slug": {
         "edit": {
-          "label": "identifiant",
+          "label": "Identifiant",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -219,14 +219,8 @@
         [
           {
             "name": "name",
-            "size": 6
+            "size": 4
           },
-          {
-            "name": "arts",
-            "size": 6
-          }
-        ],
-        [
           {
             "name": "title",
             "size": 4
@@ -234,15 +228,15 @@
           {
             "name": "slug",
             "size": 4
-          },
-          {
-            "name": "art_tag_categories",
-            "size": 4
           }
         ],
         [
           {
             "name": "image",
+            "size": 6
+          },
+          {
+            "name": "art_tag_categories",
             "size": 6
           }
         ],

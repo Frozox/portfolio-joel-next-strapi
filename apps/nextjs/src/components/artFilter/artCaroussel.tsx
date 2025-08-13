@@ -177,7 +177,7 @@ export const ArtCaroussel = () => {
                 slides={[item.thumbnail, ...item.images]}
               />
             </div>
-            <div className='mt-6 flex justify-center lg:relative lg:mx-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end'>
+            <div className='mt-6 flex lg:relative lg:mx-10 lg:mt-0 lg:w-64 lg:justify-start lg:self-end'>
               <div>
                 <h2 className='mb-4 text-xl font-medium md:text-2xl'>
                   {item.name}

@@ -1,37 +1,3 @@
-// import { defineConfig } from "eslint/config";
-
-// export default defineConfig([{
-//   plugins: ['prettier', 'tailwindcss', '@tanstack/query'],
-//   extends: [
-//     'next/core-web-vitals',
-//     'prettier',
-//     'plugin:tailwindcss/recommended',
-//     'plugin:@tanstack/eslint-plugin-query/recommended',
-//   ],
-//   rules: {
-//     quotes: ['error', 'single'],
-//     semi: ['error', 'always'],
-//     indent: ['error', 2],
-//     'tailwindcss/classnames-order': 'warn',
-//     'tailwindcss/no-custom-classname': 'error',
-//     'tailwindcss/no-contradicting-classname': 'error',
-//     '@tanstack/query/exhaustive-deps': 'error',
-//     '@tanstack/query/no-rest-destructuring': 'warn',
-//     '@tanstack/query/stable-query-client': 'error',
-//   },
-//   overrides: [
-//     {
-//       files: ['*.ts', '*.mjs', '*.tsx', '*.js'],
-//       parser: '@typescript-eslint/parser',
-//     },
-//   ],
-//   settings: {
-//     tailwindcss: {
-//       callees: ['classNames'],
-//     },
-//   },
-// }])
-
 /* eslint-disable import-x/no-named-as-default-member */
 
 import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';

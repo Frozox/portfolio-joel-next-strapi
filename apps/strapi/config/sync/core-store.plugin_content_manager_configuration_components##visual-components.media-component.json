@@ -21,7 +21,7 @@
       },
       "media": {
         "edit": {
-          "label": "media",
+          "label": "Image",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -35,7 +35,7 @@
       },
       "media_position": {
         "edit": {
-          "label": "media_position",
+          "label": "Position de l'image",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -57,12 +57,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "media",
-        "media_position",
-        "documentId"
-      ],
       "edit": [
         [
           {
@@ -74,6 +68,12 @@
             "size": 6
           }
         ]
+      ],
+      "list": [
+        "id",
+        "media",
+        "media_position",
+        "documentId"
       ]
     },
     "uid": "visual-components.media-component",

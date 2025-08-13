@@ -21,7 +21,7 @@
       },
       "content": {
         "edit": {
-          "label": "content",
+          "label": "Contenu",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -35,7 +35,7 @@
       },
       "title": {
         "edit": {
-          "label": "title",
+          "label": "Titre",
           "description": "",
           "placeholder": "",
           "visible": true,
@@ -57,24 +57,24 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "title",
-        "documentId"
-      ],
       "edit": [
-        [
-          {
-            "name": "content",
-            "size": 12
-          }
-        ],
         [
           {
             "name": "title",
             "size": 6
           }
+        ],
+        [
+          {
+            "name": "content",
+            "size": 12
+          }
         ]
+      ],
+      "list": [
+        "id",
+        "title",
+        "documentId"
       ]
     },
     "uid": "visual-components.text-component",

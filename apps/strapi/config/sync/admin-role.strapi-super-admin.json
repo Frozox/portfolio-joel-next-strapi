@@ -22,12 +22,11 @@
           "sortOrder"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "ntbc7j8dtcf4gb7nkd5vk0ny",
+      "documentId": "n9umyt825b8z9gvw44emfjei",
       "locale": null
     },
     {
@@ -36,12 +35,11 @@
       "subject": "api::art-category.art-category",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "j74y0fq0ldz2figv3cwcusuq",
+      "documentId": "zfv2gi1nma05tkwpcvu59yu4",
       "locale": null
     },
     {
@@ -50,12 +48,11 @@
       "subject": "api::art-category.art-category",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "u1z87pi0mkww7290khl9ui8l",
+      "documentId": "rnbojfiuvq73edpoan3z6bfk",
       "locale": null
     },
     {
@@ -75,12 +72,11 @@
           "sortOrder"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "agehozy93ic86lic6hvamyfy",
+      "documentId": "ccvj26myhnhuqoy5an9bkrxk",
       "locale": null
     },
     {
@@ -100,12 +96,11 @@
           "sortOrder"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "sw188n6lwunucqvcpdkucb31",
+      "documentId": "gm37cfzrljpqprvdap2llssq",
       "locale": null
     },
     {
@@ -120,12 +115,11 @@
           "art_categories"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "lj6q48xobvbnslz02wc2jzn0",
+      "documentId": "ak2ceicaxejtlkbpoaukv6o5",
       "locale": null
     },
     {
@@ -134,12 +128,11 @@
       "subject": "api::art-tag-category.art-tag-category",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "st35nsfbf150iv0vajgwu84a",
+      "documentId": "zal7zza7d7ix9p249bpomtts",
       "locale": null
     },
     {
@@ -148,12 +141,11 @@
       "subject": "api::art-tag-category.art-tag-category",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "iknew43ccdqvqopauhyh6qg3",
+      "documentId": "axl2695oq89i92hys346ffs1",
       "locale": null
     },
     {
@@ -168,12 +160,11 @@
           "art_categories"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "fkvcoesqjgc0io2cxenek8e4",
+      "documentId": "mktdd7hhldi6iz2gwp0di0x4",
       "locale": null
     },
     {
@@ -188,12 +179,11 @@
           "art_categories"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "fvk5pgxoupn9yg9gkyh77axs",
+      "documentId": "v3463j8h1flx8pbdmg03hv33",
       "locale": null
     },
     {
@@ -207,12 +197,11 @@
           "art_tag_category"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "vvvmvc845ak3df02v7bwbfwh",
+      "documentId": "i471hvfncziucoai97tatpd1",
       "locale": null
     },
     {
@@ -221,12 +210,11 @@
       "subject": "api::art-tag.art-tag",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "utvuxbtekdaubwfg38wlbl4u",
+      "documentId": "i4trrquwa0f528psgr1h79sc",
       "locale": null
     },
     {
@@ -235,12 +223,11 @@
       "subject": "api::art-tag.art-tag",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "v4eizva5ifx7rakq8zsleg4v",
+      "documentId": "koxczpcwjypllbz0gupmu3qo",
       "locale": null
     },
     {
@@ -254,12 +241,11 @@
           "art_tag_category"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "lhms2etuvh7nluslovb5qgu6",
+      "documentId": "ctymuuo9413vgp1qsagmbbs6",
       "locale": null
     },
     {
@@ -273,12 +259,11 @@
           "art_tag_category"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "g4wf7t95k32ofqxniof782yu",
+      "documentId": "dac3kzs5s9hsk0ki88wvb1if",
       "locale": null
     },
     {
@@ -301,12 +286,11 @@
           "sortOrder"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "qm8xuanz7zvi600nbybozrhj",
+      "documentId": "n5g1b82lhzwsd6guepjzobzh",
       "locale": null
     },
     {
@@ -315,12 +299,11 @@
       "subject": "api::art.art",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "q252z62rxft7w6lbwyv003oa",
+      "documentId": "jde94asjoxpe65d8cdb7ojrw",
       "locale": null
     },
     {
@@ -329,12 +312,11 @@
       "subject": "api::art.art",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "xazxpvlxwfhnlczo8zhyeqmd",
+      "documentId": "jq36bt5a2qugu7l93p1bi18u",
       "locale": null
     },
     {
@@ -357,12 +339,11 @@
           "sortOrder"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "jx07rijmp0t7j1s3ipx8ri3s",
+      "documentId": "nmwk5qfxj38lgtwq7n72ua0y",
       "locale": null
     },
     {
@@ -385,12 +366,11 @@
           "sortOrder"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "h37wccq3sa9sunjy9m0w973k",
+      "documentId": "xsuesco4btdhotsihfm8m2tp",
       "locale": null
     },
     {
@@ -402,12 +382,11 @@
           "content"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "naq6s6w4ybxyom8hhbzlgvh7",
+      "documentId": "eoh7bwmedowhu9reqpfg9er7",
       "locale": null
     },
     {
@@ -416,12 +395,11 @@
       "subject": "api::new.new",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "t0sbgfhvo7wtx3wevjkj3tp2",
+      "documentId": "da3g3apze55p5j1stgsr4i7h",
       "locale": null
     },
     {
@@ -430,12 +408,11 @@
       "subject": "api::new.new",
       "properties": {
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "lfcoqx4j5zcw4ny7sejxeqzq",
+      "documentId": "fy8704wuhmj7def5meh7ood4",
       "locale": null
     },
     {
@@ -447,12 +424,11 @@
           "content"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "ir7q2m536s1zyqmgjzkuybh4",
+      "documentId": "u6mxev3cmni5p432koe5gmim",
       "locale": null
     },
     {
@@ -464,12 +440,11 @@
           "content"
         ],
         "locales": [
-          "en",
           "fr"
         ]
       },
       "conditions": [],
-      "documentId": "g9tv4z1psl74y4nwqro2rnkb",
+      "documentId": "lft0kgm538denlfzinydzkoi",
       "locale": null
     },
     {

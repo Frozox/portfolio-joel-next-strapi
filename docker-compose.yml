@@ -1,0 +1,30 @@
+services:
+
+  postgres:
+    image: postgres:17.5
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/data/postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/data/postgres
+
+  strapi:
+    build:
+      dockerfile: ./deploy/docker/Dockerfile
+      target: strapi
+    ports:
+      - 8000:8000
+
+  nextjs:
+    build:
+      dockerfile: ./deploy/docker/Dockerfile
+      target: nextjs
+    ports:
+      - 8001:8001
+
+volumes:
+  db:
