@@ -23,13 +23,17 @@ interface TLayoutProps {
 }
 
 const getCurrentArtCategory = async (slug: string) => {
-  const queryClient = getQueryClient();
-  const { data } = await fetchArtCategories(queryClient, {
-    filters: { slug },
-    populate: 'image',
-  });
-  if (!data.length) redirect('/');
-  return data[0];
+  try {
+    const queryClient = getQueryClient();
+    const { data } = await fetchArtCategories(queryClient, {
+      filters: { slug },
+      populate: 'image',
+    });
+    if (!!data.length) return data[0];
+  } catch {}
+  finally {
+    redirect('/');
+  }
 };
 
 export const generateMetadata = async ({

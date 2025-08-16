@@ -6,6 +6,9 @@
     "build": "pnpm run --parallel build",
     "start": "pnpm run --parallel start"
   },
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "author": "Tom Cuillandre <tom.cuillandre@sfr.fr>",
   "license": "MIT"
 }

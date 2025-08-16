@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "deploy": "next build && cp -r .next/static .next/standalone/apps/nextjs/.next/ && cp -r public .next/standalone/apps/nextjs/",
     "start": "next start",
     "lint": "npm run pretty && npm run lint:fix",
     "lint:fix": "next lint --fix",

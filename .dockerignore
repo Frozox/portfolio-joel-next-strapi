@@ -1,5 +1,8 @@
 node_modules
+.vscode
 .git
 .gitignore
 *.md
-dist
+**/.env
+**/.env.*
+**/.tmp

@@ -12,7 +12,7 @@ const News = () => {
   return (
     <div className='size-full animate-content-load'>
       <div className='container'>
-        {(response?.data.content as TStrapiComponent[]).map(
+        {(response?.data.content as TStrapiComponent[] | undefined)?.map(
           (component, idx) => (
             <StrapiComponentLoader key={idx} component={component} />
           )
