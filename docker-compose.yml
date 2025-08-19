@@ -17,9 +17,14 @@ services:
 
   strapi:
     container_name: strapi
+    image: harbor.frozox.fr/portfolio-joel/strapi:latest
+    restart: always
     build:
       dockerfile: ./deploy/docker/Dockerfile
       target: strapi
+      platforms:
+        - linux/amd64
+        - linux/arm64
     env_file:
       - stack.env
     ports:
@@ -29,9 +34,14 @@ services:
 
   nextjs:
     container_name: nextjs
+    image: harbor.frozox.fr/portfolio-joel/nextjs:latest
+    restart: always
     build:
       dockerfile: ./deploy/docker/Dockerfile
       target: nextjs
+      platforms:
+        - linux/amd64
+        - linux/arm64
     env_file:
       - stack.env
     ports:
