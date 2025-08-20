@@ -1,3 +1,4 @@
+include stack.env
 # ===========================
 # Configuration
 # ===========================
@@ -47,6 +48,9 @@ deploy-strapi: ensure-builder
 deploy-nextjs: ensure-builder
 	docker buildx build \
 		--platform linux/amd64,linux/arm64 \
+		--build-arg NEXT_PUBLIC_FRONTEND_HOST=$(NEXT_PUBLIC_FRONTEND_HOST) \
+		--build-arg NEXT_PUBLIC_BACKEND_HOST=$(NEXT_PUBLIC_BACKEND_HOST) \
+		--build-arg NEXT_PUBLIC_HCAPTCHA_SITEKEY=$(NEXT_PUBLIC_HCAPTCHA_SITEKEY) \
 		-t $(NEXTJS_IMAGE):$(TAG) \
 		-f $(DOCKERFILE) \
 		--target nextjs \
