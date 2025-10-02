@@ -11,6 +11,20 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
+  // allow cross-origin on https://strapi.joel-chapeau.fr
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NEXT_PUBLIC_BACKEND_HOST,
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
