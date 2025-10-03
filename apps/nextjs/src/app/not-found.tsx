@@ -1,7 +1,14 @@
 import { Button } from '@components/ui/button';
 import { Title } from '@components/ui/title';
 import { HouseIcon } from 'lucide-react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: '404',
+  };
+};
 
 const NotFound = () => {
   return (
