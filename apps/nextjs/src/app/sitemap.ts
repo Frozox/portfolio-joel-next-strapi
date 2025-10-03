@@ -8,35 +8,35 @@ const generateDynamicSiteMap = async (): Promise<MetadataRoute.Sitemap> => {
     ArtCategory_Plain[]
   >(StrapiContentTypes.ArtCategories);
   return artCategories.map((artCategory) => ({
-      url: `${env.NEXT_PUBLIC_FRONTEND_HOST}/${artCategory.slug}`,
-      lastModified: new Date(),
-      priority: 0.7,
-    }))
+    url: `${env.NEXT_PUBLIC_FRONTEND_HOST}/${artCategory.slug}`,
+    lastModified: new Date(),
+    priority: 0.7,
+  }));
 };
-const generateSiteMap = async (): Promise<MetadataRoute.Sitemap>  => {
-  const sitemap: MetadataRoute.Sitemap = [{
-    url: env.NEXT_PUBLIC_FRONTEND_HOST,
-    lastModified: new Date(),
-    priority: 1,
-  },
-  {
-    url: `${env.NEXT_PUBLIC_FRONTEND_HOST}/expositions`,
-    lastModified: new Date(),
-    priority: 0.5,
-  },
-  {
-    url: `${env.NEXT_PUBLIC_FRONTEND_HOST}/contact`,
-    lastModified: new Date(),
-    priority: 0.8,
-  }]
+const generateSiteMap = async (): Promise<MetadataRoute.Sitemap> => {
+  const sitemap: MetadataRoute.Sitemap = [
+    {
+      url: env.NEXT_PUBLIC_FRONTEND_HOST,
+      lastModified: new Date(),
+      priority: 1,
+    },
+    {
+      url: `${env.NEXT_PUBLIC_FRONTEND_HOST}/expositions`,
+      lastModified: new Date(),
+      priority: 0.5,
+    },
+    {
+      url: `${env.NEXT_PUBLIC_FRONTEND_HOST}/contact`,
+      lastModified: new Date(),
+      priority: 0.8,
+    },
+  ];
 
   try {
     const dynamicSitemap = await generateDynamicSiteMap();
     sitemap.push(...dynamicSitemap);
-  } catch {
-  } finally {
-    return  sitemap
-  }
+  } catch {}
+  return sitemap;
 };
 
-export default generateSiteMap
+export default generateSiteMap;

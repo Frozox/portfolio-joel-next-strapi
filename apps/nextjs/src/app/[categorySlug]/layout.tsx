@@ -29,11 +29,9 @@ const getCurrentArtCategory = async (slug: string) => {
       filters: { slug },
       populate: 'image',
     });
-    if (!!data.length) return data[0];
+    if (data.length) return data[0];
   } catch {}
-  finally {
-    redirect('/');
-  }
+  redirect('/');
 };
 
 export const generateMetadata = async ({

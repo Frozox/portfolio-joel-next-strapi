@@ -142,7 +142,10 @@ export const prefetchArtTags = (
 ) => prefetchQuery(queryClient, StrapiContentTypes.ArtTags, params);
 
 export const useGetNews = (params?: StrapiRequestParams) =>
-  useGenericRequestFindSingle<New_Plain | undefined>(StrapiContentTypes.News, params);
+  useGenericRequestFindSingle<New_Plain | undefined>(
+    StrapiContentTypes.News,
+    params
+  );
 
 export const prefetchNews = (
   queryClient: QueryClient,

@@ -123,6 +123,12 @@ importers:
       '@eslint-react/eslint-plugin':
         specifier: ^1.52.3
         version: 1.52.4(eslint@9.33.0(jiti@1.21.7))(ts-api-utils@2.1.0(typescript@5.9.2))(typescript@5.9.2)
+      '@eslint/eslintrc':
+        specifier: ^3.3.1
+        version: 3.3.1
+      '@eslint/js':
+        specifier: ^9.36.0
+        version: 9.36.0
       '@faker-js/faker':
         specifier: ^8.4.1
         version: 8.4.1
@@ -1364,6 +1370,10 @@ packages:
 
   '@eslint/js@9.33.0':
     resolution: {integrity: sha512-5K1/mKhWaMfreBGJTwval43JJmkip0RmM+3+IuqupeSKNC/Th2Kc7ucaq5ovTSra/OOKB9c58CGSz3QMVbWt0A==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.36.0':
+    resolution: {integrity: sha512-uhCbYtYynH30iZErszX78U+nR3pJU3RHGQ57NXy5QupD4SBVwDeU8TNBy+MjMngc1UyIW9noKqsRqfjQTBU2dw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -9360,8 +9370,8 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unlayer-types@1.289.0:
-    resolution: {integrity: sha512-3nqnOUbAPV84ektF3f1cKNvfl5uK8uwR7WzVR1nMqCCWLZTUo9j9Y9W5dcIVWVUcmJyWiPXADiPOcHxLbSo+Lw==}
+  unlayer-types@1.309.0:
+    resolution: {integrity: sha512-V+4Xx56GJmpY0Lx8RHIXtxJmCiyF2Qs7qneCD8sE030VfpW/irxu6Hx+CLPzYhT9k3Ho/vs8hqBCRqDgAU1K3w==}
 
   unload@2.2.0:
     resolution: {integrity: sha512-B60uB5TNBLtN6/LsgAf3udH9saB5p7gqJwcFfbOEZ8BcBHnGwCf6G/TGiEqkRAxX7zAFIUtzdrXQSdL3Q/wqNA==}
@@ -11277,6 +11287,8 @@ snapshots:
 
   '@eslint/js@9.33.0': {}
 
+  '@eslint/js@9.36.0': {}
+
   '@eslint/object-schema@2.1.6': {}
 
   '@eslint/plugin-kit@0.3.5':
@@ -11756,7 +11768,7 @@ snapshots:
 
   '@koa/router@12.0.2':
     dependencies:
-      debug: 4.3.4
+      debug: 4.4.1(supports-color@5.5.0)
       http-errors: 2.0.0
       koa-compose: 4.1.0
       methods: 1.1.2
@@ -18197,7 +18209,7 @@ snapshots:
   koa-session@6.4.0:
     dependencies:
       crc: 3.8.0
-      debug: 4.3.4
+      debug: 4.4.1(supports-color@5.5.0)
       is-type-of: 1.4.0
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -19455,7 +19467,7 @@ snapshots:
   react-email-editor@1.7.11(react@18.3.1):
     dependencies:
       react: 18.3.1
-      unlayer-types: 1.289.0
+      unlayer-types: 1.309.0
 
   react-fast-compare@2.0.4: {}
 
@@ -21131,7 +21143,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unlayer-types@1.289.0: {}
+  unlayer-types@1.309.0: {}
 
   unload@2.2.0:
     dependencies:

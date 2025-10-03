@@ -26,10 +26,13 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    NODE_ENV: process.env.NODE_ENV || 'development',
-    NEXT_PUBLIC_FRONTEND_HOST: process.env.NEXT_PUBLIC_FRONTEND_HOST || 'http://localhost:3000',
-    NEXT_PUBLIC_BACKEND_HOST: process.env.NEXT_PUBLIC_BACKEND_HOST || 'http://localhost:1337',
-    NEXT_PUBLIC_HCAPTCHA_SITEKEY: process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY || '',
+    NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_FRONTEND_HOST:
+      process.env.NEXT_PUBLIC_FRONTEND_HOST ?? 'http://localhost:3000',
+    NEXT_PUBLIC_BACKEND_HOST:
+      process.env.NEXT_PUBLIC_BACKEND_HOST ?? 'http://localhost:1337',
+    NEXT_PUBLIC_HCAPTCHA_SITEKEY:
+      process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY ?? '',
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

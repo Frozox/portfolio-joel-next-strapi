@@ -91,7 +91,9 @@ export const ContactProvider = ({ children }: TContactProviderProps) => {
   }, [savedArts, defaultSavedArtsId]);
 
   return (
-    <ContactContext.Provider value={{ savedArts, toggleSavedArt, clearSavedArts }}>
+    <ContactContext.Provider
+      value={{ savedArts, toggleSavedArt, clearSavedArts }}
+    >
       {children}
     </ContactContext.Provider>
   );

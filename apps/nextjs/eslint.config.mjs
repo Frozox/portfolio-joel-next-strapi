@@ -92,7 +92,6 @@ const config = tseslint.config(
         'error',
         { fixMixedExportsWithInlineTypeSpecifier: true },
       ],
-
       'import-x/no-unresolved': ['error', { ignore: ['geist'] }],
       'react-compiler/react-compiler': 'error',
       '@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
@@ -102,6 +101,7 @@ const config = tseslint.config(
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
       indent: ['error', 2],
+      'no-empty': ['warn', { allowEmptyCatch: true }],
       'tailwindcss/classnames-order': 'warn',
       'tailwindcss/no-custom-classname': 'error',
       'tailwindcss/no-contradicting-classname': 'error',

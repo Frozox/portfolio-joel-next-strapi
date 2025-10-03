@@ -77,7 +77,11 @@ const FormItem = ({
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref as React.LegacyRef<HTMLDivElement >} className={cn('space-y-2', className)} {...props} />
+      <div
+        ref={ref as React.LegacyRef<HTMLDivElement>}
+        className={cn('space-y-2', className)}
+        {...props}
+      />
     </FormItemContext.Provider>
   );
 };
@@ -182,6 +186,5 @@ export {
   FormItem,
   FormLabel,
   FormMessage,
-  useFormField
+  useFormField,
 };
-

@@ -9,7 +9,7 @@ const nextConfig = {
   // reactStrictMode: false,
   output: 'standalone',
   eslint: {
-    ignoreDuringBuilds: true
+    ignoreDuringBuilds: true,
   },
   // allow cross-origin on https://strapi.joel-chapeau.fr
   async headers() {
