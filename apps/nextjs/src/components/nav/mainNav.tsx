@@ -59,7 +59,7 @@ const MainNav = ({ className }: MainNavProps) => {
           className='flex items-center space-x-3 rtl:space-x-reverse'
         >
           <LogoIcon className='h-8 w-auto dark:invert' />
-          <span className='self-center whitespace-nowrap text-2xl font-semibold'>
+          <span className='self-center whitespace-nowrap text-2xl font-semibold text-foreground'>
             Joel Chapeau
           </span>
         </Link>
@@ -118,7 +118,7 @@ const MainNav = ({ className }: MainNavProps) => {
                     return (
                       <DropdownMenuItem key={category.id} asChild>
                         <Link
-                          href={category.slug}
+                          href={`/${category.slug}`}
                           className={cn(
                             'size-full text-lg',
                             `/${category.slug}` === currentPath &&
@@ -140,7 +140,7 @@ const MainNav = ({ className }: MainNavProps) => {
                   return (
                     <li key={category.id}>
                       <Link
-                        href={category.slug}
+                        href={`/${category.slug}`}
                         className={cn(
                           'block rounded px-3 py-2 text-black hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 md:border-0 md:p-0 md:hover:bg-transparent md:dark:hover:bg-transparent',
                           `/${category.slug}` === currentPath &&

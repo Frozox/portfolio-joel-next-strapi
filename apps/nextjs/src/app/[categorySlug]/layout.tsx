@@ -12,7 +12,7 @@ import { getMediaFromFormat } from '@libs/mediaFormat';
 import { defaultPaginationFilter } from '@libs/pagination';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import type { Product, WithContext } from 'schema-dts';
 
 interface TLayoutProps {
@@ -31,7 +31,7 @@ const getCurrentArtCategory = async (slug: string) => {
     });
     if (data.length) return data[0];
   } catch {}
-  redirect('/');
+  notFound();
 };
 
 export const generateMetadata = async ({

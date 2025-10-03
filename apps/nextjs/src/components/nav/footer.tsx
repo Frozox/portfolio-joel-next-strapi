@@ -21,9 +21,9 @@ const FooterElement = (props: FooterElementProps) => {
       <span className='text-sm font-bold uppercase sm:text-lg'>
         {props.title}
       </span>
-      <ul className='mt-4 space-y-1 text-xs sm:text-base'>
+      <ul className='mt-4 grid grid-flow-col grid-rows-4 gap-x-4 text-xs sm:gap-x-6 sm:text-base'>
         {Children.map(props.children, (children) => (
-          <li>{children}</li>
+          <li className='pt-1'>{children}</li>
         ))}
       </ul>
     </li>
@@ -39,7 +39,7 @@ const Footer = (props: TFooterProps) => {
   return (
     <div {...props}>
       <hr className='my-8 h-[2px] w-full border-t-0 bg-transparent bg-gradient-to-r from-transparent via-foreground to-transparent opacity-25' />
-      <div className='flex flex-col space-y-3 md:flex-row md:space-y-0'>
+      <div className='flex flex-col space-y-3 text-foreground md:flex-row md:space-y-0'>
         <div className='mb-6 flex self-center md:mb-0'>
           <Link
             href={'/'}
@@ -78,7 +78,7 @@ const Footer = (props: TFooterProps) => {
             </FooterElement>
             <FooterElement title='Travaux'>
               {...artCategories.map((artCategory) => (
-                <Link key={artCategory.slug} href={artCategory.slug}>
+                <Link key={artCategory.slug} href={`/${artCategory.slug}`}>
                   <span
                     className={cn(
                       currentPath === `/${artCategory.slug}` && currentPageStyle
