@@ -21,7 +21,7 @@ const FooterElement = (props: FooterElementProps) => {
       <span className='text-sm font-bold uppercase sm:text-lg'>
         {props.title}
       </span>
-      <ul className='mt-4 grid grid-flow-col grid-rows-4 gap-x-4 text-xs sm:gap-x-6 sm:text-base'>
+      <ul className='mt-4 grid grid-flow-col grid-rows-6 lg:grid-rows-4 gap-x-4 text-xs sm:gap-x-6 sm:text-base'>
         {Children.map(props.children, (children) => (
           <li className='pt-1'>{children}</li>
         ))}
