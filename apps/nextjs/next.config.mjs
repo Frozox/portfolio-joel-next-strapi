@@ -26,6 +26,7 @@ const nextConfig = {
     ];
   },
   images: {
+    minimumCacheTTL: 14400, // 4 hours
     remotePatterns: [
       {
         protocol: 'https',

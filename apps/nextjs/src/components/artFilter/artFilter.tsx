@@ -262,6 +262,8 @@ export const ArtFilter = ({ className }: { className?: string }) => {
     artTagCategoriesQuery: { response, isError, isLoading },
     setFilters,
     filters: currentFilters,
+    pagination,
+    setPagination,
   } = useArtFilter();
   const [filterCategories, setFilterCategories] = useState<TFilterCategory[]>(
     []
@@ -327,6 +329,7 @@ export const ArtFilter = ({ className }: { className?: string }) => {
   }, [filterCategories, filterItems, setFilters]);
 
   useEffect(() => {
+    setPagination({ ...pagination, page: 1 });
     if (!currentFilters?.art_tags) return;
 
     setFilterItems((prev) =>
